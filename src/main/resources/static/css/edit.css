@@ -1,0 +1,164 @@
+
+.body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding-bottom: 14rem;
+}
+.body::before{
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+
+/* useredit바디 */
+.edit_body{
+    padding: 7.5vh 2.7vh 6.8vh 2.7vh;
+    border: 1px solid #999;
+    border-radius: 1.5vh;
+    background: white;
+}
+form{
+    position: relative;
+    z-index: 2;
+}
+
+/* 프로필사진 에리어 */
+.profile_img_area{
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-bottom: 20px;
+    position: relative;
+    text-align: center;
+}
+.profile_img_area img{
+    width: 13vh;
+    height: 13vh;
+    border-radius: 50%;
+    border: solid #999;
+}
+.profile_img_edit_area{
+    text-align: center;
+}
+.img_edit a{
+    text-align: center;
+    text-decoration: none;
+    color: black;
+}
+.img_edit a:hover{
+    color: cadetblue;
+}
+.profile_img_edit_area {
+    font-size: 1.5rem;
+}
+
+
+/* userNickname_edit_area */
+.profile_username_area{
+    width: 100%;
+    margin-bottom: 15px;
+    position: relative;
+}
+.profile_username_area:first-child{
+    margin-top: 0;
+}
+.profile_username_area input{
+    width: 100%;
+    height: 40px;
+    padding: 20px 10px 10px;
+    border: none;
+    border-bottom: 1px solid #999;
+    font-size: 15px;
+    color: black;
+    outline: none;
+}
+.profile_username_area label{
+    top: 0.5px;
+    left: 13px;
+    position: absolute;
+    font-size: 13px;
+    color: #166cea;
+}
+.profile_username_area input:focus + label,
+.profile_username_area input:valid + label{
+    top: 0.5px;
+    font-size: 13px;
+    color: #166cea;
+}
+
+/* userRname_edit_area */
+.profile_userRname_area{
+    width: 100%;
+    margin-bottom: 15px;
+    position: relative;
+}
+.profile_userRname_area:first-child{
+    margin-top: 0;
+}
+.profile_userRname_area input{
+    width: 100%;
+    height: 40px;
+    padding: 20px 10px 10px;
+    border: none;
+    border-bottom: 1px solid #999;
+    font-size: 15px;
+    color: black;
+    outline: none;
+}
+.profile_userRname_area label{
+    top: 0.5px;
+    left: 13px;
+    font-size: 13px;
+    position: absolute;
+    color: #166cea;
+}
+
+/* user_introduce_area */
+.profile_introduce_area{
+    width: 100%;
+    margin-bottom: 15px;
+    position: relative;
+}
+.profile_introduce_area:first-child{
+    margin-top: 0;
+}
+.profile_introduce_area textarea{
+    width: 100%;
+    height: 80px;
+    padding: 20px 10px 10px;
+    border: none;
+    border-bottom: 1px solid #999;
+    font-size: 15px;
+    color: black;
+    outline: none;
+}
+.profile_introduce_area label{
+    top: 0.5px;
+    left: 13px;
+    position: absolute;
+    font-size: 13px;
+    color: #166cea;
+}
+
+/* btn_area */
+
+.btn_area{
+    margin-top: 15px;
+}
+.btn_area button{
+    width: 100%;
+    height: 30px;
+    background: #166cea;
+    color: #fff;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+}
+.btn_area button:hover{
+    cursor: pointer;
+    background: cadetblue;
+}

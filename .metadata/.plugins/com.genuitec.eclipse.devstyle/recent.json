@@ -1,0 +1,84 @@
+{
+  "lastUsed": 1604064687415,
+  "path": "C:\/Users\/yoon sung\/Desktop\/java",
+  "projectCount": 1,
+  "recentFiles": [
+    {
+      "path": "\/Servers\/Tomcat v9.0 Server at localhost-config",
+      "parentWorkspace": "C:\/Users\/yoon sung\/Desktop\/java",
+      "name": "context.xml",
+      "lastModified": 1603369822463,
+      "locationURI": "file:\/C:\/Users\/yoon%20sung\/Desktop\/java\/Servers\/Tomcat%20v9.0%20Server%20at%20localhost-config\/context.xml"
+    },
+    {
+      "path": "\/2020IPRO\/src\/database",
+      "parentWorkspace": "C:\/Users\/yoon sung\/Desktop\/java",
+      "name": "Database.java",
+      "lastModified": 1603382044028,
+      "locationURI": "file:\/C:\/Users\/yoon%20sung\/Desktop\/java\/2020IPRO\/src\/database\/Database.java"
+    },
+    {
+      "path": "\/2020IPRO\/WebContent",
+      "parentWorkspace": "C:\/Users\/yoon sung\/Desktop\/java",
+      "name": "main.jsp",
+      "lastModified": 1603380226156,
+      "locationURI": "file:\/C:\/Users\/yoon%20sung\/Desktop\/java\/2020IPRO\/WebContent\/main.jsp"
+    },
+    {
+      "path": "\/Servers\/Tomcat v9.0 Server at localhost-config",
+      "parentWorkspace": "C:\/Users\/yoon sung\/Desktop\/java",
+      "name": "web.xml",
+      "lastModified": 1603369846541,
+      "locationURI": "file:\/C:\/Users\/yoon%20sung\/Desktop\/java\/Servers\/Tomcat%20v9.0%20Server%20at%20localhost-config\/web.xml"
+    },
+    {
+      "path": "\/2020IPRO\/WebContent",
+      "parentWorkspace": "C:\/Users\/yoon sung\/Desktop\/java",
+      "name": "joinA.jsp",
+      "lastModified": 1603377475396,
+      "locationURI": "file:\/C:\/Users\/yoon%20sung\/Desktop\/java\/2020IPRO\/WebContent\/joinA.jsp"
+    },
+    {
+      "path": "\/2020IPRO\/WebContent",
+      "parentWorkspace": "C:\/Users\/yoon sung\/Desktop\/java",
+      "name": "login.jsp",
+      "lastModified": 1603382284779,
+      "locationURI": "file:\/C:\/Users\/yoon%20sung\/Desktop\/java\/2020IPRO\/WebContent\/login.jsp"
+    },
+    {
+      "path": "\/2020IPRO\/WebContent",
+      "parentWorkspace": "C:\/Users\/yoon sung\/Desktop\/java",
+      "name": "join.jsp",
+      "lastModified": 1603378970778,
+      "locationURI": "file:\/C:\/Users\/yoon%20sung\/Desktop\/java\/2020IPRO\/WebContent\/join.jsp"
+    },
+    {
+      "path": "\/2020IPRO\/src\/user",
+      "parentWorkspace": "C:\/Users\/yoon sung\/Desktop\/java",
+      "name": "User.java",
+      "lastModified": 1603369691362,
+      "locationURI": "file:\/C:\/Users\/yoon%20sung\/Desktop\/java\/2020IPRO\/src\/user\/User.java"
+    },
+    {
+      "path": "\/2020IPRO\/WebContent\/WEB-INF",
+      "parentWorkspace": "C:\/Users\/yoon sung\/Desktop\/java",
+      "name": "web.xml",
+      "lastModified": 1603203985332,
+      "locationURI": "file:\/C:\/Users\/yoon%20sung\/Desktop\/java\/2020IPRO\/WebContent\/WEB-INF\/web.xml"
+    },
+    {
+      "path": "\/2020IPRO\/WebContent",
+      "parentWorkspace": "C:\/Users\/yoon sung\/Desktop\/java",
+      "name": "index.jsp",
+      "lastModified": 1603382364907,
+      "locationURI": "file:\/C:\/Users\/yoon%20sung\/Desktop\/java\/2020IPRO\/WebContent\/index.jsp"
+    },
+    {
+      "path": "\/2020IPRO\/src\/user",
+      "parentWorkspace": "C:\/Users\/yoon sung\/Desktop\/java",
+      "name": "UserDAO.java",
+      "lastModified": 1603382389365,
+      "locationURI": "file:\/C:\/Users\/yoon%20sung\/Desktop\/java\/2020IPRO\/src\/user\/UserDAO.java"
+    }
+  ]
+}

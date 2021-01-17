@@ -1,0 +1,43 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<link rel="stylesheet" href="/resource/css/header.css">
+<div class="header_area">
+    <!-- searchbar area -->
+    <div class="search_bar_area">
+        <input type="text" name="search" id="search"
+               placeholder="search" />
+        <label for="search">search</label>
+        <button type="submit">Search</button>
+    </div>
+    <!-- header title area -->
+    <div class="header_title">
+        <a href="/ipro/main">
+            <h1>SnsProject</h1>
+        </a>
+    </div>
+    <!-- header_user_nav_area -->
+    <div class="user_area" sec:authorize="hasRole('USER')">
+        <a href="/ipro/main">
+            <img src="/resource/img/header/home.png" alt="home">
+        </a>
+        <a href=""><img src="/resource/img/header/likes.png" alt="likes"></a>
+        <a href=""><img src="/resource/img/header/message.png" alt="message"></a>
+        <a th:if="${user.get().getUserimg() != null}"
+           th:href="@{/ipro/main/user/{id}(id=${user.get().usernick})}">
+            <img th:src="@{/resource/img/profile/} + ${user.get().userimg}"
+                 alt="userhome" class="user_feed_area">
+        </a>
+        <a th:if="${user.get().getUserimg() == null}"
+           th:href="@{/ipro/main/user/{id}(id=${user.get().usernick})}">
+            <img th:src="@{/resource/img/profile/Basic.png}"
+                 alt="userhome" class="user_feed_area">
+        </a>
+        <a href="/ipro/post">
+            <img src="/resource/img/header/logout.png" alt="logout">
+        </a>
+    </div>
+    <div class="user_area" sec:authorize="isAnonymous()">
+        <a href="/ipro/login" class="login">Login</a>
+        <a href="/ipro/signup" class="join">Sign up</a>
+    </div>
+</div>

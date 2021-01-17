@@ -1,0 +1,97 @@
+.header_area{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #999;
+    display: flex;
+    background: #26bda4;
+    min-width: 93.5rem;
+}
+
+/* serchBar */
+.search_bar_area{
+    width: 25%;
+    margin-top: 3px;
+    margin-left: 42px;
+    padding: 0 15px 0 55px;
+    position: relative;
+}
+.search_bar_area input{
+    height: 80%;
+    border: none;
+    background: #e6e9ed;
+    outline: none;
+}
+.search_bar_area label{
+    position: absolute;
+    top: 7px;
+    left: 20px;
+    transition: 0.2s ease;
+    cursor: text;
+    color: #999;
+}
+.search_bar_area input::placeholder{
+    opacity: 0;
+}
+.search_bar_area input:focus,
+.search_bar_area input:not(:placeholder-shown){
+    border: 2px solid #999;
+}
+.search_bar_area input:focus ~ label,
+.search_bar_area input:not(:placeholder-shown) ~ label{
+    transform: translate(-1%, -125%) scale(1.0);
+    font-size: 13px;
+    color: #fff;
+}
+.search_bar_area button{
+    width: 20%;
+    height: 80%;
+    position: absolute;
+    border: none;
+    background: #e6e9ed;
+    outline: none;
+    font-size: 1rem;
+}
+
+/* header title area */
+.header_title{
+    width: 65%;
+    padding: 0 0px 0 15px;
+    position: relative;
+    display: flex;
+    text-align: center;
+}
+.header_title a{
+    width: 100px;
+    margin-left: 35%;
+    text-decoration: none;
+    color: black;
+}
+.header_title h1{
+    padding: 0 2rem 0;
+    font-size: 3rem;
+    color: #e6e9ed;
+}
+.header_title h1:hover{
+    text-decoration: underline;
+}
+
+
+/* user_nav_area */
+.user_area{
+    width: 25%;
+    padding: 0 15px 0 0px;
+    display: flex;
+    position: relative;
+}
+.user_area a{
+    padding-left: 15px;
+    width: 40px;
+    position: relative;
+}
+.user_area img{
+    width: 33px;
+    height: 33px;
+}
+.user_area .user_feed_area{
+    border-radius: 50%;
+}

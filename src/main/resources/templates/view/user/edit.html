@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/resource/css/global.css">
+    <link rel="stylesheet" href="/resource/css/edit.css">
+    <title>Edit Profile</title>
+</head>
+<body>
+    <div th:insert="view/layout/header"></div>
+    <div class="body">
+        <div class="edit_body">
+            <form th:action="@{/ipro/user/user_edit}" method="post">
+                <!-- profile_img area -->
+                <div class="profile_img_area">
+                    <div th:if="${user.get().getUserimg() != null}">
+                        <img th:src="@{/resource/img/profile/} + ${user.get().getUserimg()}"
+                             alt="user_icon" class="user_img_icon">
+                    </div>
+                    <div th:if="${user.get().getUserimg() == null}">
+                        <img th:src="@{/resource/img/profile/Basic.png}"
+                             alt="user_icon" class="user_img_icon">
+                    </div>
+                    <div class="profile_img_edit_area">
+                    <span class="img_edit_usernick_area">
+                        <p th:text="${user.get().usernick}"></p>
+                    </span>
+                        <span class="img_edit">
+                        <a th:href="@{/ipro/user/img_edit}">Profile img edit</a>
+                    </span>
+                    </div>
+                </div>
+                <!-- user_nickname area -->
+                <div class="profile_username_area">
+                    <input type="text" id="nick" name="usernick" autocapitalize="off"
+                           th:value="${user.get().usernick}" required>
+                    <label for="nick">Username</label>
+                </div>
+                <!-- user_realname area -->
+                <div class="profile_userRname_area">
+                    <input type="text" id="rname" name="userfull" autocapitalize="off"
+                           th:value="${user.get().userfull}" required>
+                    <label for="rname">Name</label>
+                </div>
+                <!-- user_introduce area -->
+                <div class="profile_introduce_area">
+            <textarea name="userintro" id="intro" cols="30" rows="10"
+                      th:text="${user.get().getUserintro()}"></textarea>
+                    <label for="intro">Introduce</label>
+                </div>
+                <div class="btn_area">
+                    <button type="submit">submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

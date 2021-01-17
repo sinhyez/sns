@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div sec:authorize="hasRole('USER')">
+        <script>
+            location.replace("/ipro/main")
+        </script>
+    </div>
+    <div sec:authorize="isAnonymous()">
+        <script>
+            location.replace("/ipro/login")
+        </script>
+    </div>
+</body>
+</html>

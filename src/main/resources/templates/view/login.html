@@ -1,0 +1,42 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/resource/css/login.css">
+</head>
+<body>
+<section class="main-1">
+        <h1 class="title-1">
+            <a href="#" class="title-2">LOGIN PAGE</a>
+        </h1>
+        <form action="/ipro/login" class="login-form" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+            <div class="int-area">
+                <input type="email" id="id" name="username" autocapitalize="off" required>
+                <label for="id">Email</label>
+            </div>
+            <div class="int-area">
+                <input type="password" id="pw" name="userpw" autocapitalize="off" required>
+                <label for="pw">Password</label>
+            </div>
+            <div class="btn-area">
+                <button type="submit">LOGIN</button>
+            </div>
+            <a href="/oauth2/authorization/google">google login</a>
+        </form>
+        <div th:if="${param.error}">
+            <div class="fMsg">
+                <!-- <p>Login Failed<br>Please check the Email Address</p> -->
+                <!--/*@thymesVar id="errormsg" type="com"*/-->
+                <p th:text="${errormsg}"></p>
+            </div>
+        </div>
+        <div class="caption">
+            <a href="#" class="forgot">Forgot Your Email?</a>
+            <a href="#" class="forgot">Forgot Password?</a>
+        </div>
+        <div class="signup">
+            <a href="/ipro/signup">Sign up now</a>
+        </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <span><p th:text="username"></p></span>
+    <form th:action="@{/ipro/user/img_insert}" method="post" enctype="multipart/form-data">
+        <label for="ex_file">profile img change</label>
+        <input type="file" id="ex_file" name="filename">
+        <button type="submit">upload</button>
+        <a th:href="@{/ipro/user/img_delete}">img delete</a>
+    </form>
+    <div th:if="${param.error}">
+        <div class="fMsg">
+            <p>error!!</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
