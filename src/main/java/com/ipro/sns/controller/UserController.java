@@ -120,9 +120,6 @@ public class UserController {
         Optional<UserModel> model = userService.findByUsername(username);
         String redirect = "redirect:/ipro/main/user/" + model.get().getUsernick();
 
-        userService.deleteUserimg(username);
-
-
         return redirect;
     }
 

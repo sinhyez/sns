@@ -7,7 +7,7 @@
 </head>
 <body>
 <form th:action="@{/upload}" method="POST" enctype="multipart/form-data" autocomplete="off">
-    <input type="hidden" id="userid" name="userid" th:value="${user.get().id}">
+    <input type="hidden" id="usernick" name="usernick" th:value="${user.get().usernick}">
     <input type="file" multiple="multiple" name="file" placeholder="file upload">
     <input type="text" name="caption" placeholder="caption">
     <button type="submit">submit</button>

@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "user")
 @NoArgsConstructor //기본 생성자 자동 추가 ex) public UserModel(){}
@@ -34,13 +35,12 @@ public class UserModel {
     @Column
     private Role role;
 
-    @OneToMany(mappedBy = "userid")
-    @OrderBy("id desc")
+    @OneToMany(mappedBy = "user")
     private List<PostModel> postModels = new ArrayList<>();
 
     @Builder
     public UserModel(int id, String username, String userpw, String usernick, String userfull,
-                     String userimg, String userintro, Role role) {
+                     String userimg, String userintro, Role role, List<PostModel> postModels) {
         this.id = id;
         this.username = username;
         this.userpw = userpw;
@@ -49,6 +49,7 @@ public class UserModel {
         this.userimg = userimg;
         this.userintro = userintro;
         this.role = role;
+        this.postModels = postModels;
     }
 
 
