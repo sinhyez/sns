@@ -2,7 +2,9 @@ package com.ipro.sns.controller;
 
 import com.ipro.sns.model.PostModel;
 import com.ipro.sns.model.UserModel;
-import com.ipro.sns.repository.PostRepository;
+import com.ipro.sns.model.dto.PostDto;
+import com.ipro.sns.model.dto.UserDto;
+import com.ipro.sns.service.PostService;
 import com.ipro.sns.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,7 +22,7 @@ import java.util.Optional;
 public class MainController {
 
     private final UserService userService;
-    private final PostRepository postRepository;
+    private final PostService postService;
 
     @GetMapping("/")
     public String index(){
@@ -41,16 +43,21 @@ public class MainController {
     @GetMapping("/ipro/main/user/{usernick}")
     public String user_main(@PathVariable("usernick") String usernick, Model model) throws Exception {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        //유저정보 set
         Optional<UserModel> userModel = userService.findByUsername(username);
+        model.addAttribute("user", userModel);
+
         UserModel user = userModel.get();
-        
+
         //이미지 카운트
         int imgCount = user.getPostModels().size();
         model.addAttribute("imgCount", imgCount);
 
-        List<PostModel> postModel = postRepository.findByUseridId(user.getId());
-        model.addAttribute("user", userService.findByUsername(username));
-        model.addAttribute("post", postModel);
+        //포스팅 리스트
+        List<PostDto> postDtoList = postService.getUserPostList(user);
+        model.addAttribute("post", postDtoList);
+
         
 
         return "view/user/user_main";

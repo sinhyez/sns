@@ -1,9 +1,9 @@
 package com.ipro.sns.controller;
 
 
-import com.ipro.sns.model.PostModel;
 import com.ipro.sns.model.UserModel;
 import com.ipro.sns.model.dto.PostDto;
+import com.ipro.sns.model.dto.UserDto;
 import com.ipro.sns.repository.PostRepository;
 import com.ipro.sns.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -31,9 +31,10 @@ public class PostController {
 
     @RequestMapping("/upload")
     public String uploadProc(@RequestParam("file")MultipartFile file, @RequestParam("caption") String caption,
-                             @RequestParam("userid") int userid) throws IOException {
+                             @RequestParam("usernick") String usernick) throws IOException {
 
-        UserModel userModel = userService.findById(userid);
+        Optional<UserModel> userModelWrapper = userService.findByUsernick(usernick);
+        UserModel userModel = userModelWrapper.get();
         String path = "C:/Users/yoon sung/Desktop/java/sns/src/main/resources/static/img/";
         String redirect = "redirect:/ipro/main/user/" + userModel.getUsernick();
 
@@ -45,7 +46,7 @@ public class PostController {
         PostDto postDto = new PostDto();
         postDto.setCaption(caption);
         postDto.setImgurl(path);
-        postDto.setUserid(userModel);
+        postDto.setUser(userModel);
         postDto.setImgurl(filename);
         postRepository.save(postDto.toEntity()).getId();
 
@@ -56,7 +57,7 @@ public class PostController {
     @RequestMapping("/ipro/post/details/{id}")
     public String postDetails(@PathVariable("id") int id, Model model) throws Exception {
 
-        Optional<PostModel> postModel = postRepository.findById(id);
+        Optional<PostDto> postModel = postRepository.findById(id);
         model.addAttribute("post", postModel);
 
         return "view/post/post_details";

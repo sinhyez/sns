@@ -27,9 +27,9 @@ public class UserService implements UserDetailsService {
     public Optional<UserModel> findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
-    public UserModel findById(int id) { return userRepository.findById(id); }
-    public Optional<UserModel> deleteUserimg(String username) {
-        return userRepository.deleteByUserimgOrderByUsername(username);
+    public Optional<UserDto> findById(int id) { return userRepository.findById(id); }
+    public Optional<UserModel> findByUsernick(String usernick) {
+        return userRepository.findByUsernick(usernick);
     }
 
     public boolean check(UserDto userDto, BindingResult bindingResult) {
