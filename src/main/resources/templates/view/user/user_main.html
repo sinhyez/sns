@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,11 +9,11 @@
 </head>
 <body>
 <!-- include header -->
-<header th:include="view/layout/header"></header>
+<header th:replace="view/layout/header :: headerFragment"></header>
 <!-- model main section start -->
-<article>
+<main>
     <!-- model main section header start -->
-    <header>
+    <div class="main_header">
         <div class="user_main_container">
             <!-- profile area -->
             <div class="profile">
@@ -28,15 +28,34 @@
                     </div>
                     <!-- profile model setting area -->
                     <div class="profile_setting">
-                        <h1 class="user_name" th:text="${user.get().usernick}">
-                        </h1>
-                        <a th:href="@{/ipro/user/edit/{username}(username=${user.get().usernick})}"><button class="btn edit_btn">
-                            Edit Profile
-                        </button></a>
-                        <a href="/logout"><button class="btn logout_btn">
-                            <i class="fas fa-cog" aria-hidden="true"></i>
-                            Logout
-                        </button></a>
+                        <h1 class="user_name" th:text="${user.get().usernick}"></h1>
+                        <a th:if="${loginId == user.get().id}"
+                           th:href="@{/ipro/user/edit/{username}(username=${user.get().usernick})}">
+                            <button class="btn edit_btn">
+                                Edit Profile
+                            </button>
+                        </a>
+                        <a th:if="${loginId == user.get().id}" href="/logout">
+                            <button class="btn logout_btn">
+                                <i class="fas fa-cog" aria-hidden="true"></i>
+                                Logout
+                            </button>
+                        </a>
+                        <th:block th:switch="${followcount}">
+                            <a th:case="${followcount == false}" th:if="${loginId != user.get().id}"
+                               th:href="@{/follow/{id}(id=${user.get().id})}">
+                                <button class="btn edit_btn">
+                                    Follow
+                                </button>
+                            </a>
+                            <form th:case="${followcount == true}" th:if="${loginId != user.get().id}"
+                                  th:action="@{'/follow/' + ${user.get().id}} " method="post">
+                                <input type="hidden" value="delete" />
+                                <button class="btn edit_btn">
+                                    Unfollow
+                                </button>
+                            </form>
+                        </th:block>
                     </div>
                     <!-- profile model status area -->
                     <div class="profile_stat">
@@ -51,7 +70,7 @@
                             </li>
                             <li>
                                 <a href="">Following</a>
-                                <span class="stat_count">3</span>
+                                <span class="stat_count" th:text="${following}"></span>
                             </li>
                         </ul>
                     </div>
@@ -65,54 +84,42 @@
             <!-- End of profile section -->
         </div>
         <!-- End of container -->
-    </header>
+    </div>
 
-    <main>
+    <div class="main_section">
         <div class="user_main_container">
             <!-- model post section start -->
-            <div class="user_post_area" th:object="${post}">
+            <div class="user_post_area">
                 <!-- model post item -->
-                <div th:if="${post != null}">
-                    <div class="post_item" th:each="post, i : ${post}">
-                        <a th:href="@{/ipro/post/details/{id}(id=${post.id})}">
-                            <img th:src="@{/resource/img/} + ${post.Imgurl}" alt="post_img" class="post_img">
-                            <!-- post item info likes comment -->
-                            <div class="post_item_info">
-                                <ul>
-                                    <li class="item_likes">
+                <div class="post_item" th:each="postlist, i : ${postlist}">
+                    <a th:href="@{/ipro/post/details/{id}(id=${postlist.Id})}">
+                        <img th:src="@{/resource/img/} + ${postlist.Imgurl}" alt="post_img" class="post_img">
+                        <!-- post item info likes comment -->
+                        <div class="post_item_info">
+                            <ul>
+                                <li class="item_likes">
                                     <span class="hidden">
                                         Likes:
                                     </span>
-                                        <i class="fas fa-heart" aria-hidden="true"></i>
-                                        56
-                                    </li>
-                                    <li class="item_commnet">
+                                    <i class="fas fa-heart" aria-hidden="true"></i>
+                                    56
+                                </li>
+                                <li class="item_commnet">
                                     <span class="item_commnet">
                                         comments:
                                     </span>
-                                        <i class="fas fa-comment" aria-hidden="true"></i>
-                                        2
-                                    </li>
-                                </ul>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="user_post_empty" th:if="${post == null}">
-                    <img src="" alt="" class="empty">
-                </div>
-                <div class="post_something">
-                        <span>
-                            Start sharing your moments
-                        </span>
-                    <br>
-                    <a href="">Post Now</a>
+                                    <i class="fas fa-comment" aria-hidden="true"></i>
+                                    2
+                                </li>
+                            </ul>
+                        </div>
+                    </a>
                 </div>
             </div>
             <!-- end of model post section -->
         </div>
         <!-- end of container -->
-    </main>
-</article>
+    </div>
+</main>
 </body>
 </html>

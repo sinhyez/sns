@@ -4,7 +4,6 @@ package com.ipro.sns.service;
 import com.ipro.sns.model.PostModel;
 import com.ipro.sns.model.UserModel;
 import com.ipro.sns.model.dto.PostDto;
-import com.ipro.sns.model.dto.UserDto;
 import com.ipro.sns.repository.PostRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,6 +19,10 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final UserService userService;
+
+    public Optional<PostDto> findById(int id) {
+        return postRepository.findById(id);
+    }
 
     //PostDto를 통해 Controller 와 Service 간의 데이터 전달을 위해
     //Repository에서 가져온 PostModel 을 For문을 통해 Dto로 변환

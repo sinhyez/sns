@@ -10,9 +10,10 @@ import java.util.Optional;
 
 public interface PostRepository extends JpaRepository<PostModel, Integer> {
 
+    //List<PostModel> findByUser_UsernickOrderByIdDesc(UserModel userModel);
 
-    List<PostModel> findByUser_UsernickOrderByIdDesc(UserModel userModel);
     List<PostModel> findByUserOrderByIdDesc(UserModel userid);
+
     Optional<PostDto> findById(int id);
 
 

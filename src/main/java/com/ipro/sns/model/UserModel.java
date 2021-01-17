@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "user")
-@NoArgsConstructor //기본 생성자 자동 추가 ex) public UserModel(){}
+@NoArgsConstructor(access = AccessLevel.PROTECTED) //기본 생성자 자동 추가 ex) public UserModel(){}
 public class UserModel {
 
     @Id

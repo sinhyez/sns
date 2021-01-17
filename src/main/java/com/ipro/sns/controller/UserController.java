@@ -26,7 +26,6 @@ import java.util.Optional;
 public class UserController {
 
     private final UserService userService;
-    private final UserRepository userRepository;
 
     //로그인 처리
     @RequestMapping("/ipro/login")
@@ -45,7 +44,7 @@ public class UserController {
 
     //회원가입 처리 프로세스
     @PostMapping("/ipro/signup")
-    public String Signupproc(@Valid UserDto userDto, BindingResult bindingResult, Model model) throws Exception{
+    public String signUpProc(@Valid UserDto userDto, BindingResult bindingResult, Model model) throws Exception{
         if (userService.check(userDto, bindingResult)) {
             model.addAttribute("userDto", userDto);
             return "view/signup";
@@ -54,9 +53,17 @@ public class UserController {
         return "redirect:/ipro/login";
     }
 
+    //헤더에서 유저프로필로 이동할때 처리되는 프로세스
+    @RequestMapping("/ipro/main/user/")
+    public String userProfile() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Optional<UserModel> userModel = userService.findByUsername(username);
+        return "redirect:/ipro/main/user/" + userModel.get().getUsernick();
+    }
+
     //유저 프로필 업데이트
     @RequestMapping(value = "/ipro/user/edit/{usernick}")
-    public String update_user(@PathVariable("usernick") String usernick, Model model) throws Exception {
+    public String updateUser(@PathVariable("usernick") String usernick, Model model) throws Exception {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         model.addAttribute("user", userService.findByUsername(username));
         return "view/user/edit";
@@ -64,7 +71,7 @@ public class UserController {
 
     //유저 프로필 사진 업데이트
     @RequestMapping(value = "/ipro/user/img_edit")
-    public String img_edit(Model model) throws Exception{
+    public String imgEdit(Model model) throws Exception{
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         model.addAttribute("user", userService.findByUsername(username));
         return "view/user/img_edit";
@@ -72,7 +79,7 @@ public class UserController {
 
     //유저 프로필 사진 업데이트 프로세스
     @RequestMapping(value = "/ipro/user/img_insert")
-    public String img_insert(HttpServletRequest request,
+    public String imgInsert(HttpServletRequest request,
                              @RequestParam("filename") MultipartFile multipartFile, Model model) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Optional<UserModel> model1 = userService.findByUsername(username);
@@ -99,7 +106,7 @@ public class UserController {
 
     //유저 프로필 업데이트 프로세스
     @RequestMapping(value = "/ipro/user/user_edit")
-    public String profile_edit(HttpServletRequest request, Model model) throws Exception{
+    public String profileEdit(HttpServletRequest request, Model model) throws Exception{
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Optional<UserModel> model1 = userService.findByUsername(username);
         String redirect = "redirect:/ipro/main/user/" + model1.get().getId();
@@ -114,13 +121,5 @@ public class UserController {
         return redirect;
     }
 
-    @RequestMapping("/ipro/user/img_delete")
-    public String deleteImg(HttpServletRequest request) throws Exception{
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        Optional<UserModel> model = userService.findByUsername(username);
-        String redirect = "redirect:/ipro/main/user/" + model.get().getUsernick();
-
-        return redirect;
-    }
 
 }

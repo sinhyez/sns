@@ -1,6 +1,6 @@
 package com.ipro.sns.model;
 
-import com.ipro.sns.model.dto.UserDto;
+
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;

@@ -27,7 +27,7 @@ public class UserService implements UserDetailsService {
     public Optional<UserModel> findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
-    public Optional<UserDto> findById(int id) { return userRepository.findById(id); }
+    public Optional<UserModel> findById(int id) { return userRepository.findById(id); }
     public Optional<UserModel> findByUsernick(String usernick) {
         return userRepository.findByUsernick(usernick);
     }
@@ -62,6 +62,7 @@ public class UserService implements UserDetailsService {
         userModel.setUserimg(userimg);
         userRepository.save(userModel);
     }
+
     //유저 프로필 내용 수정
     public void user_edit(String username, String usernick, String userfull, String userintro) {
         Optional<UserModel> uModel = userRepository.findByUsername(username);
@@ -71,10 +72,6 @@ public class UserService implements UserDetailsService {
         userModel.setUserfull(userfull);
         userModel.setUserintro(userintro);
         userRepository.save(userModel);
-    }
-
-    public void userImgDelete(String username, String userimg) {
-
     }
 
     //spring security login method
