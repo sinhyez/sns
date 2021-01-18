@@ -4,14 +4,103 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/resource/css/global.css">
+    <link rel="stylesheet" href="/resource/css/main.css">
 
     <title>Document</title>
 </head>
 
-<body th:insert="view/layout/header">
-    <div></div>
-    <section>
-        <article></article>
-    </section>
+<body>
+    <!-- include header -->
+    <header th:replace="view/layout/header :: headerFragment"></header>
+    <!-- section start -->
+    <div class="feed_main">
+        <!-- article start -->
+        <article class="feed_contianer" th:each="post : ${postlist}">
+            <!-- card header -->
+            <div class="feed_card_header">
+
+                <div class="photo_user_info" th:if="${post.user.userimg != null}">
+                    <img th:src="@{'/resource/img/profile/' + ${post.user.userimg}}" alt="userIcon">
+                    <a th:href="@{'/ipro/main/user/' + ${post.user.usernick}}"
+                       class="username" th:text="${post.user.usernick}"></a>
+                </div>
+                <div class="photo_user_info" th:if="${post.user.userimg == null}">
+                    <img src="/resource/img/profile/basic.png" alt="userIcon">
+                    <a th:href="@{'/ipro/main/user/' + ${post.user.usernick}}"
+                       class="username" th:text="${post.user.usernick}"></a>
+                </div>
+
+            </div>
+
+            <!-- img card area -->
+            <div class="photo_card_img">
+                <img th:src="@{'/resource/img/' + ${post.imgurl}}" alt="card_img" style="object-fit: cover">
+            </div>
+
+            <!-- card info -->
+            <div class="photo_info">
+                <div class="photo_actions">
+                    <span class="photo_action">
+
+                        <!-- likes img -->
+                        <i onclick="" id=""
+                           class="fa fa-heart heart heart-clicked"></i>like
+                        <!-- <i onclick="" id=""
+                        class="fa fa-heart-o heart"></i> -->
+
+                    </span>
+                    <span class="photo_action">
+
+                        <!-- comment img -->
+                        <i class="fa fa-commnet-0"></i>comment
+
+                    </span>
+                </div>
+
+                <!-- like count -->
+                <span class="photo_like_count">
+                    likes
+                </span>
+
+                <!-- article caption -->
+                <div class="photo_caption">
+
+                    <span class="username" th:text="${post.user.usernick}"></span>
+                    <span class="caption" th:text="${post.caption}"></span>
+
+                </div>
+
+                <!-- article tag -->
+                <div class="photo_tag">
+                    #acne
+                </div>
+
+                <!-- article comment -->
+                <ul class="photo_comments">
+                    <li class="photo_comment">
+                        <a href="" class="comment_user">
+                            dummy_id2
+                        </a>
+                        love this!
+                    </li>
+                </ul>
+
+                <!-- article create date -->
+                <span class="photo_date">
+                    <a href="">2day ago</a>
+                </span>
+
+                <!-- add comment area -->
+                <div class="add_comment_area">
+                    <textarea name="" id="" cols="30" rows="10" placeholder="add a comment"></textarea>
+                    <i class="fa fa-ellipsis-h"></i>
+                </div>
+
+            </div>
+
+        </article>
+        <!-- article end -->
+    </div>
+    <!-- section end -->
 </body>
 </html>

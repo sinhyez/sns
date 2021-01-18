@@ -1,5 +1,6 @@
 package com.ipro.sns.service;
 
+import com.ipro.sns.model.FollowModel;
 import com.ipro.sns.model.UserModel;
 import com.ipro.sns.model.dto.FollowDto;
 import com.ipro.sns.repository.FollowRepository;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,6 +26,10 @@ public class FollowService {
 
     public int followingCounting(UserModel userModel) {
         return followRepository.countByFollowingid(userModel);
+    }
+
+    public List<FollowModel> findByFollowingid(UserModel userModel) {
+        return followRepository.findByFollowingid(userModel);
     }
 
     //팔로우 저장

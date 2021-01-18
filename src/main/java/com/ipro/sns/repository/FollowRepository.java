@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 public interface FollowRepository extends JpaRepository<FollowModel, Integer> {
@@ -16,6 +17,8 @@ public interface FollowRepository extends JpaRepository<FollowModel, Integer> {
     int countByFollowerid(UserModel followerid);
 
     int countByFollowingid(UserModel followingid);
+
+    List<FollowModel> findByFollowingid(UserModel followingid);
 
     //언팔로우
     @Transactional

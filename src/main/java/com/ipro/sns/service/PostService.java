@@ -20,8 +20,16 @@ public class PostService {
     private final PostRepository postRepository;
     private final UserService userService;
 
-    public Optional<PostDto> findById(int id) {
-        return postRepository.findById(id);
+    public List<PostModel> findByUserOrderByIdDesc(UserModel userModel) {
+        return postRepository.findByUserOrderByIdDesc(userModel);
+    }
+
+    public List<PostModel> findByUserIdOrderByIdDesc(int id) {
+        return postRepository.findByUserIdOrderByIdDesc(id);
+    }
+
+    public PostModel findAll() {
+        return (PostModel) postRepository.findAll();
     }
 
     //PostDto를 통해 Controller 와 Service 간의 데이터 전달을 위해

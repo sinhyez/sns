@@ -1,8 +1,9 @@
 package com.ipro.sns.controller;
 
+import com.ipro.sns.model.FollowModel;
+import com.ipro.sns.model.PostModel;
 import com.ipro.sns.model.UserModel;
 import com.ipro.sns.model.dto.PostDto;
-import com.ipro.sns.repository.FollowRepository;
 import com.ipro.sns.service.FollowService;
 import com.ipro.sns.service.PostService;
 import com.ipro.sns.service.UserService;
@@ -25,7 +26,6 @@ public class MainController {
 
     private final UserService userService;
     private final PostService postService;
-    private final FollowRepository followRepository;
     private final FollowService followService;
 
     @GetMapping("/")
@@ -36,10 +36,34 @@ public class MainController {
     //main feed
     @GetMapping("/ipro/main")
     public String main(Model model) throws Exception {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
         //현재 로그인 되어있는 아이디 검색
-        model.addAttribute("user", userService.findByUsername(username));
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Optional<UserModel> user = userService.findByUsername(username);
+        UserModel userWrapper = user.get();
+
+        //login user 가 Follow한 아이디 리스트
+        List<FollowModel> followList = followService.findByFollowingid(userWrapper);
+
+        //login user의 post 찾기
+        List<PostModel> postList = postService.findByUserIdOrderByIdDesc(userWrapper.getId());
+
+        // following한 유저의 게시글 select 후 user 포스팅과 list 합치기
+        for (FollowModel f : followList) {
+            List<PostModel> post = postService.findByUserIdOrderByIdDesc(f.getFollowerid().getId());
+            for (PostModel p : post) {
+                postList.add(p);
+            }
+        }
+
+
         //유저아이디를 통해 유저테이블에 존재하는 현재 유저의 모든정보 전달
+        model.addAttribute("user", user);
+
+        model.addAttribute("postlist", postList);
+        model.addAttribute("postsize", postList.size());
+
+
         return "view/main";
     }
 

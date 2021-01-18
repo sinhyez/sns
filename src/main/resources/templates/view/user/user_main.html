@@ -88,33 +88,32 @@
         <div class="user_main_container">
             <!-- model post section start -->
             <div class="user_post_area">
+
                 <!-- model post item -->
-                <th:block>
-                    <div class="post_item" th:each="postlist, i : ${postlist}">
-                        <a th:href="@{'/ipro/post/details/' + ${postlist.id}}">
-                            <img th:src="@{'/resource/img/'+ ${postlist.imgurl}} " alt="post_img" class="post_img">
-                            <!-- post item info likes comment -->
-                            <div class="post_item_info">
-                                <ul>
-                                    <li class="item_likes">
+                <div class="post_item" th:each="postlist, i : ${postlist}">
+                    <a th:href="@{'/ipro/post/details/' + ${postlist.id}}">
+                        <img th:src="@{'/resource/img/'+ ${postlist.imgurl}} " alt="post_img" class="post_img">
+                        <!-- post item info likes comment -->
+                        <div class="post_item_info">
+                            <ul>
+                                <li class="item_likes">
                                     <span class="hidden">
                                         Likes:
                                     </span>
-                                        <i class="fas fa-heart" aria-hidden="true"></i>
-                                        56
-                                    </li>
-                                    <li class="item_commnet">
+                                    <i class="fas fa-heart" aria-hidden="true"></i>
+                                    56
+                                </li>
+                                <li class="item_commnet">
                                     <span class="item_commnet">
                                         comments:
                                     </span>
-                                        <i class="fas fa-comment" aria-hidden="true"></i>
-                                        2
-                                    </li>
-                                </ul>
-                            </div>
-                        </a>
-                    </div>
-                </th:block>
+                                    <i class="fas fa-comment" aria-hidden="true"></i>
+                                    2
+                                </li>
+                            </ul>
+                        </div>
+                    </a>
+                </div>
 
             </div>
             <!-- end of model post section -->

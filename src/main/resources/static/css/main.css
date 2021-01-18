@@ -1,0 +1,172 @@
+article {
+    margin-top: 4rem;
+    font-size: 2rem;
+    border: 1px solid rgba(0, 0, 0, .0975);;
+    background: #fff;
+}
+
+.feed_main {
+    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.feed_container {
+    margin-bottom: 6rem;
+
+}
+
+.feed_container img {
+    max-width: 100%;
+}
+
+.feed_container .fee_card_header {
+    padding: 1.5rem;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+
+.feed_card_header {
+    border-bottom: 1px solid rgba(0, 0, 0, .0975);
+}
+
+.feed_card_header img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.photo_user_info {
+    display: flex;
+    padding: 1rem;
+}
+
+.username {
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+    padding-top: 2px;
+}
+
+.photo_card_img {
+    width: 60vh;
+    max-width: 60vh;
+
+}
+
+.photo_card_img img {
+    width: 100%;
+}
+
+.photo_info {
+    /*
+    padding: 1rem 0 1rem 0;
+    */
+    padding-bottom: 0;
+    box-sizing: border-box;
+}
+
+.photo_info .photo_actions {
+    font-size: 1.2rem;
+    display: flex;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.photo_info .photo_action {
+    margin-right: 1.2rem;
+    display: block;
+    cursor: pointer;
+}
+
+.photo_info .photo_like_count {
+    padding: 1rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.photo_caption {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-bottom: 6px;
+}
+
+.caption {
+    font-size: 1.56rem;
+}
+
+.photo_tag {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    color: black;
+    margin-bottom: 6px;
+    font-size: 1.3rem;
+}
+
+.photo_comments {
+    padding: 1rem;
+    padding-left: 0;
+}
+
+.photo_comments .photo_comment {
+    padding-left: 1rem;
+    list-style: none;
+    font-size: 1.3rem;
+}
+
+
+.photo_comment .comment_user {
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+}
+
+.photo_info .photo_date{
+    text-transform: uppercase;
+    font-size: 13px;
+
+}
+
+.photo_date a {
+    padding-left: 1rem;
+    text-decoration: none;
+    color: #999;
+}
+
+.photo_info .add_comment_area {
+
+    margin-top: 15px;
+    width: 100%;
+    border-top: 1px solid rgba(0, 0, 0, .0975);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.add_comment_area textarea {
+    padding: 1.5rem;
+    border: 0;
+    resize: none;
+    width: 100%;
+    height: 5rem;
+    font-size: 1.4rem;
+}
+
+.add_comment_area textarea:focus {
+    outline: none;
+}
+
+.add_comment_area i {
+    cursor: pointer;
+}
+
+.heart-clicked {
+    color: red;
+    animation: .5s pump infinite linear;
+}
