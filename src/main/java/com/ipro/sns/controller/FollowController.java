@@ -36,13 +36,18 @@ public class FollowController {
 
     }
 
-    @DeleteMapping("/follow/{id}")
+    @RequestMapping("/unfollow/{id}")
     public String unFollow(@PathVariable int id) throws Exception {
+
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        Optional<UserModel> loginUser = userService.findByUsername(username);
+        UserModel loginUserWrapper = loginUser.get();
 
         Optional<UserModel> toUsermodel = userService.findById(id);
         UserModel userModel = toUsermodel.get();
 
-        followService.unFollow(userModel, userModel);
+        followService.unFollow(loginUserWrapper.getId(), userModel.getId());
 
         String redirect = "redirect:/ipro/main/user/" + userModel.getUsernick();
 

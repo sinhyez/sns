@@ -17,6 +17,15 @@ public class FollowService {
     private final FollowRepository followRepository;
     private final UserService userService;
 
+
+    public int followerCounting(UserModel userModel) {
+        return followRepository.countByFollowerid(userModel);
+    }
+
+    public int followingCounting(UserModel userModel) {
+        return followRepository.countByFollowingid(userModel);
+    }
+
     //팔로우 저장
     public void save(String username, String pagename) {
         FollowDto followDto = new FollowDto();
@@ -39,16 +48,18 @@ public class FollowService {
 
     //연팔로우
     @Transactional
-    public void unFollow(UserModel id1, UserModel id2) {
-        followRepository.deleteByFollowingidAndFollowerid(id1, id2);
+    public void unFollow(int id1, int id2) {
+        followRepository.deleteByFollowingidIdAndFolloweridId(id1, id2);
     }
 
     //팔로우 카운팅
-    public boolean countFollow(UserModel id1, UserModel id2) {
+    public boolean checkFollow(int id1, int id2) {
 
-        if (followRepository.countByFolloweridAndFollowingid(id1, id2) == 0)
+        if (followRepository.countByFolloweridIdAndFollowingidId(id1, id2) == 0){
             return false;
-        return true;
+        } else {
+            return true;
+        }
 
     }
 

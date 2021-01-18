@@ -45,8 +45,7 @@ public class MainController {
 
     //user Profile page
     @RequestMapping("/ipro/main/user/{usernick}")
-    public String userMain(@PathVariable("usernick") String usernick, Model model,
-                            Principal principal) throws Exception {
+    public String userMain(@PathVariable("usernick") String usernick, Model model) throws Exception {
 
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
 
@@ -56,10 +55,11 @@ public class MainController {
 
         UserModel user = userModel.get();
 
-        if (principal != null) {
-            Optional<UserModel> loginUser = userService.findByUsername(principal.getName());
-            model.addAttribute("loginId", loginUser.get().getId());
-        }
+
+        Optional<UserModel> loginUser = userService.findByUsername(username);
+        UserModel loginUserWrapper = loginUser.get();
+        model.addAttribute("loginId", loginUser.get().getId());
+
 
         //이미지 카운트
         int imgCount = user.getPostModels().size();
@@ -70,9 +70,12 @@ public class MainController {
         model.addAttribute("postlist", postDtoList);
 
         //팔로우 카운팅
-        boolean followCount = followService.countFollow(user, user);
-        model.addAttribute("followcount", followCount);
-        model.addAttribute("following", followRepository.countByFollowingid(user));
+        int followerCount = followService.followerCounting(user);
+        int followingCount = followService.followingCounting(user);
+        boolean checkFollow = followService.checkFollow(user.getId(), loginUserWrapper.getId());
+        model.addAttribute("followcount", checkFollow);
+        model.addAttribute("follower", followerCount);
+        model.addAttribute("following", followingCount);
 
         return "view/user/user_main";
     }

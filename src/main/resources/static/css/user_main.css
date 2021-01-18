@@ -53,8 +53,11 @@ img {
 }
 
 .profile_img {
+    /*
     width: calc(33.333% - 1rem);
-    margin-right: 1rem;
+     */
+    margin-right: 3rem;
+    padding-left: 8rem;
     display: flex;
     float: left;
     justify-content: center;
@@ -62,8 +65,8 @@ img {
 }
 
 .profile_img img {
-    width: 150px;
-    height: 150px;
+    width: 160px;
+    height: 155px;
     border: solid #26bda4;
     border-radius: 50%;
 }
@@ -83,10 +86,11 @@ img {
     display: inline-block;
     font-size: 3.2rem;
     font-weight: 300;
+    margin-left: 4rem;
 }
 
 .edit_btn {
-    margin-left: 2rem;
+    margin-left: 1rem;
     padding: 0 2.4rem;
     font-size: 1.4rem;
     line-height: 1.8;
@@ -125,6 +129,7 @@ img {
 
 .profile_intro {
     margin-top: 1.3rem;
+    padding-left: 4rem;
     font-size: 1.4rem;
     font-weight: 400;
     line-height: 1.5;
@@ -183,4 +188,35 @@ img {
     width: 285px;
     height: 100%;
     object-fit: cover;
+}
+
+/* post is empty */
+
+.if_post_empty {
+    display: flex;
+}
+
+.user_post_empty {
+    margin: 2rem 2rem 1rem 2rem;
+}
+
+.user_post_empty img {
+    width: 300px;
+}
+
+.post_something {
+    text-align: center;
+    font-size: 3rem;
+    margin-top: 11rem;
+    margin-left: 5rem;
+}
+
+.post_something a {
+    font-size: 2.4rem;
+    text-decoration: none;
+    color: black;
+}
+
+.post_something a:hover {
+    color: #26bda4;
 }

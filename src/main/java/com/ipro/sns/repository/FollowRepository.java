@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 public interface FollowRepository extends JpaRepository<FollowModel, Integer> {
 
     //팔로우 유무
-    int countByFolloweridAndFollowingid(UserModel followerid, UserModel followingid);
+    int countByFolloweridIdAndFollowingidId(int followerid, int followingid);
 
     int countByFollowerid(UserModel followerid);
 
@@ -19,6 +19,6 @@ public interface FollowRepository extends JpaRepository<FollowModel, Integer> {
 
     //언팔로우
     @Transactional
-    void deleteByFollowingidAndFollowerid(UserModel followingid, UserModel followerid);
+    void deleteByFollowingidIdAndFolloweridId(int followingid, int followerid);
 
 }

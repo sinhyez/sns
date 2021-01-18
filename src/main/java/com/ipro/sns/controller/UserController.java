@@ -3,7 +3,6 @@ package com.ipro.sns.controller;
 
 import com.ipro.sns.model.UserModel;
 import com.ipro.sns.model.dto.UserDto;
-import com.ipro.sns.repository.UserRepository;
 import com.ipro.sns.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -85,7 +84,6 @@ public class UserController {
         Optional<UserModel> model1 = userService.findByUsername(username);
         String img_path = "C:/Users/yoon sung/Desktop/java/sns/src/main/resources/static/img/profile/" + model1.get().getUsernick();
         String redirect = "redirect:/ipro/main/user/" + model1.get().getUsernick();
-        String msg = null;
 
         try {
             if (model1.get().getUserimg() != null) {
@@ -109,7 +107,7 @@ public class UserController {
     public String profileEdit(HttpServletRequest request, Model model) throws Exception{
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Optional<UserModel> model1 = userService.findByUsername(username);
-        String redirect = "redirect:/ipro/main/user/" + model1.get().getId();
+        String redirect = "redirect:/ipro/main/user/";
 
         //파라메터 값을 넘겨받을 변수지정
         String nick = request.getParameter("usernick");

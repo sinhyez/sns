@@ -20,41 +20,39 @@
                 <!-- profile border line -->
                 <div class="profile_border">
                     <!-- profile model icon area -->
-                    <div class="profile_img" th:if="${user.get().userimg != null}">
-                        <img th:src="@{/resource/img/profile/} + ${user.get().userimg}" alt="usericon">
-                    </div>
+                    <th:block th:if="${user.get().userimg != null}">
+                        <div class="profile_img">
+                            <img th:src="@{'/resource/img/profile/'+ ${user.get().userimg}} " alt="usericon">
+                        </div>
+                    </th:block>
                     <div class="profile_img" th:if="${user.get().userimg == null}">
-                        <img th:src="@{/resource/img/profile/Basic.png}" alt="usericon">
+                        <img th:src="@{'/resource/img/profile/Basic.png'}" alt="usericon">
                     </div>
                     <!-- profile model setting area -->
                     <div class="profile_setting">
                         <h1 class="user_name" th:text="${user.get().usernick}"></h1>
                         <a th:if="${loginId == user.get().id}"
-                           th:href="@{/ipro/user/edit/{username}(username=${user.get().usernick})}">
-                            <button class="btn edit_btn">
-                                Edit Profile
-                            </button>
+                           th:href="@{'/ipro/user/edit/' + ${user.get().usernick}}">
+                            <button class="btn edit_btn">Edit Profile</button>
                         </a>
                         <a th:if="${loginId == user.get().id}" href="/logout">
                             <button class="btn logout_btn">
-                                <i class="fas fa-cog" aria-hidden="true"></i>
-                                Logout
+                                <i class="fas fa-cog" aria-hidden="true"></i>Logout
                             </button>
                         </a>
                         <th:block th:switch="${followcount}">
-                            <a th:case="${followcount == false}" th:if="${loginId != user.get().id}"
-                               th:href="@{/follow/{id}(id=${user.get().id})}">
+                            <a th:case="false" th:if="${loginId != user.get().id}"
+                               th:href="@{'/follow/' + ${user.get().id}}">
                                 <button class="btn edit_btn">
                                     Follow
                                 </button>
                             </a>
-                            <form th:case="${followcount == true}" th:if="${loginId != user.get().id}"
-                                  th:action="@{'/follow/' + ${user.get().id}} " method="post">
-                                <input type="hidden" value="delete" />
+                            <a th:case="true" th:if="${loginId != user.get().id}"
+                               th:href="@{'/unfollow/' + ${user.get().id}}" >
                                 <button class="btn edit_btn">
                                     Unfollow
                                 </button>
-                            </form>
+                            </a>
                         </th:block>
                     </div>
                     <!-- profile model status area -->
@@ -66,7 +64,7 @@
                             </li>
                             <li>
                                 <a href="">Followers</a>
-                                <span class="stat_count">100</span>
+                                <span class="stat_count" th:text="${follower}"></span>
                             </li>
                             <li>
                                 <a href="">Following</a>
@@ -76,7 +74,7 @@
                     </div>
                     <!-- profile model introduce area -->
                     <div class="profile_intro">
-                        <p th:text="${user.get().userintro}"></p>
+                        <span th:text="${user.get().userintro}"></span>
                     </div>
                 </div>
                 <!-- end of profile border line -->
@@ -91,30 +89,33 @@
             <!-- model post section start -->
             <div class="user_post_area">
                 <!-- model post item -->
-                <div class="post_item" th:each="postlist, i : ${postlist}">
-                    <a th:href="@{/ipro/post/details/{id}(id=${postlist.Id})}">
-                        <img th:src="@{/resource/img/} + ${postlist.Imgurl}" alt="post_img" class="post_img">
-                        <!-- post item info likes comment -->
-                        <div class="post_item_info">
-                            <ul>
-                                <li class="item_likes">
+                <th:block>
+                    <div class="post_item" th:each="postlist, i : ${postlist}">
+                        <a th:href="@{'/ipro/post/details/' + ${postlist.id}}">
+                            <img th:src="@{'/resource/img/'+ ${postlist.imgurl}} " alt="post_img" class="post_img">
+                            <!-- post item info likes comment -->
+                            <div class="post_item_info">
+                                <ul>
+                                    <li class="item_likes">
                                     <span class="hidden">
                                         Likes:
                                     </span>
-                                    <i class="fas fa-heart" aria-hidden="true"></i>
-                                    56
-                                </li>
-                                <li class="item_commnet">
+                                        <i class="fas fa-heart" aria-hidden="true"></i>
+                                        56
+                                    </li>
+                                    <li class="item_commnet">
                                     <span class="item_commnet">
                                         comments:
                                     </span>
-                                    <i class="fas fa-comment" aria-hidden="true"></i>
-                                    2
-                                </li>
-                            </ul>
-                        </div>
-                    </a>
-                </div>
+                                        <i class="fas fa-comment" aria-hidden="true"></i>
+                                        2
+                                    </li>
+                                </ul>
+                            </div>
+                        </a>
+                    </div>
+                </th:block>
+
             </div>
             <!-- end of model post section -->
         </div>
