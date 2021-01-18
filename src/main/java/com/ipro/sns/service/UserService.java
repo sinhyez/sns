@@ -31,6 +31,12 @@ public class UserService implements UserDetailsService {
     public Optional<UserModel> findByUsernick(String usernick) {
         return userRepository.findByUsernick(usernick);
     }
+    public List<UserModel> findByUsernickContains(String word) {
+        return userRepository.findByUsernickContains(word);
+    }
+    public int countByUsernickContains(String word) {
+        return userRepository.countByUsernickContains(word);
+    }
 
     public boolean check(UserDto userDto, BindingResult bindingResult) {
         // 회원가입 유효성 검사

@@ -7,10 +7,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.util.Comparator;
 
 @Data
 @NoArgsConstructor
-public class PostDto {
+public class PostDto implements Comparator<PostModel> {
 
     private int id;
     private String caption;
@@ -38,5 +39,20 @@ public class PostDto {
         this.imgurl = imgurl;
         this.create_date = create_date;
         this.update_date = update_date;
+    }
+
+    @Override
+    public int compare(PostModel p1, PostModel p2) {
+
+        long l1 = p1.getCreate_date().getTime();
+        long l2 = p2.getCreate_date().getTime();
+
+        if (l1 > l2) {
+            return -1;
+        }
+        else {
+            return 1;
+        }
+
     }
 }

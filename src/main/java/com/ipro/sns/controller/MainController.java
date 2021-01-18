@@ -8,6 +8,7 @@ import com.ipro.sns.service.FollowService;
 import com.ipro.sns.service.PostService;
 import com.ipro.sns.service.UserService;
 import lombok.AllArgsConstructor;
+import org.hibernate.mapping.Collection;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,6 +61,10 @@ public class MainController {
 
         //유저아이디를 통해 유저테이블에 존재하는 현재 유저의 모든정보 전달
         model.addAttribute("user", user);
+
+        //작성한 날짜 순서 정렬
+        PostDto postDto = new PostDto();
+        Collections.sort(postList, postDto);
 
         model.addAttribute("postlist", postList);
         model.addAttribute("postsize", postList.size());

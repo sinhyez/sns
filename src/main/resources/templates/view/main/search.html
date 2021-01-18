@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!-- include header -->
+    <header th:replace="view/layout/header :: headerFragment"></header>
+    <div th:if="${countUser == 0}">
+        <p>유저없당</p>
+    </div>
+    <div th:each="list : ${findUser}">
+        <div th:if="${list.userimg != null}">
+            <img th:src="@{'/resource/img/profile/' + ${list.userimg}}">
+            <a th:href="@{'/ipro/main/user/' + ${list.usernick}}" th:text="${list.usernick}"></a>
+        </div>
+        <div th:if="${list.userimg == null}">
+            <img th:src="@{'/resource/img/profile/basic.png'}">
+            <a th:href="@{'/ipro/main/user/' + ${list.usernick}}" th:text="${list.usernick}"></a>
+        </div>
+
+    </div>
+
+</body>
+</html>

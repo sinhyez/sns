@@ -5,12 +5,14 @@
 
     <div class="header_area">
         <!-- searchbar area -->
-        <div class="search_bar_area">
-            <input type="text" name="search" id="search"
-                   placeholder="search" />
-            <label for="search">search</label>
-            <button type="submit">Search</button>
-        </div>
+        <form class="search_bar_area" method="post" th:action="@{'/search'}">
+
+                <input type="search" name="search" id="search"
+                       autocomplete="off" placeholder="search" />
+                <label for="search">search</label>
+                <button type="submit">Search</button>
+
+        </form>
         <!-- header title area -->
         <div class="header_title">
             <a href="/ipro/main">

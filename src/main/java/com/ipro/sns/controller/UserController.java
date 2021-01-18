@@ -119,5 +119,20 @@ public class UserController {
         return redirect;
     }
 
+    //유저 검색
+    @RequestMapping("/search")
+    public String search(@RequestParam("search") String search, Model model) throws Exception {
+
+        if (search == "") {
+            return "redirect:/ipro/main";
+        }
+
+        model.addAttribute("findUser", userService.findByUsernickContains(search));
+        model.addAttribute("countUser", userService.countByUsernickContains(search));
+        model.addAttribute("search", search);
+
+        return "view/main/search";
+
+    }
 
 }
