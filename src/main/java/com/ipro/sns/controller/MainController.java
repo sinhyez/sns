@@ -58,7 +58,6 @@ public class MainController {
             }
         }
 
-
         //유저아이디를 통해 유저테이블에 존재하는 현재 유저의 모든정보 전달
         model.addAttribute("user", user);
 
@@ -89,7 +88,6 @@ public class MainController {
         Optional<UserModel> loginUser = userService.findByUsername(username);
         UserModel loginUserWrapper = loginUser.get();
         model.addAttribute("loginId", loginUser.get().getId());
-
 
         //이미지 카운트
         int imgCount = user.getPostModels().size();

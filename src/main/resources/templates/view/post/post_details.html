@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
     <span>포스팅상세화면</span>
+    <div>
+        <p th:text="${post.get().user.usernick}"></p>
+        <img th:src="@{'/resource/img/' + ${post.get().imgurl}}">
+        <p th:text="${post.get().caption}"></p>
+        <p th:text="${#calendars.format(post.get().create_date, 'MM/dd')}"></p>
+        <a th:if="${loginUser.get().id == post.get().user.id}" th:href="@{'/deletePost/' + ${post.get().id}}">
+            <button class="btn edit_btn">
+                Delete
+            </button>
+        </a>
+    </div>
 </body>
 </html>

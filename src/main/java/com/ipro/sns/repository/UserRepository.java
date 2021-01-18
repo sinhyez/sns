@@ -17,6 +17,7 @@ public interface UserRepository extends JpaRepository<UserModel, Integer> {
 
     //word가 포함되는 유저찾기
     List<UserModel> findByUsernickContains(String word);
+    List<UserModel> findByUserfull(String userfull);
 
     //wor가 포함되는 유저 갯수 찾기
     int countByUsernickContains(String word);

@@ -15,6 +15,9 @@
     <!-- section start -->
     <div class="feed_main">
         <!-- article start -->
+        <article class="no_feed" th:if="${postsize == 0}">
+            <p>팔로우 하러 가기</p>
+        </article>
         <article class="feed_contianer" th:each="post : ${postlist}">
             <!-- card header -->
             <div class="feed_card_header">
@@ -34,7 +37,9 @@
 
             <!-- img card area -->
             <div class="photo_card_img">
-                <img th:src="@{'/resource/img/' + ${post.imgurl}}" alt="card_img" class="card_img" style="object-fit: cover">
+                <div class="card_photo">
+                    <img th:src="@{'/resource/img/' + ${post.imgurl}}" alt="card_img" class="card_img" />
+                </div>
             </div>
 
             <!-- card info -->
@@ -88,7 +93,7 @@
 
                 <!-- article create date -->
                 <span class="photo_date">
-                    <a href="" th:text="${#calendars.format(post.create_date, 'MM/dd')}"></a>
+                    <a th:href="@{'/ipro/post/details/' + ${post.id}}" th:text="${#calendars.format(post.create_date, 'MM/dd')}"></a>
                 </span>
 
                 <!-- add comment area -->

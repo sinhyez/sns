@@ -3,9 +3,11 @@ package com.ipro.sns.controller;
 
 import com.ipro.sns.model.UserModel;
 import com.ipro.sns.model.dto.PostDto;
+import com.ipro.sns.model.dto.UserDto;
 import com.ipro.sns.repository.PostRepository;
 import com.ipro.sns.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +30,8 @@ public class PostController {
     private final UserService userService;
     private final PostRepository postRepository;
 
+
+    //포스팅 업로드 프로세스
     @RequestMapping("/upload")
     public String uploadProc(@RequestParam("file")MultipartFile file, @RequestParam("caption") String caption,
                              @RequestParam("usernick") String usernick) throws IOException {
@@ -53,13 +57,31 @@ public class PostController {
 
     }
 
+    //포스팅 디테일 화면
     @RequestMapping("/ipro/post/details/{id}")
     public String postDetails(@PathVariable("id") int id, Model model) throws Exception {
+
+        //유저정보 set
+
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Optional<UserModel> user = userService.findByUsername(username);
 
         Optional<PostDto> postModel = postRepository.findById(id);
         model.addAttribute("post", postModel);
 
+        model.addAttribute("loginUser", user);
+
         return "view/post/post_details";
+    }
+
+    //포스팅 삭제
+    @RequestMapping("/deletePost/{id}")
+    public String deletePost(@PathVariable int id) {
+        String redirect = "redirect:/ipro/main/user/";
+
+        postRepository.deleteById(id);
+
+        return redirect;
     }
 
 }

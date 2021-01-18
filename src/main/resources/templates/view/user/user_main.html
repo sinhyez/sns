@@ -90,9 +90,9 @@
             <div class="user_post_area">
 
                 <!-- model post item -->
-                <div class="post_item" th:each="postlist, i : ${postlist}">
-                    <a th:href="@{'/ipro/post/details/' + ${postlist.id}}">
-                        <img th:src="@{'/resource/img/'+ ${postlist.imgurl}} " alt="post_img" class="post_img">
+                <div class="post_item" th:each="i : ${postlist}">
+                    <a th:href="@{'/ipro/post/details/' + ${i.id}}">
+                        <img th:src="@{'/resource/img/'+ ${i.imgurl}} " alt="post_img" class="post_img">
                         <!-- post item info likes comment -->
                         <div class="post_item_info">
                             <ul>

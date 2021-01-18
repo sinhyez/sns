@@ -20,10 +20,9 @@ public class PostService {
     private final PostRepository postRepository;
     private final UserService userService;
 
-    public List<PostModel> findByUserOrderByIdDesc(UserModel userModel) {
-        return postRepository.findByUserOrderByIdDesc(userModel);
+    public void deleteByID(int id) {
+        postRepository.deleteById(id);
     }
-
     public List<PostModel> findByUserIdOrderByIdDesc(int id) {
         return postRepository.findByUserIdOrderByIdDesc(id);
     }
