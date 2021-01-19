@@ -1,2 +1,2 @@
 # sns
-Instagram-like SNS projects made of springboot.
+Instagram-like SNS project written in spring boot.
