@@ -22,7 +22,7 @@ import java.util.*;
 @Service
 @AllArgsConstructor
 public class UserService implements UserDetailsService {
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public Optional<UserModel> findByUsername(String username) {
         return userRepository.findByUsername(username);
@@ -31,17 +31,11 @@ public class UserService implements UserDetailsService {
     public Optional<UserModel> findByUsernick(String usernick) {
         return userRepository.findByUsernick(usernick);
     }
-    public List<UserModel> findByUserfull(String  id) {
-        return userRepository.findByUserfull(id);
-    }
     public List<UserModel> findByUsernickContains(String word) {
         return userRepository.findByUsernickContains(word);
     }
     public int countByUsernickContains(String word) {
         return userRepository.countByUsernickContains(word);
-    }
-    public List<UserModel> findAll() {
-        return userRepository.findAll();
     }
 
     public boolean check(UserDto userDto, BindingResult bindingResult) {

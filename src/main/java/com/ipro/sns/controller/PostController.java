@@ -5,6 +5,7 @@ import com.ipro.sns.model.UserModel;
 import com.ipro.sns.model.dto.PostDto;
 import com.ipro.sns.model.dto.UserDto;
 import com.ipro.sns.repository.PostRepository;
+import com.ipro.sns.service.PostService;
 import com.ipro.sns.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,6 +30,7 @@ public class PostController {
 
     private final UserService userService;
     private final PostRepository postRepository;
+    private final PostService postService;
 
 
     //포스팅 업로드 프로세스
@@ -51,7 +53,7 @@ public class PostController {
         postDto.setImgurl(path);
         postDto.setUser(userModel);
         postDto.setImgurl(filename);
-        postRepository.save(postDto.toEntity()).getId();
+        postRepository.save(postDto.toEntity());
 
         return redirect;
 
@@ -62,7 +64,6 @@ public class PostController {
     public String postDetails(@PathVariable("id") int id, Model model) throws Exception {
 
         //유저정보 set
-
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Optional<UserModel> user = userService.findByUsername(username);
 
@@ -79,7 +80,7 @@ public class PostController {
     public String deletePost(@PathVariable int id) {
         String redirect = "redirect:/ipro/main/user/";
 
-        postRepository.deleteById(id);
+        postService.deleteByID(id);
 
         return redirect;
     }

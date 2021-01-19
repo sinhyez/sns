@@ -106,7 +106,6 @@ public class UserController {
     @RequestMapping(value = "/ipro/user/user_edit")
     public String profileEdit(HttpServletRequest request, Model model) throws Exception{
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        Optional<UserModel> model1 = userService.findByUsername(username);
         String redirect = "redirect:/ipro/main/user/";
 
         //파라메터 값을 넘겨받을 변수지정

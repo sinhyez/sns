@@ -1,6 +1,5 @@
 package com.ipro.sns.service;
 
-
 import com.ipro.sns.model.PostModel;
 import com.ipro.sns.model.UserModel;
 import com.ipro.sns.model.dto.PostDto;
@@ -18,7 +17,6 @@ import java.util.Optional;
 public class PostService {
 
     private final PostRepository postRepository;
-    private final UserService userService;
 
     public void deleteByID(int id) {
         postRepository.deleteById(id);
@@ -27,9 +25,6 @@ public class PostService {
         return postRepository.findByUserIdOrderByIdDesc(id);
     }
 
-    public PostModel findAll() {
-        return (PostModel) postRepository.findAll();
-    }
 
     //PostDto를 통해 Controller 와 Service 간의 데이터 전달을 위해
     //Repository에서 가져온 PostModel 을 For문을 통해 Dto로 변환
