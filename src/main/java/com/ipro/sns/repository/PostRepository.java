@@ -15,7 +15,8 @@ public interface PostRepository extends JpaRepository<PostModel, Integer> {
 
     List<PostModel> findByUserIdOrderByIdDesc(int id);
 
-    Optional<PostDto> findById(int id);
+//    Optional<PostDto> findById(int id);
+    Optional<PostModel> findById(int id);
 
     @Transactional
     void deleteById(int id);

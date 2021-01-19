@@ -24,6 +24,9 @@ public class PostService {
     public List<PostModel> findByUserIdOrderByIdDesc(int id) {
         return postRepository.findByUserIdOrderByIdDesc(id);
     }
+    public Optional<PostModel> findById(int id) {
+        return postRepository.findById(id);
+    }
 
 
     //PostDto를 통해 Controller 와 Service 간의 데이터 전달을 위해

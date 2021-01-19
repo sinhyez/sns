@@ -1,6 +1,7 @@
 package com.ipro.sns.controller;
 
 
+import com.ipro.sns.model.PostModel;
 import com.ipro.sns.model.UserModel;
 import com.ipro.sns.model.dto.PostDto;
 import com.ipro.sns.model.dto.UserDto;
@@ -67,7 +68,7 @@ public class PostController {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Optional<UserModel> user = userService.findByUsername(username);
 
-        Optional<PostDto> postModel = postRepository.findById(id);
+        Optional<PostModel> postModel = postRepository.findById(id);
         model.addAttribute("post", postModel);
 
         model.addAttribute("loginUser", user);

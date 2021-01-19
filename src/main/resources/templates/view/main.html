@@ -97,10 +97,13 @@
                 </span>
 
                 <!-- add comment area -->
-                <div class="add_comment_area">
-                    <textarea name="" id="" cols="30" rows="10" placeholder="add a comment"></textarea>
+                <form th:action="@{/cInsert}" method="post" class="add_comment_area">
+                    <input type="hidden" name="postid" th:value="${post.id}">
+                    <textarea name="content" id="" cols="30" rows="10" placeholder="add a comment"></textarea>
+                    <input type="hidden" name="userid" th:value="${user.get().id}">
+                    <button type="submit">submit</button>
                     <i class="fa fa-ellipsis-h"></i>
-                </div>
+                </form>
 
             </div>
 
