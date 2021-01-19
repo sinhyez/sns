@@ -1,9 +1,12 @@
 package com.ipro.sns.controller;
 
+import com.ipro.sns.model.CommnetModel;
 import com.ipro.sns.model.FollowModel;
 import com.ipro.sns.model.PostModel;
 import com.ipro.sns.model.UserModel;
+import com.ipro.sns.model.dto.CommentDto;
 import com.ipro.sns.model.dto.PostDto;
+import com.ipro.sns.service.CommentService;
 import com.ipro.sns.service.FollowService;
 import com.ipro.sns.service.PostService;
 import com.ipro.sns.service.UserService;
@@ -16,9 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 
 @Controller
@@ -28,6 +29,7 @@ public class MainController {
     private final UserService userService;
     private final PostService postService;
     private final FollowService followService;
+    private final CommentService commentService;
 
     @GetMapping("/")
     public String index(){

@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface CommentRepository extends JpaRepository<CommnetModel, Integer> {
 
-    List<CommentDto> findByPostid(PostModel postid);
+    List<CommnetModel> findByPostidId(int id);
 
     @Transactional
     void deleteById(int id);
