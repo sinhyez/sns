@@ -1,9 +1,6 @@
 package com.ipro.sns.controller;
 
-import com.ipro.sns.model.CommnetModel;
-import com.ipro.sns.model.FollowModel;
-import com.ipro.sns.model.PostModel;
-import com.ipro.sns.model.UserModel;
+import com.ipro.sns.model.*;
 import com.ipro.sns.model.dto.CommentDto;
 import com.ipro.sns.model.dto.PostDto;
 import com.ipro.sns.service.CommentService;
@@ -58,6 +55,16 @@ public class MainController {
                 postList.add(p);
             }
         }
+
+        List<Count> count = new ArrayList<>();
+        for (PostModel p : postList) {
+            Count c = new Count();
+            c.setPostid(p.getId());
+            c.setCount(commentService.countByPostid(p.getId()));
+
+            count.add(c);
+        }
+        model.addAttribute("count", count);
 
         //유저아이디를 통해 유저테이블에 존재하는 현재 유저의 모든정보 전달
         model.addAttribute("user", user);

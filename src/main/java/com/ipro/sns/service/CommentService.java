@@ -24,19 +24,23 @@ public class CommentService {
         return commentRepository.findByPostidId(postid);
     }
 
+    public int countByPostid(int postid) {
+        return commentRepository.countByPostidId(postid);
+    }
+
     public int deleteById(int id) {
         commentRepository.deleteById(id);
         return 1;
     }
     
     //코멘트 저장 프로세스
-    public void cSave(int userid, int postid, String content) {
+    public void cSave(UserModel userid, PostModel postid, String content) {
 
         CommentDto commentDto = new CommentDto();
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-        Optional<UserModel> user = userService.findById(userid);
-        Optional<PostModel> post = postService.findById(postid);
+        Optional<UserModel> user = userService.findById(userid.getId());
+        Optional<PostModel> post = postService.findById(postid.getId());
 
         UserModel userWrapper = user.get();
         PostModel postWrapper = post.get();

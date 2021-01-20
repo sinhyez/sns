@@ -15,6 +15,8 @@ public interface CommentRepository extends JpaRepository<CommnetModel, Integer> 
 
     List<CommnetModel> findByPostidId(int id);
 
+    int countByPostidId(int id);
+
     @Transactional
     void deleteById(int id);
 

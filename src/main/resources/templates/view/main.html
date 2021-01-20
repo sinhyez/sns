@@ -11,105 +11,105 @@
 </head>
 
 <body>
-    <!-- include header -->
-    <header th:replace="view/layout/header :: headerFragment"></header>
-    <!-- section start -->
-    <div class="feed_main">
-        <!-- article start -->
-        <article class="no_feed" th:if="${postsize == 0}">
-            <p>팔로우 하러 가기</p>
-        </article>
-        <article class="feed_contianer" th:each="post : ${postlist}">
-            <!-- card header -->
-            <div class="feed_card_header">
+<!-- include header -->
+<header th:replace="view/layout/header :: headerFragment"></header>
+<!-- section start -->
+<div class="feed_main">
+    <!-- article start -->
+    <article class="no_feed" th:if="${postsize == 0}">
+        <p>팔로우 하러 가기</p>
+    </article>
+    <article class="feed_contianer" th:each="post : ${postlist}">
+        <!-- card header -->
+        <div class="feed_card_header">
 
-                <div class="photo_user_info" th:if="${post.user.userimg != null}">
-                    <img th:src="@{'/resource/img/profile/' + ${post.user.userimg}}" alt="userIcon">
-                    <a th:href="@{'/ipro/main/user/' + ${post.user.usernick}}"
-                       class="username" th:text="${post.user.usernick}"></a>
-                </div>
-                <div class="photo_user_info" th:if="${post.user.userimg == null}">
-                    <img src="/resource/img/profile/basic.png" alt="userIcon">
-                    <a th:href="@{'/ipro/main/user/' + ${post.user.usernick}}"
-                       class="username" th:text="${post.user.usernick}"></a>
-                </div>
-
+            <div class="photo_user_info" th:if="${post.user.userimg != null}">
+                <img th:src="@{'/resource/img/profile/' + ${post.user.userimg}}" alt="userIcon">
+                <a th:href="@{'/ipro/main/user/' + ${post.user.usernick}}"
+                   class="username" th:text="${post.user.usernick}"></a>
+            </div>
+            <div class="photo_user_info" th:if="${post.user.userimg == null}">
+                <img src="/resource/img/profile/basic.png" alt="userIcon">
+                <a th:href="@{'/ipro/main/user/' + ${post.user.usernick}}"
+                   class="username" th:text="${post.user.usernick}"></a>
             </div>
 
-            <!-- img card area -->
-            <div class="photo_card_img">
-                <div class="card_photo">
-                    <img th:src="@{'/resource/img/' + ${post.imgurl}}" alt="card_img" class="card_img" />
-                </div>
-            </div>
+        </div>
 
-            <!-- card info -->
-            <div class="photo_info">
-                <div class="photo_actions">
+        <!-- img card area -->
+        <div class="photo_card_img">
+            <div class="card_photo">
+                <img th:src="@{'/resource/img/' + ${post.imgurl}}" alt="card_img" class="card_img" />
+            </div>
+        </div>
+
+        <!-- card info -->
+        <div class="photo_info">
+            <div class="photo_actions">
                     <span class="photo_action">
 
                         <!-- likes img -->
-                        <i onclick="" id="1"
+                        <i onclick="" id=""
                            class="fa fa-heart heart heart-clicked"></i>like
                         <!-- <i onclick="" id=""
                         class="fa fa-heart-o heart"></i> -->
 
                     </span>
-                    <span class="photo_action">
+                <span class="photo_action">
 
                         <!-- comment img -->
                         <i class="fa fa-commnet-0"></i>comment
 
                     </span>
-                </div>
+            </div>
 
-                <!-- like count -->
-                <span class="photo_like_count">
+            <!-- like count -->
+            <span class="photo_like_count">
                     likes
                 </span>
 
-                <!-- article caption -->
-                <div class="photo_caption">
+            <!-- article caption -->
+            <div class="photo_caption">
 
-                    <a th:href="@{'/ipro/main/user/' + ${post.user.usernick}}"
-                       class="username" th:text="${post.user.usernick}"></a>
-                    <span class="caption" th:text="${post.caption}"></span>
-
-                </div>
-
-                <!-- article tag -->
-                <div class="photo_tag">
-                    #acne
-                </div>
-
-                <!-- article comment -->
-                <ul class="photo_comments">
-                    <li class="photo_comment">
-                        <a href="" class="comment_user">
-                        </a>
-                    </li>
-                </ul>
-
-                <!-- article create date -->
-                <span class="photo_date">
-                    <a th:href="@{'/ipro/post/details/' + ${post.id}}"
-                       th:text="${#calendars.format(post.create_date, 'MM/dd')}"></a>
-                </span>
-
-                <!-- add comment area -->
-                <form class="add_comment_area">
-                    <input type="hidden" id="postid" name="postid" th:value="${post.id}">
-                    <textarea name="content" id="content" placeholder="add a comment"></textarea>
-                    <input type="hidden" id="userid" name="userid" th:value="${user.get.id}">
-                    <button id="cInsertbtn">submit</button>
-                </form>
+                <a th:href="@{'/ipro/main/user/' + ${post.user.usernick}}"
+                   class="username" th:text="${post.user.usernick}"></a>
+                <span class="caption" th:text="${post.caption}"></span>
 
             </div>
-        </article>
-        <!-- article end -->
-    </div>
-    <!-- section end -->
-    <script type="text/javascript" src="/resource/js/comment.js"></script>
 
+            <!-- article tag -->
+            <div class="photo_tag">
+                #acne
+            </div>
+
+<!--             article comment -->
+            <th:block th:each="li : ${count}">
+                <div class="photo_comments" th:if="${li.count} > 0">
+                    <div class="photo_comment" th:if="${post.id == li.postid}">
+                        <a href="" class="comment_user" th:text="${li.count}+'더보기'"></a>
+                    </div>
+                </div>
+            </th:block>
+
+            <!-- article create date -->
+            <span class="photo_date">
+                    <a th:href="@{'/ipro/post/details/' + ${post.id}}" th:text="${#calendars.format(post.create_date, 'MM/dd')}"></a>
+                </span>
+
+            <!-- add comment area -->
+            <form class="add_comment_area" th:id="'ci'+${post.id}" >
+                <input type="hidden" id="postid" name="postid" th:value="${post.id}">
+                <textarea name="content" th:id="'content'+${post.id}" placeholder="add a comment"></textarea>
+                <input type="hidden" th:id="'userid' + ${post.id}" name="userid" th:value="${user.get.id}">
+                <button th:onclick="|commentSend('${post.id}')|">submit</button>
+            </form>
+
+        </div>
+
+    </article>
+    <!-- article end -->
+</div>
+<!-- section end -->
+<script th:inline="javascript" th:src="@{'/resource/js/comment.js'}"></script>
 </body>
 </html>
