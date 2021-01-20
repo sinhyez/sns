@@ -123,7 +123,7 @@ public class UserController {
     public String search(@RequestParam("search") String search, Model model) throws Exception {
 
         if (search == "") {
-            return "redirect:/ipro/main";
+            return "redirect:/";
         }
 
         model.addAttribute("findUser", userService.findByUsernickContains(search));

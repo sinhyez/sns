@@ -23,11 +23,9 @@ public class CommentService {
     public List<CommnetModel> findByPostid(int postid) {
         return commentRepository.findByPostidId(postid);
     }
-
     public int countByPostid(int postid) {
         return commentRepository.countByPostidId(postid);
     }
-
     public int deleteById(int id) {
         commentRepository.deleteById(id);
         return 1;

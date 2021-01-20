@@ -4,7 +4,6 @@ package com.ipro.sns.controller;
 import com.ipro.sns.model.PostModel;
 import com.ipro.sns.model.UserModel;
 import com.ipro.sns.model.dto.PostDto;
-import com.ipro.sns.model.dto.UserDto;
 import com.ipro.sns.repository.PostRepository;
 import com.ipro.sns.service.PostService;
 import com.ipro.sns.service.UserService;

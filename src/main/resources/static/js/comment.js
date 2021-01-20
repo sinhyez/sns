@@ -8,7 +8,6 @@ function commentSend(postid) {
         "postid" : postid, "userid" : userid, "content" : content
     };
 
-
     $.ajax({
         url: '/comment/insert',
         type: "POST",

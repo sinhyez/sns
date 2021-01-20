@@ -1,6 +1,5 @@
 package com.ipro.sns.model;
 
-import com.ipro.sns.model.dto.PostDto;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;

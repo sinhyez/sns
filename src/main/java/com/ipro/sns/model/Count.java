@@ -7,4 +7,5 @@ public class Count {
 
     private int postid;
     private int count;
+
 }

@@ -28,7 +28,6 @@ public class PostService {
         return postRepository.findById(id);
     }
 
-
     //PostDto를 통해 Controller 와 Service 간의 데이터 전달을 위해
     //Repository에서 가져온 PostModel 을 For문을 통해 Dto로 변환
     @Transactional

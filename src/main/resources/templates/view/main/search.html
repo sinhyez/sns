@@ -1,12 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<!--inclide header-->
+<th:block th:replace="view/layout/header :: headerFragment"></th:block>
 <body>
-    <!-- include header -->
-    <header th:replace="view/layout/header :: headerFragment"></header>
     <div th:if="${countUser == 0}">
         <p>유저없당</p>
     </div>

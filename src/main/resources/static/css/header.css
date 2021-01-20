@@ -11,7 +11,7 @@
 .search_bar_area{
     width: 25%;
     margin-top: 3px;
-    margin-left: 42px;
+    /*margin-left: 42px;*/
     padding: 0 15px 0 55px;
     position: relative;
 }
@@ -79,7 +79,7 @@
 /* user_nav_area */
 .user_area{
     width: 25%;
-    padding: 0 15px 0 0px;
+    padding: 0 1.5rem 0 5.5rem;
     display: flex;
     position: relative;
 }

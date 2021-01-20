@@ -1,26 +1,52 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<link rel="stylesheet" href="/resource/css/posting.css">
+<th:block th:replace="view/layout/header :: headerFragment"></th:block>
 <body>
+<div class="posting_container">
 
-<div id="image_container"></div>
-<form th:action="@{/upload}" method="POST" enctype="multipart/form-data" autocomplete="off">
-    <input type="hidden" id="usernick" name="usernick" th:value="${user.get().usernick}">
-    <input type="file" multiple="multiple" name="file" placeholder="file upload" accept="image/**"
-    onchange="setThumbnail(event)">
-    <input type="text" name="caption" placeholder="caption">
-    <button type="submit">submit</button>
+    <div class="form_area">
 
+        <!-- img thumbnail -->
+        <span>사진미리보기</span>
+        <div class="img_thumbnail">
+            <div class="image_container" id="image_container">
 
+            </div>
+            <div class="image_container">
 
+            </div>
+        </div>
 
+        <!-- input area -->
+        <form th:action="@{/upload}" method="POST" enctype="multipart/form-data" autocomplete="off" class="posting">
 
-</form>
+            <div class="input_area">
+                <div class="file_form">
+                    <div class="file_box">
+                        <label for="ex_file">
+                            Choose file
+                        </label>
+                        <input type="file" name="file" multiple="multiple"
+                               class="upload" id="ex_file" accept="image/**"
+                               onchange="setThumbnail(event)">
+                    </div>
+                    <input class="upload_name" value="파일선택" disabled="disabled">
+                </div>
+                <input type="text" name="caption" class="form_caption" placeholder="Photo caption">
+                <input type="hidden" id="usernick" name="usernick" th:value="${user.get().usernick}">
+                <button type="submit" class="post_btn">POST</button>
+            </div>
 
+        </form>
+
+    </div>
+    <div class="back_button">
+        <a href="">Go back</a>
+    </div>
+
+</div>
+<script src="/resource/js/posting.js"></script>
 <script>
     function setThumbnail(event) {
         var reader = new FileReader();
@@ -28,7 +54,7 @@
         reader.onload = function(event) {
             var img = document.createElement("img");
             img.setAttribute("src", event.target.result);
-            document.querySelector("div#image_container").appendChild(img);
+            document.querySelector("#image_container").appendChild(img);
         };
         reader.readAsDataURL(event.target.files[0]);
     }

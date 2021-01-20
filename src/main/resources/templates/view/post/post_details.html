@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="view/layout/header :: headerFragment"></th:block>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Microblogram</title>
 </head>
 <body>
     <span>포스팅상세화면</span>
@@ -16,6 +17,14 @@
                 Delete
             </button>
         </a>
+        <form class="add_comment_area" th:id="'ci'+${post.get().id}" >
+            <input type="hidden" id="postid" name="postid" th:value="${post.get().id}">
+            <textarea name="content" th:id="'content'+${post.get().id}" placeholder="Add a comment"></textarea>
+            <input type="hidden" th:id="'userid' + ${post.get().id}" name="userid" th:value="${loginUser.get().id}">
+            <button th:onclick="|commentSend('${post.get().id}')|">Post</button>
+        </form>
     </div>
+
+    <script th:inline="javascript" th:src="@{'/resource/js/comment.js'}"></script>
 </body>
 </html>

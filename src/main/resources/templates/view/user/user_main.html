@@ -1,15 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/resource/css/global.css">
     <link rel="stylesheet" href="/resource/css/user_main.css">
-    <title th:text="${user.get().usernick} + '  Profile Page'"></title>
-</head>
+    <title th:text="${user.get().usernick} + '  Profile Page ・ Microblogram'"></title>
+    <!-- include header -->
+    <th:block th:replace="view/layout/header :: headerFragment"></th:block>
 <body>
-<!-- include header -->
-<header th:replace="view/layout/header :: headerFragment"></header>
 <!-- model main section start -->
 <main>
     <!-- model main section header start -->
