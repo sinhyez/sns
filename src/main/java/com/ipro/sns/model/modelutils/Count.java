@@ -1,4 +1,4 @@
-package com.ipro.sns.model;
+package com.ipro.sns.model.modelutils;
 
 import lombok.Data;
 

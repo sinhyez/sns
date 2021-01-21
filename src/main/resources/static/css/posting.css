@@ -20,7 +20,9 @@ body {
 }
 
 .img_thumbnail img {
-    height: 28vh;
+    height: 18vh;
+    width: 18vh;
+    object-fit: cover;
 }
 
 /* fomr area */

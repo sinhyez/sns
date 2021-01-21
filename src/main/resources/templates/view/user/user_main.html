@@ -27,12 +27,12 @@
                     <div class="profile_setting">
                         <h1 class="user_name" th:text="${user.get().usernick}"></h1>
                         <a th:if="${loginId == user.get().id}"
-                           th:href="@{'/ipro/user/edit/' + ${user.get().usernick}}">
-                            <button class="btn edit_btn">Edit Profile</button>
+                           th:href="@{'/ipro/user/edit/' + ${user.get().usernick}}" class="btn edit_btn">
+                            Edit Profile
                         </a>
                         <a th:if="${loginId == user.get().id}" href="/logout">
                             <button class="btn logout_btn">
-                                <i class="fas fa-cog" aria-hidden="true"></i>Logout
+                                Logout
                             </button>
                         </a>
                         <th:block th:switch="${followcount}">
@@ -95,16 +95,17 @@
                                     <span class="hidden">
                                         Likes:
                                     </span>
-                                    <i class="fas fa-heart" aria-hidden="true"></i>
+                                    <i class="fa fa-heart heart fa-1x" aria-hidden="true"></i>
                                     56
                                 </li>
-                                <li class="item_commnet">
-                                    <span class="item_commnet">
-                                        comments:
-                                    </span>
-                                    <i class="fas fa-comment" aria-hidden="true"></i>
-                                    2
-                                </li>
+                                <th:block th:each="li : ${count}">
+                                    <li class="item_commnet" th:if="${i.id == li.postid}">
+                                        <i class="fas fa-comment" aria-hidden="true"></i>
+                                        <span class="item_commnet" th:if="${li.count} > 0" th:text="${li.count}">
+
+                                        </span>
+                                    </li>
+                                </th:block>
                             </ul>
                         </div>
                     </a>

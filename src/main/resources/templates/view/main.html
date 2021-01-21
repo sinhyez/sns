@@ -2,108 +2,112 @@
 <link rel="stylesheet" href="/resource/css/main.css">
 <!-- include header -->
 <th:block th:replace="view/layout/header :: headerFragment"></th:block>
-<body>
 <!-- section start -->
 <div class="feed_main">
     <!-- article start -->
-    <article class="no_feed" th:if="${postsize == 0}">
-        <p>팔로우 하러 가기</p>
-    </article>
-    <article class="feed_contianer" th:each="post : ${postlist}">
-        <!-- card header -->
-        <div class="feed_card_header">
+    <th:bolck th:if="${postlist.size() == 0}">
+        <article class="no_feed" >
+            <p>팔로우 하러 가기</p>
+        </article>
+    </th:bolck>
+    <th:block th:each="post : ${postlist}">
 
-            <div class="photo_user_info" th:if="${post.user.userimg != null}">
-                <img th:src="@{'/resource/img/profile/' + ${post.user.userimg}}" alt="userIcon">
-                <a th:href="@{'/ipro/main/user/' + ${post.user.usernick}}"
-                   class="username" th:text="${post.user.usernick}"></a>
-            </div>
-            <div class="photo_user_info" th:if="${post.user.userimg == null}">
-                <img src="/resource/img/profile/basic.png" alt="userIcon">
-                <a th:href="@{'/ipro/main/user/' + ${post.user.usernick}}"
-                   class="username" th:text="${post.user.usernick}"></a>
-            </div>
-
-        </div>
-
-        <!-- img card area -->
-        <div class="photo_card_img">
-            <div class="card_photo">
-                <img th:src="@{'/resource/img/' + ${post.imgurl}}" alt="card_img" class="card_img" />
-            </div>
-        </div>
-
-        <!-- card info -->
-        <div class="photo_info">
-            <div class="photo_actions">
-                    <span class="photo_action">
-
-                        <!-- likes img -->
-                        <i onclick="" id=""
-                           class="fa fa-heart heart heart-clicked"></i>like
-                        <!-- <i onclick="" id=""
-                        class="fa fa-heart-o heart"></i> -->
-
-                    </span>
-
-                <th:block th:each="li : ${count}">
-                    <span class="photo_action" th:if="${post.id == li.postid}">
-
-                        <!-- comment img -->
-                        <p th:if="${li.count} > 0" th:text="${li.count} + 'comment'"></p>
-                        <i class="fa fa-commnet-0"></i>
-
-                </span>
-                </th:block>
-            </div>
-
-            <!-- like count -->
-            <span class="photo_like_count">
-                    likes
-                </span>
-
-            <!-- article caption -->
-            <div class="photo_caption">
-
-                <a th:href="@{'/ipro/main/user/' + ${post.user.usernick}}"
-                   class="username" th:text="${post.user.usernick}"></a>
-                <span class="caption" th:text="${post.caption}"></span>
-
-            </div>
-
-            <!-- article tag -->
-            <div class="photo_tag">
-                #acne
-            </div>
-
-            <!-- article comment -->
-            <th:block th:each="li : ${count}">
-                <div class="photo_comments" th:if="${post.id == li.postid}">
-                    <div class="photo_comment" th:if="${li.count} > 0">
-                        <a th:href="@{'/ipro/post/details/' + ${post.id}}" class="comment_user" th:text="'View all ' + ${li.count} + ' comments'"></a>
-                    </div>
+        <article class="feed_contianer" >
+            <!-- card header -->
+            <div class="feed_card_header">
+                <div class="photo_user_info" th:if="${post.user.userimg != null}">
+                    <img th:src="@{'/resource/img/profile/' + ${post.user.userimg}}" alt="userIcon">
+                    <a th:href="@{'/ipro/main/user/' + ${post.user.usernick}}"
+                       class="username" th:text="${post.user.usernick}"></a>
                 </div>
-            </th:block>
+                <div class="photo_user_info" th:if="${post.user.userimg == null}">
+                    <img src="/resource/img/profile/basic.png" alt="userIcon">
+                    <a th:href="@{'/ipro/main/user/' + ${post.user.usernick}}"
+                       class="username" th:text="${post.user.usernick}"></a>
+                </div>
+            </div>
 
-            <!-- article create date -->
-            <span class="photo_date">
+            <!-- img card area -->
+            <div class="photo_card_img">
+                <div class="card_photo">
+                    <img th:src="@{'/resource/img/' + ${post.imgurl}}" alt="card_img" class="card_img" />
+                </div>
+            </div>
+
+            <!-- card info -->
+            <div class="photo_info">
+                <div class="photo_actions">
+                    <th:block>
+                        <span class="photo_action">
+                        <!-- likes img -->
+                            <th:block th:each="li : ${likes}" th:if="${li.postid == post.id}">
+                                <i th:if="${li.userid} != null and ${li.count} > 0" th:onclick="|unlike('${post.id}','${user.get.id}')|" th:id="'like'+${post.id}"
+                                   class="fa fa-heart heart heart-clicked fa-2x"></i>
+                                <i th:if="${li.userid} != null and ${li.count} eq 0" th:onclick="|like('${post.id}','${user.get.id}')|" th:id="'like'+${post.id}"
+                                   class="far fa-heart heart fa-2x"></i>
+                            </th:block>
+                        </span>
+                    </th:block>
+
+
+                    <span class="photo_action">
+                        <!-- comment img -->
+                        <a th:href="@{'/ipro/post/details/' + ${post.id}}">
+                            <i class="far fa-comment fa-2x" aria-hidden="true"></i>
+                        </a>
+                    </span>
+                </div>
+
+                <!-- like count -->
+                <th:block th:each="lC : ${likes}">
+                    <span class="photo_like_count" th:if="${lC.postid == post.id} and ${lC.count} >= 0"
+                          th:text="${lC.count} + 'Likes'">
+                    </span>
+                </th:block>
+
+                <!-- article caption -->
+                <div class="photo_caption">
+                    <a th:href="@{'/ipro/main/user/' + ${post.user.usernick}}"
+                       class="username" th:text="${post.user.usernick}"></a>
+                    <span class="caption" th:text="${post.caption}"></span>
+                </div>
+
+                <!-- article tag -->
+                <div class="photo_tag">
+                    #acne
+                </div>
+
+                <!-- article comment -->
+                <th:block th:each="li : ${count}">
+                    <div class="photo_comments" th:if="${post.id == li.postid}">
+                        <div class="photo_comment" th:if="${li.count} > 0">
+                            <a th:href="@{'/ipro/post/details/' + ${post.id}}" class="comment_user" th:text="'View all ' + ${li.count} + ' comments'"></a>
+                        </div>
+                    </div>
+                </th:block>
+
+                <!-- article create date -->
+                <span class="photo_date">
                     <a th:href="@{'/ipro/post/details/' + ${post.id}}" th:text="${#calendars.format(post.create_date, 'MM/dd')}"></a>
                 </span>
 
-            <!-- add comment area -->
-            <form class="add_comment_area" th:id="'ci'+${post.id}" >
-                <input type="hidden" id="postid" name="postid" th:value="${post.id}">
-                <textarea name="content" th:id="'content'+${post.id}" placeholder="Add a comment"></textarea>
-                <input type="hidden" th:id="'userid' + ${post.id}" name="userid" th:value="${user.get.id}">
-                <button th:onclick="|commentSend('${post.id}')|">Post</button>
-            </form>
+                <!-- add comment area -->
+                <form class="add_comment_area" th:id="'ci'+${post.id}" >
+                    <input type="hidden" id="postid" name="postid" th:value="${post.id}">
+                    <textarea name="content" th:id="'content'+${post.id}" placeholder="Add a comment"></textarea>
+                    <input type="hidden" th:id="'userid' + ${post.id}" name="userid" th:value="${user.get.id}">
+                    <button th:onclick="|commentSend('${post.id}')|">Post</button>
+                </form>
 
-        </div>
+            </div>
 
-    </article>
-    <!-- article end -->
+        </article>
+        <!-- article end -->
+
+    </th:block>
 </div>
 <!-- section end -->
 <script th:inline="javascript" th:src="@{'/resource/js/comment.js'}"></script>
+<script th:inline="javascript" th:src="@{'/resource/js/like.js'}"></script>
 </body>
 </html>

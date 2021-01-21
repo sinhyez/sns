@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" href="/resource/css/posting.css">
 <th:block th:replace="view/layout/header :: headerFragment"></th:block>
+<link rel="stylesheet" href="/resource/css/posting.css">
 <body>
 <div class="posting_container">
 
@@ -11,9 +11,6 @@
         <span>사진미리보기</span>
         <div class="img_thumbnail">
             <div class="image_container" id="image_container">
-
-            </div>
-            <div class="image_container">
 
             </div>
         </div>
@@ -48,16 +45,7 @@
 </div>
 <script src="/resource/js/posting.js"></script>
 <script>
-    function setThumbnail(event) {
-        var reader = new FileReader();
 
-        reader.onload = function(event) {
-            var img = document.createElement("img");
-            img.setAttribute("src", event.target.result);
-            document.querySelector("#image_container").appendChild(img);
-        };
-        reader.readAsDataURL(event.target.files[0]);
-    }
 </script>
 
 

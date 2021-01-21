@@ -178,3 +178,8 @@ article {
     color: red;
     animation: .5s pump infinite linear;
 }
+
+.fa-comment {
+    text-decoration: none;
+    color: black;
+}

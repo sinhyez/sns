@@ -2,7 +2,7 @@ package com.ipro.sns.model.dto;
 
 import com.ipro.sns.model.PostModel;
 import com.ipro.sns.model.UserModel;
-import com.ipro.sns.model.Role;
+import com.ipro.sns.model.modelutils.Role;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;

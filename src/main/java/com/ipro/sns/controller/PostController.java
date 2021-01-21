@@ -3,8 +3,6 @@ package com.ipro.sns.controller;
 
 import com.ipro.sns.model.PostModel;
 import com.ipro.sns.model.UserModel;
-import com.ipro.sns.model.dto.PostDto;
-import com.ipro.sns.repository.PostRepository;
 import com.ipro.sns.service.PostService;
 import com.ipro.sns.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +27,6 @@ import java.util.UUID;
 public class PostController {
 
     private final UserService userService;
-    private final PostRepository postRepository;
     private final PostService postService;
 
 
@@ -41,19 +38,14 @@ public class PostController {
         Optional<UserModel> userModelWrapper = userService.findByUsernick(usernick);
         UserModel userModel = userModelWrapper.get();
         String path = "C:/Users/yoon sung/Desktop/java/sns/src/main/resources/static/img/";
-        String redirect = "redirect:/ipro/main/user/" + userModel.getUsernick();
+        String redirect = "redirect:/ipro/main/user/";
 
         UUID uuid = UUID.randomUUID();
         String filename = uuid + "_" + file.getOriginalFilename();
         Path filepath = Paths.get(path + filename);
         Files.write(filepath, file.getBytes());
 
-        PostDto postDto = new PostDto();
-        postDto.setCaption(caption);
-        postDto.setImgurl(path);
-        postDto.setUser(userModel);
-        postDto.setImgurl(filename);
-        postRepository.save(postDto.toEntity());
+        postService.postSave(caption, userModel, filename);
 
         return redirect;
 
@@ -67,9 +59,10 @@ public class PostController {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Optional<UserModel> user = userService.findByUsername(username);
 
-        Optional<PostModel> postModel = postRepository.findById(id);
-        model.addAttribute("post", postModel);
+        //포스트 셋
+        Optional<PostModel> postModel = postService.findById(id);
 
+        model.addAttribute("post", postModel);
         model.addAttribute("loginUser", user);
 
         return "view/post/post_details";

@@ -1,11 +1,11 @@
 package com.ipro.sns.controller;
 
 import com.ipro.sns.model.*;
+import com.ipro.sns.model.dto.LikesDto;
 import com.ipro.sns.model.dto.PostDto;
-import com.ipro.sns.service.CommentService;
-import com.ipro.sns.service.FollowService;
-import com.ipro.sns.service.PostService;
-import com.ipro.sns.service.UserService;
+import com.ipro.sns.model.modelutils.Count;
+import com.ipro.sns.model.modelutils.LikesCount;
+import com.ipro.sns.service.*;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -26,6 +26,7 @@ public class MainController {
     private final PostService postService;
     private final FollowService followService;
     private final CommentService commentService;
+    private final LikeService likeService;
 
     @GetMapping("/")
     public String index(){
@@ -50,9 +51,7 @@ public class MainController {
         // following한 유저의 게시글 select 후 user 포스팅과 list 합치기
         for (FollowModel f : followList) {
             List<PostModel> post = postService.findByUserIdOrderByIdDesc(f.getFollowerid().getId());
-            for (PostModel p : post) {
-                postList.add(p);
-            }
+            postList.addAll(post);
         }
 
         //comment counting
@@ -66,7 +65,16 @@ public class MainController {
         }
         model.addAttribute("count", count);
 
-//        model.addAttribute("commnet", comment);
+        List<LikesCount> likeCount = new ArrayList<>();
+        for (PostModel p : postList) {
+            LikesCount lc = new LikesCount();
+            lc.setPostid(p.getId());
+            lc.setCount(likeService.countByPostid(p.getId()));
+            lc.setUserid(userWrapper.getId());
+
+            likeCount.add(lc);
+        }
+        model.addAttribute("likes", likeCount);
 
         //유저아이디를 통해 유저테이블에 존재하는 현재 유저의 모든정보 전달
         model.addAttribute("user", user);
@@ -76,10 +84,9 @@ public class MainController {
         Collections.sort(postList, postDto);
 
         model.addAttribute("postlist", postList);
-        model.addAttribute("postsize", postList.size());
-
 
         return "view/main";
+
     }
 
     //user Profile page
@@ -94,7 +101,6 @@ public class MainController {
 
         UserModel user = userModel.get();
 
-
         Optional<UserModel> loginUser = userService.findByUsername(username);
         UserModel loginUserWrapper = loginUser.get();
         model.addAttribute("loginId", loginUser.get().getId());
@@ -107,6 +113,17 @@ public class MainController {
         List<PostDto> postDtoList = postService.getUserPostList(user);
         model.addAttribute("postlist", postDtoList);
 
+        //코멘트 카운팅
+        List<Count> count = new ArrayList<>();
+        for (PostDto p : postDtoList) {
+            Count c = new Count();
+            c.setPostid(p.getId());
+            c.setCount(commentService.countByPostid(p.getId()));
+
+            count.add(c);
+        }
+        model.addAttribute("count", count);
+
         //팔로우 카운팅
         int followerCount = followService.followerCounting(user);
         int followingCount = followService.followingCounting(user);
@@ -116,6 +133,7 @@ public class MainController {
         model.addAttribute("following", followingCount);
 
         return "view/user/user_main";
+
     }
 
     //posting page

@@ -1,7 +1,7 @@
 package com.ipro.sns.service;
 
 import com.ipro.sns.model.UserModel;
-import com.ipro.sns.model.Role;
+import com.ipro.sns.model.modelutils.Role;
 import com.ipro.sns.repository.UserRepository;
 import com.ipro.sns.model.dto.UserDto;
 import lombok.AllArgsConstructor;
@@ -39,6 +39,7 @@ public class UserService implements UserDetailsService {
     }
 
     public boolean check(UserDto userDto, BindingResult bindingResult) {
+
         // 회원가입 유효성 검사
         if (bindingResult.hasErrors()) {
             return true;
@@ -49,28 +50,34 @@ public class UserService implements UserDetailsService {
             return true;
         }
         return false;
+
     }
 
     @Transactional
     public int joinUser(UserDto userDto){
+
         //비밀번호 암호화 후 회원가입 처리
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         userDto.setUserpw(passwordEncoder.encode(userDto.getUserpw()));
 
         return userRepository.save(userDto.toEntity()).getId();
+
     }
 
     //프로필사진 변경
     public void img_edit(String username, String userimg) {
+
         Optional<UserModel> uModel = userRepository.findByUsername(username);
         UserModel userModel = uModel.get();
         userModel.setUsername(username);
         userModel.setUserimg(userimg);
         userRepository.save(userModel);
+
     }
 
     //유저 프로필 내용 수정
     public void user_edit(String username, String usernick, String userfull, String userintro) {
+
         Optional<UserModel> uModel = userRepository.findByUsername(username);
         UserModel userModel = uModel.get();
         userModel.setUsername(username);
@@ -78,11 +85,13 @@ public class UserService implements UserDetailsService {
         userModel.setUserfull(userfull);
         userModel.setUserintro(userintro);
         userRepository.save(userModel);
+
     }
 
     //spring security login method
     @Override //상세정보 조회 메서드. 사용자의 계정정보와 권한을 갖는 userDetail반환
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
         Optional<UserModel>  modelwrapper = userRepository.findByUsername(username);
         UserModel userModel = modelwrapper.get();
 
@@ -98,6 +107,5 @@ public class UserService implements UserDetailsService {
         return new User(userModel.getUsername(), userModel.getUserpw(), authorities);
 
     }
-
 
 }

@@ -34,6 +34,7 @@ public class FollowService {
 
     //팔로우 저장
     public void save(String username, String pagename) {
+
         FollowDto followDto = new FollowDto();
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 

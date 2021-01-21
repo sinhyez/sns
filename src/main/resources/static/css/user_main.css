@@ -68,7 +68,7 @@ img {
     height: 155px;
     border: solid #26bda4;
     border-radius: 50%;
-    object-fit: cover
+    object-fit: cover;
 }
 
 .profile_setting,
@@ -165,7 +165,7 @@ img {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.3);
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
     position: absolute;
 }
@@ -181,8 +181,10 @@ img {
 }
 
 .item_likes {
+    margin-left: 5rem;
     margin-right: 2.2rem;
 }
+
 
 .post_img {
     width: 285px;

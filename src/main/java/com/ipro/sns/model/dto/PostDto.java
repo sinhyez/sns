@@ -19,6 +19,7 @@ public class PostDto implements Comparator<PostModel> {
     private UserModel user;
     private Timestamp create_date;
     private Timestamp update_date;
+    private boolean likeState;
 
     public PostModel toEntity() {
         return PostModel.builder()
@@ -27,18 +28,20 @@ public class PostDto implements Comparator<PostModel> {
                 .user(user)
                 .imgurl(imgurl)
                 .create_date(create_date)
+                .likeState(likeState)
                 .build();
     }
 
     @Builder
     public PostDto(int id, UserModel user, String caption, String imgurl,
-                   Timestamp create_date, Timestamp update_date) {
+                   Timestamp create_date, Timestamp update_date, boolean likeState) {
         this.id = id;
         this.user = user;
         this.caption = caption;
         this.imgurl = imgurl;
         this.create_date = create_date;
         this.update_date = update_date;
+        this.likeState = likeState;
     }
 
     @Override

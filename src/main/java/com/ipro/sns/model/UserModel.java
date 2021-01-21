@@ -1,6 +1,7 @@
 package com.ipro.sns.model;
 
 
+import com.ipro.sns.model.modelutils.Role;
 import lombok.*;
 
 import javax.persistence.*;
