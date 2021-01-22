@@ -17,8 +17,8 @@ public class LikeService {
     private final LikesRepository likesRepository;
 
     public int countByPostid(int postid) { return likesRepository.countByPosidId(postid); }
-    public Optional<LikesModel> findByUserid(UserModel userid) {
-        return likesRepository.findByUserid(userid);
+    public LikesModel findByUseridIdAndPosidId(int userid, int postid) {
+        return likesRepository.findByUseridIdAndPosidId(userid, postid);
     }
     public void unLike(PostModel postid, UserModel userid) {
         likesRepository.deleteByPosidAndUserid(postid, userid);

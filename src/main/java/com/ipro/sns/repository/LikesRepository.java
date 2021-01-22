@@ -14,7 +14,7 @@ import java.util.Optional;
 @Repository
 public interface LikesRepository extends JpaRepository<LikesModel, Integer> {
 
-    Optional<LikesModel> findByUserid(UserModel userid);
+    LikesModel findByUseridIdAndPosidId(int userid, int postid);
 
     int countByPosidId(int postid);
 

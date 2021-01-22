@@ -12,7 +12,7 @@
     </th:bolck>
     <th:block th:each="post : ${postlist}">
 
-        <article class="feed_contianer" >
+        <article class="feed_contianer">
             <!-- card header -->
             <div class="feed_card_header">
                 <div class="photo_user_info" th:if="${post.user.userimg != null}">
@@ -40,12 +40,10 @@
                     <th:block>
                         <span class="photo_action">
                         <!-- likes img -->
-                            <th:block th:each="li : ${likes}" th:if="${li.postid == post.id}">
-                                <i th:if="${li.userid} != null and ${li.count} > 0" th:onclick="|unlike('${post.id}','${user.get.id}')|" th:id="'like'+${post.id}"
-                                   class="fa fa-heart heart heart-clicked fa-2x"></i>
-                                <i th:if="${li.userid} != null and ${li.count} eq 0" th:onclick="|like('${post.id}','${user.get.id}')|" th:id="'like'+${post.id}"
-                                   class="far fa-heart heart fa-2x"></i>
-                            </th:block>
+                            <i th:if="${post.likeState} eq true" th:onclick="|unlike('${post.id}','${user.get.id}')|"
+                               th:id="'like'+${post.id}" class="fa fa-heart heart heart-clicked fa-2x"></i>
+                            <i th:if="${post.likeState} eq false" th:onclick="|like('${post.id}','${user.get.id}')|"
+                               th:id="'like'+${post.id}" class="far fa-heart heart fa-2x"></i>
                         </span>
                     </th:block>
 

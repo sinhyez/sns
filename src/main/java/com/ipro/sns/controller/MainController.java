@@ -1,7 +1,6 @@
 package com.ipro.sns.controller;
 
 import com.ipro.sns.model.*;
-import com.ipro.sns.model.dto.LikesDto;
 import com.ipro.sns.model.dto.PostDto;
 import com.ipro.sns.model.modelutils.Count;
 import com.ipro.sns.model.modelutils.LikesCount;
@@ -42,6 +41,9 @@ public class MainController {
         Optional<UserModel> user = userService.findByUsername(username);
         UserModel userWrapper = user.get();
 
+        Optional<UserModel> findU = userService.findById(userWrapper.getId());
+        model.addAttribute("uu", findU);
+
         //login user 가 Follow한 아이디 리스트
         List<FollowModel> followList = followService.findByFollowingid(userWrapper);
 
@@ -54,6 +56,7 @@ public class MainController {
             postList.addAll(post);
         }
 
+
         //comment counting
         List<Count> count = new ArrayList<>();
         for (PostModel p : postList) {
@@ -65,12 +68,17 @@ public class MainController {
         }
         model.addAttribute("count", count);
 
+        //like count
         List<LikesCount> likeCount = new ArrayList<>();
         for (PostModel p : postList) {
             LikesCount lc = new LikesCount();
+            LikesModel likesModel = likeService.findByUseridIdAndPosidId(userWrapper.getId(), p.getId());
+            if (likesModel != null) {
+                p.setLikeState(true);
+            }
             lc.setPostid(p.getId());
             lc.setCount(likeService.countByPostid(p.getId()));
-            lc.setUserid(userWrapper.getId());
+            lc.setUserid(user.get().getId());
 
             likeCount.add(lc);
         }

@@ -19,6 +19,7 @@ function like(postid, userid) {
         url : page,
         method : "POST",
         data : param,
+        async : false,
         success : function (data) {
             if (data === 1) {
                 location.reload();
@@ -47,6 +48,7 @@ function unlike(postid, userid) {
         url: page,
         method: "DELETE",
         data: param,
+        async : false,
         success : function (data) {
             if (data === -1){
                 location.reload();

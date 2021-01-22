@@ -41,6 +41,9 @@ public class PostModel {
     @Transient
     private boolean likeState;
 
+    @Transient
+    private int likeCount;
+
     @Builder
     public PostModel(int id, String caption, String imgurl, UserModel user,
                      Timestamp create_date, boolean likeState) {
