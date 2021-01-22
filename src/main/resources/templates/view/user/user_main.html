@@ -70,6 +70,9 @@
                     <!-- profile model introduce area -->
                     <div class="profile_intro">
                         <span th:text="${user.get().userintro}"></span>
+<!--                        <th:block th:each="fl : ${followerlist}">-->
+<!--                            <p th:text="${fl.followingid.usernick}"></p>-->
+<!--                        </th:block>-->
                     </div>
                 </div>
                 <!-- end of profile border line -->
@@ -91,18 +94,18 @@
                         <!-- post item info likes comment -->
                         <div class="post_item_info">
                             <ul>
-                                <li class="item_likes">
-                                    <span class="hidden">
-                                        Likes:
-                                    </span>
-                                    <i class="fa fa-heart heart fa-1x" aria-hidden="true"></i>
-                                    56
-                                </li>
+                                <th:block th:each="lc : ${likes}">
+                                    <li class="item_likes" th:if="${i.id == lc.postid} and ${lc.count} >= 0">
+                                        <i class="fa fa-heart heart fa-1x" aria-hidden="true"></i>
+                                        <span class="item_commnet" th:text="${lc.count}">
+                                        </span>
+                                    </li>
+                                </th:block>
+
                                 <th:block th:each="li : ${count}">
                                     <li class="item_commnet" th:if="${i.id == li.postid}">
                                         <i class="fas fa-comment" aria-hidden="true"></i>
                                         <span class="item_commnet" th:if="${li.count} > 0" th:text="${li.count}">
-
                                         </span>
                                     </li>
                                 </th:block>

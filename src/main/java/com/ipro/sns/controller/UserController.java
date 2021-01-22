@@ -54,17 +54,30 @@ public class UserController {
 
     //헤더에서 유저프로필로 이동할때 처리되는 프로세스
     @RequestMapping("/ipro/main/user/")
-    public String userProfile() {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        Optional<UserModel> userModel = userService.findByUsername(username);
-        return "redirect:/ipro/main/user/" + userModel.get().getUsernick();
+    public String userProfile() throws Exception{
+
+        try {
+
+            String username = SecurityContextHolder.getContext().getAuthentication().getName();
+            Optional<UserModel> userModel = userService.findByUsername(username);
+
+            return "redirect:/ipro/main/user/" + userModel.get().getUsernick();
+
+        } catch (Exception e) {
+
+            return "view/login";
+
+        }
+
     }
 
     //유저 프로필 업데이트
     @RequestMapping(value = "/ipro/user/edit/{usernick}")
     public String updateUser(@PathVariable("usernick") String usernick, Model model) throws Exception {
+
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         model.addAttribute("user", userService.findByUsername(username));
+
         return "view/user/edit";
     }
 

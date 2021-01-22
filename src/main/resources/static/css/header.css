@@ -4,7 +4,7 @@
     border-bottom: 1px solid #999;
     display: flex;
     background: #26bda4;
-    min-width: 93.5rem;
+    /*min-width: 93.5rem;*/
 }
 
 /* serchBar */
@@ -16,6 +16,7 @@
     position: relative;
 }
 .search_bar_area input{
+    width: 60%;
     height: 80%;
     border: none;
     background: #e6e9ed;
@@ -23,7 +24,7 @@
 }
 .search_bar_area label{
     position: absolute;
-    top: 7px;
+    top: 8px;
     left: 6rem;
     transition: 0.2s ease;
     cursor: text;
@@ -38,18 +39,19 @@
 }
 .search_bar_area input:focus ~ label,
 .search_bar_area input:not(:placeholder-shown) ~ label{
-    transform: translate(-1%, -125%) scale(1.0);
+    transform: translate(-1%, -143%) scale(1.0);
     font-size: 13px;
     color: #fff;
 }
 .search_bar_area button{
-    width: 20%;
+    width: 10%;
     height: 80%;
     position: absolute;
     border: none;
     background: #e6e9ed;
     outline: none;
     font-size: 1rem;
+    color: #999;
 }
 
 /* header title area */
@@ -84,11 +86,18 @@
     position: relative;
 }
 .user_area a{
-    padding-left: 15px;
+    padding-left: 0.5rem;
+    margin-left: 1.5rem;
     width: 40px;
     position: relative;
+    text-decoration: none;
+    color: #e6e9ed;
 }
 .user_area img{
     width: 33px;
     height: 33px;
+}
+
+.home-clicked {
+    color: black;
 }

@@ -27,14 +27,6 @@ img {
     outline: 0.5rem auto #4d90fe;
 }
 
-.hidden {
-    position: absolute !important;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(1px, 1px, 1px, 1px);
-}
-
 /* profile section */
 .profile {
     margin-top: 3rem;
@@ -96,6 +88,7 @@ img {
     line-height: 1.8;
     border: 0.1rem solid #dbdbdb;
     border-radius: 0.3rem;
+    text-decoration: none;
 }
 
 .logout_btn {

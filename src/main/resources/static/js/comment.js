@@ -15,8 +15,8 @@ function commentSend(postid) {
         dataType:'text',
         success: function (data) {
             if (data === 1) {
-                $(".content").val("");
-                console.log(data);
+                // $(".content").val("");
+                location.reload();
             }
         },
         error: function (request, status, error) {

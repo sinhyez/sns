@@ -28,6 +28,10 @@ public class FollowService {
         return followRepository.countByFollowingid(userModel);
     }
 
+    public List<FollowModel> findByFollowerid(UserModel followerid) {
+        return followRepository.findByFollowerid(followerid);
+    }
+
     public List<FollowModel> findByFollowingid(UserModel userModel) {
         return followRepository.findByFollowingid(userModel);
     }
@@ -49,14 +53,14 @@ public class FollowService {
         followDto.setFollowingid(userModelUserWrapper);
         followDto.setFollowdate(timestamp);
 
-        followRepository.save(followDto.toEntity()).getId();
+        followRepository.save(followDto.toEntity());
 
     }
 
     //연팔로우
     @Transactional
     public void unFollow(int id1, int id2) {
-        followRepository.deleteByFollowingidIdAndFolloweridId(id1, id2);
+        followRepository.deleteByFolloweridIdAndFollowingidId(id1, id2);
     }
 
     //팔로우 카운팅

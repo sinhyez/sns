@@ -18,21 +18,21 @@ public class FollowController {
     private final FollowService followService;
     private final UserService userService;
 
+    //팔로잉
     @RequestMapping("/follow/{id}")
-    public String follow(@PathVariable int id, UserModel userModel) throws Exception{
+    public String follow(@PathVariable int id) throws Exception{
 
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Optional<UserModel> toUserModel = userService.findById(id);
-        userModel = toUserModel.get();
+        UserModel userModel = toUserModel.get();
 
         followService.save(username, userModel.getUsername());
 
-        String redirect = "redirect:/ipro/main/user/" + userModel.getUsernick();
-
-        return redirect;
+        return "redirect:/ipro/main/user/" + userModel.getUsernick();
 
     }
 
+    //언팔로우
     @RequestMapping("/unfollow/{id}")
     public String unFollow(@PathVariable int id) throws Exception {
 
@@ -44,10 +44,8 @@ public class FollowController {
         Optional<UserModel> toUsermodel = userService.findById(id);
         UserModel userModel = toUsermodel.get();
 
-        followService.unFollow(loginUserWrapper.getId(), userModel.getId());
+        followService.unFollow(userModel.getId(), loginUserWrapper.getId());
 
-        String redirect = "redirect:/ipro/main/user/" + userModel.getUsernick();
-
-        return redirect;
+        return "redirect:/ipro/main/user/" + userModel.getUsernick();
     }
 }

@@ -18,11 +18,11 @@ public class FollowModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "followerid")
     private UserModel followerid; // 당한사람
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "followingid")
     private UserModel followingid; //한사람
 

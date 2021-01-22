@@ -22,7 +22,9 @@
                 <input type="search" name="search" id="search"
                        autocomplete="off" placeholder="search" />
                 <label for="search">search</label>
-                <button type="submit">Search</button>
+                <button type="submit">
+                    <i class="fas fa-search fa-2x"></i>
+                </button>
 
             </form>
             <!-- header title area -->
@@ -33,17 +35,17 @@
             </div>
             <!-- header_user_nav_area -->
             <div class="user_area">
-                <a href="/ipro/main">
-                    <img src="/resource/img/header/home.png" alt="home">
-                </a>
-                <a href=""><img src="/resource/img/header/likes.png" alt="likes"></a>
-                <a href=""><img src="/resource/img/header/message.png" alt="message"></a>
-                <a th:href="@{'/ipro/main/user/'}">
-                    <img th:src="@{'/resource/img/header/basic.png'}"
-                         alt="userhome" class="user_feed_area">
+                <a href="/ipro/main" id="home">
+                    <i class="fas fa-home fa-4x"></i>
                 </a>
                 <a href="/ipro/post">
-                    <img src="/resource/img/header/posting.png" alt="posting">
+                    <i class="fas fa-pen fa-4x"></i>
+                </a>
+                <a th:href="@{'/ipro/main/user/'}">
+                    <i class="fas fa-user fa-4x"></i>
+                </a>
+                <a href="/logout">
+                    <i class="fas fa-sign-out-alt fa-4x"></i>
                 </a>
             </div>
 

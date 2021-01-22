@@ -18,10 +18,11 @@ public interface FollowRepository extends JpaRepository<FollowModel, Integer> {
 
     int countByFollowingid(UserModel followingid);
 
+    List<FollowModel> findByFollowerid( UserModel followerid);
     List<FollowModel> findByFollowingid(UserModel followingid);
 
     //언팔로우
     @Transactional
-    void deleteByFollowingidIdAndFolloweridId(int followingid, int followerid);
+    void deleteByFolloweridIdAndFollowingidId(int followingid, int followerid);
 
 }

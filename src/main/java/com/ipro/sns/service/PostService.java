@@ -65,19 +65,5 @@ public class PostService {
 
     }
 
-    @Transactional
-    public List<PostModel> like(int userid) {
-        List<PostModel> postModels = null;
-
-        for (PostModel p : postModels) {
-            p.setLikeCount(p.getLike().size());
-            for (LikesModel l : p.getLike()) {
-                if (l.getUserid().getId() == userid) {
-                    p.setLikeState(true);
-                }
-            }
-        }
-        return postModels;
-    }
 
 }
