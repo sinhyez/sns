@@ -1,0 +1,8 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div id="modal-following" class="modal-following_list">
+        <th:block th:each="fwlist : ${followinglist}">
+            <p th:text="${fwlist.followerid.usernick}"></p>
+        </th:block>
+    </div>
+</body>

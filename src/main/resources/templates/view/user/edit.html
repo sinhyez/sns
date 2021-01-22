@@ -1,25 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/resource/css/global.css">
-    <link rel="stylesheet" href="/resource/css/edit.css">
-    <title>Edit Profile</title>
-</head>
+<link rel="stylesheet" href="/resource/css/edit.css">
+<th:block th:replace="view/layout/header :: headerFragment"></th:block>
+<title>Edit Profile</title>
+
 <body>
-    <div th:insert="view/layout/header"></div>
     <div class="body">
         <div class="edit_body">
-            <form th:action="@{/ipro/user/user_edit}" method="post">
+            <form th:action="@{'/ipro/user/user_edit'}" method="post">
                 <!-- profile_img area -->
                 <div class="profile_img_area">
-                    <div th:if="${user.get().getUserimg() != null}">
-                        <img th:src="@{/resource/img/profile/} + ${user.get().getUserimg()}"
+                    <div th:unless="${user.get().getUserimg()} eq null">
+                        <img th:src="@{'/resource/img/profile/'+ ${user.get.userimg} }"
                              alt="user_icon" class="user_img_icon">
                     </div>
-                    <div th:if="${user.get().getUserimg() == null}">
-                        <img th:src="@{/resource/img/profile/Basic.png}"
+                    <div th:if="${user.get().getUserimg()} eq null ">
+                        <img th:src="@{'/resource/img/profile/Basic.png'}"
                              alt="user_icon" class="user_img_icon">
                     </div>
                     <div class="profile_img_edit_area">
@@ -55,5 +51,6 @@
             </form>
         </div>
     </div>
+
 </body>
 </html>

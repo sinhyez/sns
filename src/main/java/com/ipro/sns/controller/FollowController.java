@@ -1,14 +1,17 @@
 package com.ipro.sns.controller;
 
+import com.ipro.sns.model.FollowModel;
 import com.ipro.sns.model.UserModel;
 import com.ipro.sns.service.FollowService;
 import com.ipro.sns.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -47,5 +50,27 @@ public class FollowController {
         followService.unFollow(userModel.getId(), loginUserWrapper.getId());
 
         return "redirect:/ipro/main/user/" + userModel.getUsernick();
+    }
+
+    @RequestMapping("/follwerlist/{id}")
+    public String followerlist(@PathVariable int id, Model model) throws Exception {
+
+        Optional<UserModel> user = userService.findById(id);
+
+        List<FollowModel> followerList = followService.findByFollowerid(user.get());
+        model.addAttribute("followerlist", followerList);
+
+        return "view/modal/followerlist";
+    }
+
+    @RequestMapping("/followinglist/{id}")
+    public String followinglist(@PathVariable int id, Model model) throws Exception {
+
+        Optional<UserModel> user = userService.findById(id);
+
+        List<FollowModel> followingList = followService.findByFollowingid(user.get());
+        model.addAttribute("followinglist", followingList);
+
+        return "view/modal/followinglist";
     }
 }

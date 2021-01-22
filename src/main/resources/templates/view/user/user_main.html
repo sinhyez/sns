@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
     <link rel="stylesheet" href="/resource/css/user_main.css">
     <title th:text="${user.get().usernick} + '  Profile Page ・ Microblogram'"></title>
     <!-- include header -->
@@ -15,34 +15,32 @@
                 <!-- profile border line -->
                 <div class="profile_border">
                     <!-- profile model icon area -->
-                    <th:block th:if="${user.get().userimg != null}">
-                        <div class="profile_img">
-                            <img th:src="@{'/resource/img/profile/'+ ${user.get().userimg}} " alt="usericon">
-                        </div>
-                    </th:block>
-                    <div class="profile_img" th:if="${user.get().userimg == null}">
+                    <div class="profile_img" th:unless="${user.get().userimg eq null}">
+                        <img th:src="@{'/resource/img/profile/'+ ${user.get().userimg}} " alt="usericon">
+                    </div>
+                    <div class="profile_img" th:if="${user.get().userimg eq null}">
                         <img th:src="@{'/resource/img/profile/Basic.png'}" alt="usericon">
                     </div>
                     <!-- profile model setting area -->
                     <div class="profile_setting">
                         <h1 class="user_name" th:text="${user.get().usernick}"></h1>
-                        <a th:if="${loginId == user.get().id}"
+                        <a th:if="${loginId eq user.get().id}"
                            th:href="@{'/ipro/user/edit/' + ${user.get().usernick}}" class="btn edit_btn">
                             Edit Profile
                         </a>
-                        <a th:if="${loginId == user.get().id}" href="/logout">
+                        <a th:if="${loginId eq user.get().id}" href="/logout">
                             <button class="btn logout_btn">
                                 Logout
                             </button>
                         </a>
                         <th:block th:switch="${followcount}">
-                            <a th:case="false" th:if="${loginId != user.get().id}"
+                            <a th:case="false" th:unless="${loginId eq user.get().id}"
                                th:href="@{'/follow/' + ${user.get().id}}">
                                 <button class="btn edit_btn">
                                     Follow
                                 </button>
                             </a>
-                            <a th:case="true" th:if="${loginId != user.get().id}"
+                            <a th:case="true" th:unless="${loginId eq user.get().id}"
                                th:href="@{'/unfollow/' + ${user.get().id}}" >
                                 <button class="btn edit_btn">
                                     Unfollow
@@ -58,11 +56,11 @@
                                 <span class="stat_cout" th:text="${imgCount}"></span>
                             </li>
                             <li>
-                                <a href="">Followers</a>
+                                <a th:href="@{'/follwerlist/' + ${user.get.id} }">Followers</a>
                                 <span class="stat_count" th:text="${follower}"></span>
                             </li>
                             <li>
-                                <a href="">Following</a>
+                                <a th:onclick="|modalFollowing('${user.get.id}')|">Following</a>
                                 <span class="stat_count" th:text="${following}"></span>
                             </li>
                         </ul>
@@ -70,9 +68,6 @@
                     <!-- profile model introduce area -->
                     <div class="profile_intro">
                         <span th:text="${user.get().userintro}"></span>
-<!--                        <th:block th:each="fl : ${followerlist}">-->
-<!--                            <p th:text="${fl.followingid.usernick}"></p>-->
-<!--                        </th:block>-->
                     </div>
                 </div>
                 <!-- end of profile border line -->
@@ -82,43 +77,55 @@
         <!-- End of container -->
     </div>
 
+
     <div class="main_section">
         <div class="user_main_container">
             <!-- model post section start -->
             <div class="user_post_area">
 
-                <!-- model post item -->
-                <div class="post_item" th:each="i : ${postlist}">
-                    <a th:href="@{'/ipro/post/details/' + ${i.id}}">
-                        <img th:src="@{'/resource/img/'+ ${i.imgurl}} " alt="post_img" class="post_img">
-                        <!-- post item info likes comment -->
-                        <div class="post_item_info">
-                            <ul>
-                                <th:block th:each="lc : ${likes}">
-                                    <li class="item_likes" th:if="${i.id == lc.postid} and ${lc.count} >= 0">
-                                        <i class="fa fa-heart heart fa-1x" aria-hidden="true"></i>
-                                        <span class="item_commnet" th:text="${lc.count}">
-                                        </span>
-                                    </li>
-                                </th:block>
+                <div id="modal-following"></div>
 
-                                <th:block th:each="li : ${count}">
-                                    <li class="item_commnet" th:if="${i.id == li.postid}">
-                                        <i class="fas fa-comment" aria-hidden="true"></i>
-                                        <span class="item_commnet" th:if="${li.count} > 0" th:text="${li.count}">
+                <th:block th:if="${postlist.size()} eq 0">
+                    <p> 게시글 작성해!!</p>
+                </th:block>
+                <!-- model post item -->
+                <th:block th:each="i : ${postlist}">
+
+                    <div class="post_item">
+                        <a th:href="@{'/ipro/post/details/' + ${i.id}}">
+                            <img th:src="@{'/resource/img/'+ ${i.imgurl}} " alt="post_img" class="post_img">
+                            <!-- post item info likes comment -->
+                            <div class="post_item_info">
+                                <ul>
+                                    <th:block th:each="lc : ${likes}">
+                                        <li class="item_likes" th:if="${i.id eq lc.postid} and ${lc.count} >= 0">
+                                            <i class="fa fa-heart heart fa-1x" aria-hidden="true"></i>
+                                            <span class="item_commnet" th:text="${lc.count}">
                                         </span>
-                                    </li>
-                                </th:block>
-                            </ul>
-                        </div>
-                    </a>
-                </div>
+                                        </li>
+                                    </th:block>
+
+                                    <th:block th:each="li : ${count}">
+                                        <li class="item_commnet" th:if="${i.id eq li.postid}">
+                                            <i class="fas fa-comment" aria-hidden="true"></i>
+                                            <span class="item_commnet" th:if="${li.count} > 0" th:text="${li.count}">
+                                        </span>
+                                        </li>
+                                    </th:block>
+                                </ul>
+                            </div>
+                        </a>
+                    </div>
+
+                </th:block>
+
 
             </div>
             <!-- end of model post section -->
         </div>
         <!-- end of container -->
     </div>
+    <script src="/resource/js/modal.js"></script>
 </main>
 </body>
 </html>
