@@ -27,13 +27,17 @@ public class UserService implements UserDetailsService {
     public Optional<UserModel> findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
     public Optional<UserModel> findById(int id) { return userRepository.findById(id); }
+
     public Optional<UserModel> findByUsernick(String usernick) {
         return userRepository.findByUsernick(usernick);
     }
+
     public List<UserModel> findByUsernickContains(String word) {
         return userRepository.findByUsernickContains(word);
     }
+
     public int countByUsernickContains(String word) {
         return userRepository.countByUsernickContains(word);
     }
@@ -49,6 +53,7 @@ public class UserService implements UserDetailsService {
             bindingResult.rejectValue("username", null, "중복된 아이디 입니다.");
             return true;
         }
+        
         return false;
 
     }

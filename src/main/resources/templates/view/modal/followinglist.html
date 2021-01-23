@@ -1,10 +1,17 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<link rel="css" href="/resource/css/modal.css">
 <script src="/resource/js/modal.js"></script>
-<body>
+
     <div id="modal-following" class="modal-following_list">
         <th:block th:each="fwlist : ${followinglist}">
-            <p th:text="${fwlist.followerid.usernick}"></p>
+            <div class="modal-following_list_img">
+                <img th:if="${fwlist.followerid.userimg} eq null" th:src="" alt="">
+                <img th:unless="${fwlist.followerid.userimg} eq null" th:src="" alt="">
+            </div>
+            <div class="modal-following_list_username">
+                <p th:text="${fwlist.followerid.usernick}"></p>
+            </div>
         </th:block>
         <button id="modal-button">x</button>
     </div>
-</body>
+

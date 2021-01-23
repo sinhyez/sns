@@ -46,9 +46,12 @@
                     <i class="far fa-comment fa-2x" aria-hidden="true"></i>
                 </div>
             </div>
-            <div class="like_count">
-                <span>100Likes</span>
-            </div>
+            <th:block th:each="lc : ${likes}">
+                <div class="like_count" th:if="${lc.postid == post.get.id} and ${lc.count} >= 0">
+                    <span th:text="${lc.count} + 'Likes'"></span>
+                </div>
+            </th:block>
+
             <div class="post_date">
                 <a th:text="${#calendars.format(post.get().create_date, 'MM/dd')}"></a>
             </div>

@@ -4,18 +4,20 @@ function commentSend(postid) {
     let userid = $("#userid"+postid).val();
     let content = $("#content"+postid).val();
 
+    let page = '/comment/insert'
+
     let param = {
         "postid" : postid, "userid" : userid, "content" : content
     };
 
     $.ajax({
-        url: '/comment/insert',
+        url: page,
         type: "POST",
         data: param,
         dataType:'text',
         success: function (data) {
             if (data === 1) {
-                // $(".content").val("");
+                $(".content").val("");
                 location.reload();
             }
         },

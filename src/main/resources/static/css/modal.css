@@ -1,0 +1,11 @@
+body {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.modal-following_list {
+    z-index: 1;
+    width: 30rem;
+    border: 1px solid;
+    position: absolute;
+    justify-content: center;
+}

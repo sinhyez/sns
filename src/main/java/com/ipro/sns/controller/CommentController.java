@@ -17,7 +17,7 @@ public class CommentController {
     private final CommentService commentService;
 
     //comment insert proc
-    @RequestMapping("/insert")
+    @PostMapping("/insert")
     public int commentInsert(@RequestParam PostModel postid, @RequestParam UserModel userid, @RequestParam String content)
         throws Exception {
 

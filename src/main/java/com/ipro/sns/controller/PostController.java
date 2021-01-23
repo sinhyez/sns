@@ -2,8 +2,10 @@ package com.ipro.sns.controller;
 
 
 import com.ipro.sns.model.CommnetModel;
+import com.ipro.sns.model.LikesModel;
 import com.ipro.sns.model.PostModel;
 import com.ipro.sns.model.UserModel;
+import com.ipro.sns.model.modelutils.LikesCount;
 import com.ipro.sns.service.CommentService;
 import com.ipro.sns.service.LikeService;
 import com.ipro.sns.service.PostService;
@@ -23,6 +25,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -71,8 +74,21 @@ public class PostController {
 
 
         List<CommnetModel> commentlist = commentService.findByPostid(id);
+        List<PostModel> postList = postService.findByUserIdOrderByIdDesc(user.get().getId());
+        List<LikesCount> likeCount = new ArrayList<>();
+        for (PostModel p : postList) {
+            LikesCount lc = new LikesCount();
+            LikesModel likesModel = likeService.findByUseridIdAndPosidId(user.get().getId(), p.getId());
+            if (likesModel != null) {
+                p.setLikeState(true);
+            }
+            lc.setPostid(p.getId());
+            lc.setCount(likeService.countByPostid(p.getId()));
 
+            likeCount.add(lc);
+        }
 
+        model.addAttribute("likes", likeCount);
         model.addAttribute("post", postModel);
         model.addAttribute("loginUser", user);
         model.addAttribute("comment", commentlist);

@@ -1,7 +1,7 @@
 article {
     margin-top: 1rem;
     font-size: 1.6rem;
-    border: 1px solid rgba(0, 0, 0, .0975);;
+    border: 1px solid #26bda4;
     background: #fff;
 }
 
@@ -34,8 +34,8 @@ article {
 }
 
 .feed_card_header img {
-    width: 30px;
-    height: 30px;
+    width: 3.5rem;
+    height: 3.5rem;
     border-radius: 50%;
     margin-right: 10px;
     object-fit: cover;
@@ -50,11 +50,13 @@ article {
     text-decoration: none;
     color: black;
     font-weight: bold;
-    padding-top: 4px;
+    padding-top: .8rem;
+}
+.username:hover {
+    color: #26bda4;
 }
 
 .photo_card_img{
-    display: flex;
     width: 60vh;
     max-width: 60vh;
     max-height: 60vh;
@@ -117,8 +119,7 @@ article {
 }
 
 .photo_comments {
-    padding: 1rem;
-    padding-left: 0;
+    padding-bottom: 1rem;
 }
 
 .photo_comments .photo_comment {
@@ -150,7 +151,7 @@ article {
 
     margin-top: 15px;
     width: 100%;
-    border-top: 1px solid rgba(0, 0, 0, .0975);
+    border-top: 1px solid #26bda4;;
     display: flex;
     justify-content: space-between;
     align-items: center;

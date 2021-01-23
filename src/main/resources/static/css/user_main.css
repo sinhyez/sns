@@ -23,8 +23,9 @@ img {
     cursor: pointer;
 }
 
-.btn:focus {
-    outline: 0.5rem auto #4d90fe;
+.btn:hover {
+    color: #e6e9ed;
+    background: #26bda4;
 }
 
 /* profile section */
@@ -83,16 +84,16 @@ img {
 
 .edit_btn {
     margin-left: 1rem;
-    padding: 0 2.4rem;
+    padding: 0 1.4rem;
     font-size: 1.4rem;
     line-height: 1.8;
-    border: 0.1rem solid #dbdbdb;
+    border: 0.1rem solid #26bda4;
     border-radius: 0.3rem;
     text-decoration: none;
 }
 
 .logout_btn {
-    border: 0.1rem solid #dbdbdb;
+    border: 0.1rem solid #26bda4;
     padding: 0 2.4rem;
     font-size: 1.4rem;
     line-height: 1.8;
@@ -118,6 +119,7 @@ img {
 .profile_stat li a {
     text-decoration: none;
     color: black;
+    cursor: pointer;
 }
 
 .profile_intro {
