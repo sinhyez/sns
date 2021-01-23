@@ -1,0 +1,208 @@
+
+.post_details_main {
+    margin-top: 4rem;
+    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.detail_main_container {
+    width: 65vh;
+    border: 1px solid #26bda4;
+    position: relative;
+    background: #fff;
+}
+
+
+/* post user info area */
+
+.post_user_info {
+    padding: 1rem;
+    display: flex;
+}
+
+.post_user_info img{
+    width: 4rem;
+    height: 4rem;
+    margin-right: 1rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.post_user_info a {
+    text-decoration: none;
+    color: #999;
+}
+
+.post_username {
+    width: 28rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+    padding-top: 8.5px;
+}
+
+.post_edit_box {
+    padding-top: 13.5px;
+    /*margin-left: 21.8rem;*/
+
+}
+
+.post_edit_box a{
+    margin-left: 0.33rem;
+    padding: 1rem;
+    font-size: 1.3rem;
+    border-radius: 0.3rem;
+    background-color: #26bda4;
+    color: #e6e9ed;
+    font-weight: 600;
+}
+
+.post_edit_box a:hover {
+    color: #26bda4;
+}
+
+/* post img area */
+
+.post_img {
+    max-width: 64.7vh;
+    height: 65vh;
+    border-top: 1px solid #26bda4;
+    text-align: center;
+}
+
+.post_img img{
+    max-width: 64.7vh;
+    height: 64.8vh;
+    object-fit: cover;
+}
+
+/* post info */
+
+.posting_info {
+
+}
+
+.posting_caption {
+    height: 18.5vh;
+    padding: 1.5rem .5rem 1rem .5rem;
+    border-top: 1px solid #26bda4;
+    border-bottom: 1px solid #26bda4;
+}
+
+.posting_caption .info_username{
+    margin-right: .5rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: #999;
+}
+
+.posting_caption span {
+    font-size: 1.38rem;
+    word-break: break-all;
+}
+
+/* post details */
+
+.posting_info .post_info_details {
+    font-size: 1.2rem;
+    display: flex;
+    padding: 1rem .5rem 1rem .5rem;
+
+}
+
+.post_info_icon {
+    margin-right: 1.2rem;
+    display: block;
+    cursor: pointer;
+}
+
+.like_count {
+    padding: 0 0 .5rem .5rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+.post_date {
+    padding : 0 .5rem;
+    margin-bottom: 1.5rem;
+}
+
+.post_date a {
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: #999;
+}
+
+/* comment area */
+
+.post_comment_area {
+    width: 100%;
+    padding-left: 0.5rem;
+    font-size: 1.39rem;
+    display: flex;
+}
+
+.comment_user_area {
+    width: 40.2rem;
+}
+
+.comment_username {
+    margin-right: .5rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: #999;
+}
+
+.comment_edit_area {
+    margin-top: .5rem;
+}
+
+.comment_edit {
+    font-size: 1rem;
+    text-decoration: none;
+    color: #26bda4;
+}
+
+.add_comment_area{
+    margin-top: 1.5rem;
+    width: 100%;
+    display: flex;
+    border-top: 1px solid #26bda4;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.add_comment_area textarea {
+    padding: 1.7rem .7rem;
+    border: 0;
+    resize: none;
+    width: 100%;
+    height: 5rem;
+    font-size: 1.4rem;
+    outline: none;
+}
+
+.post_btn {
+    margin-right: .5rem;
+    font-size: 1.6rem;
+    border: none;
+    background-color: #fff;
+    color: #26bda4;
+    outline: none;
+    cursor: pointer;
+}
+
+
+.heart-clicked {
+    color: red;
+    animation: .5s pump infinite linear;
+}
+
+.fa-comment {
+    text-decoration: none;
+    color: black;
+}

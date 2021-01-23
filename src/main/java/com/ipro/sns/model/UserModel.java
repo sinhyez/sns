@@ -53,6 +53,4 @@ public class UserModel {
         this.postModels = postModels;
     }
 
-
-
 }

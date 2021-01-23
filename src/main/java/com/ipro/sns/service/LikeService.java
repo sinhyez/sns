@@ -8,6 +8,8 @@ import com.ipro.sns.repository.LikesRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 @AllArgsConstructor
@@ -16,9 +18,11 @@ public class LikeService {
     private final LikesRepository likesRepository;
 
     public int countByPostid(int postid) { return likesRepository.countByPosidId(postid); }
+
     public LikesModel findByUseridIdAndPosidId(int userid, int postid) {
         return likesRepository.findByUseridIdAndPosidId(userid, postid);
     }
+
     public void unLike(PostModel postid, UserModel userid) {
         likesRepository.deleteByPosidAndUserid(postid, userid);
     }

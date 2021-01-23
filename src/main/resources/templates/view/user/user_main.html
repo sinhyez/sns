@@ -7,7 +7,7 @@
 <body>
 <!-- model main section start -->
 <main>
-    <!-- model main section header start -->
+    <!-- user main section header start -->
     <div class="main_header">
         <div class="user_main_container">
             <!-- profile area -->
@@ -77,13 +77,14 @@
         <!-- End of container -->
     </div>
 
+    <!-- user modal section -->
+    <div id="modal-following"></div>
 
+    <!-- user main section start -->
     <div class="main_section">
         <div class="user_main_container">
             <!-- model post section start -->
             <div class="user_post_area">
-
-                <div id="modal-following"></div>
 
                 <th:block th:if="${postlist.size()} eq 0">
                     <p> 게시글 작성해!!</p>
@@ -108,7 +109,7 @@
                                     <th:block th:each="li : ${count}">
                                         <li class="item_commnet" th:if="${i.id eq li.postid}">
                                             <i class="fas fa-comment" aria-hidden="true"></i>
-                                            <span class="item_commnet" th:if="${li.count} > 0" th:text="${li.count}">
+                                            <span class="item_commnet" th:if="${li.count} >= 0" th:text="${li.count}">
                                         </span>
                                         </li>
                                     </th:block>

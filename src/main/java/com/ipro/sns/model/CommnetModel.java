@@ -37,5 +37,4 @@ public class CommnetModel {
         this.postid = postid;
         this.write_date = write_date;
     }
-
 }

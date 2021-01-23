@@ -1,14 +1,12 @@
 package com.ipro.sns.model;
 
-
-import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.List;
+
 
 
 @Data
@@ -35,9 +33,6 @@ public class PostModel {
 
     private Timestamp update_date;
 
-    @OneToMany
-    private List<LikesModel> like;
-
     @Transient
     private boolean likeState;
 
@@ -54,6 +49,5 @@ public class PostModel {
         this.create_date = create_date;
         this.likeState = likeState;
     }
-
 
 }

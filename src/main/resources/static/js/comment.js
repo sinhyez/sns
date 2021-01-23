@@ -25,11 +25,21 @@ function commentSend(postid) {
     });
 }
 
-function commentList(){
-    $.ajax({
-        url: '/comment/list',
-        type: 'GET',
-        data: {"id" : id},
+function commentDlete(commentid) {
 
-    })
+    let page = "/comment/delete/" + commentid;
+
+    $.ajax({
+        url : page,
+        type: "DELETE",
+        data: commentid,
+        success : function (data) {
+            if (data === -1) {
+                location.reload();
+            }
+        },
+        error: function (request, status, error) {
+            console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+        }
+    });
 }

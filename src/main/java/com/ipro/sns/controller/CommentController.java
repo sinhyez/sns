@@ -1,16 +1,11 @@
 package com.ipro.sns.controller;
 
-
-import com.ipro.sns.model.CommnetModel;
 import com.ipro.sns.model.PostModel;
 import com.ipro.sns.model.UserModel;
 import com.ipro.sns.service.CommentService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @Controller
@@ -31,10 +26,12 @@ public class CommentController {
         return 1;
     }
 
-    @RequestMapping("/list")
-    @ResponseBody
-    public List<CommnetModel> commentList(Model model, int id) {
-        return commentService.findByPostid(id);
+    @DeleteMapping("/delete/{id}")
+    public int deleteComment(@PathVariable int id) throws Exception {
+
+        commentService.deleteById(id);
+
+        return -1;
     }
 
 }

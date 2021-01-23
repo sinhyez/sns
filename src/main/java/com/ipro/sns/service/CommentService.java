@@ -23,12 +23,14 @@ public class CommentService {
     public List<CommnetModel> findByPostid(int postid) {
         return commentRepository.findByPostidId(postid);
     }
+    public Optional<CommnetModel> findByPost(PostModel postModel) {
+        return commentRepository.findByPostid(postModel);
+    }
     public int countByPostid(int postid) {
         return commentRepository.countByPostidId(postid);
     }
-    public int deleteById(int id) {
+    public void deleteById(int id) {
         commentRepository.deleteById(id);
-        return 1;
     }
     
     //코멘트 저장 프로세스

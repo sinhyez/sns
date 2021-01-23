@@ -37,16 +37,14 @@
             <!-- card info -->
             <div class="photo_info">
                 <div class="photo_actions">
-                    <th:block>
-                        <span class="photo_action">
+
+                    <span class="photo_action">
                         <!-- likes img -->
                             <i th:if="${post.likeState} eq true" th:onclick="|unlike('${post.id}','${user.get.id}')|"
                                th:id="'like'+${post.id}" class="fa fa-heart heart heart-clicked fa-2x"></i>
                             <i th:if="${post.likeState} eq false" th:onclick="|like('${post.id}','${user.get.id}')|"
                                th:id="'like'+${post.id}" class="far fa-heart heart fa-2x"></i>
                         </span>
-                    </th:block>
-
 
                     <span class="photo_action">
                         <!-- comment img -->

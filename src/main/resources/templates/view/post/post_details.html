@@ -1,30 +1,87 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="view/layout/header :: headerFragment"></th:block>
-<head>
-    <meta charset="UTF-8">
-    <title>Microblogram</title>
-</head>
-<body>
-    <span>포스팅상세화면</span>
-    <div>
-        <p th:text="${post.get().user.usernick}"></p>
-        <img th:src="@{'/resource/img/' + ${post.get().imgurl}}">
-        <p th:text="${post.get().caption}"></p>
-        <p th:text="${#calendars.format(post.get().create_date, 'MM/dd')}"></p>
-        <a th:if="${loginUser.get().id == post.get().user.id}" th:href="@{'/deletePost/' + ${post.get().id}}">
-            <button class="btn edit_btn">
-                Delete
-            </button>
-        </a>
-        <form class="add_comment_area" th:id="'ci'+${post.get().id}" >
-            <input type="hidden" id="postid" name="postid" th:value="${post.get().id}">
-            <textarea name="content" th:id="'content'+${post.get().id}" placeholder="Add a comment"></textarea>
-            <input type="hidden" th:id="'userid' + ${post.get().id}" name="userid" th:value="${loginUser.get().id}">
-            <button th:onclick="|commentSend('${post.get().id}')|">Post</button>
-        </form>
-    </div>
+<link rel="stylesheet" href="/resource/css/post_details.css">
+<div class="post_details_main">
 
-    <script th:inline="javascript" th:src="@{'/resource/js/comment.js'}"></script>
+    <article class="detail_main_container">
+
+        <div class="post_user_info">
+
+            <img th:if="${post.get.user.userimg} eq null"
+                 src="/resource/img/profile/Basic.png" alt="usericon">
+            <img th:unless="${post.get.user.userimg} eq null"
+                 th:src="@{'/resource/img/profile/' + ${post.get.user.userimg} }" alt="usericon">
+
+            <a th:href="@{'/ipro/main/user/' + ${post.get.user.usernick} }"
+               class="post_username" th:text="${post.get.user.usernick}"></a>
+
+            <div class="post_edit_box">
+                <th:block th:if="${loginUser.get.id == post.get.user.id}">
+                    <a href="">Edit</a>
+                    <a th:href="@{'/deletePost/' + ${post.get.id}}">Deletet</a>
+                </th:block>
+            </div>
+
+        </div>
+
+        <div class="post_img">
+            <img th:src="@{'/resource/img/' + ${post.get.imgurl}}" alt="postimg">
+        </div>
+
+        <div class="posting_info">
+            <div class="posting_caption">
+                <a th:href="@{'/ipro/main/user/' + ${post.get.user.usernick} }"
+                   class="info_username" th:text="${post.get.user.usernick}"></a>
+                <span th:text="${post.get().caption}"></span>
+            </div>
+            <div class="post_info_details">
+                <div class="post_info_icon">
+                    <i th:if="${post.get.likeState} eq true" th:onclick="|unlike('${post.get.id}','${loginUser.get.id}')|"
+                       th:id="'like'+${post.get.id}" class="fa fa-heart heart heart-clicked fa-2x"></i>
+                    <i th:if="${post.get.likeState} eq false" th:onclick="|like('${post.get.id}','${loginUser.get.id}')|"
+                       th:id="'like'+${post.get.id}" class="far fa-heart heart fa-2x"></i>
+                </div>
+                <div class="post_info_icon">
+                    <i class="far fa-comment fa-2x" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div class="like_count">
+                <span>100Likes</span>
+            </div>
+            <div class="post_date">
+                <a th:text="${#calendars.format(post.get().create_date, 'MM/dd')}"></a>
+            </div>
+        </div>
+        <th:block th:each="listc : ${comment}">
+            <div class="post_comment_area" th:if="${post.get.id} eq ${listc.postid.id}">
+                <div class="comment_user_area">
+                    <a href="" class="comment_username" th:text="${listc.userid.usernick}">userid</a>
+                    <span th:text="${listc.content}"></span>
+                </div>
+                <div class="comment_edit_area" th:if="${listc.userid.id} eq ${loginUser.get.id}">
+                    <a th:onclick="|commnetEdit('${post.get.id}')|" class="comment_edit">Edit</a>
+                    <a th:onclick="|commentDlete('${listc.id}')|" class="comment_edit">Delete</a>
+                </div>
+            </div>
+
+        </th:block>
+
+
+        <div class="post_add_comment">
+            <form class="add_comment_area" th:id="'ci'+${post.get().id}">
+                <input type="hidden" id="postid" name="postid" th:value="${post.get().id}">
+                <input type="hidden" th:id="'userid' + ${post.get().id}" name="userid" th:value="${loginUser.get().id}">
+                <textarea name="content" th:id="'content'+${post.get().id}" placeholder="Add a comment"></textarea>
+                <button th:onclick="|commentSend('${post.get().id}')|" class="post_btn">Post</button>
+            </form>
+        </div>
+
+    </article>
+
+</div>
+<script th:inline="javascript" th:src="@{'/resource/js/comment.js'}"></script>
+<script th:inline="javascript" th:src="@{'/resource/js/like.js'}"></script>
 </body>
 </html>
+

@@ -21,5 +21,4 @@ public interface PostRepository extends JpaRepository<PostModel, Integer> {
     @Transactional
     void deleteById(int id);
 
-
 }

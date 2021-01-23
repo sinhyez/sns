@@ -1,8 +1,11 @@
 package com.ipro.sns.controller;
 
 
+import com.ipro.sns.model.CommnetModel;
 import com.ipro.sns.model.PostModel;
 import com.ipro.sns.model.UserModel;
+import com.ipro.sns.service.CommentService;
+import com.ipro.sns.service.LikeService;
 import com.ipro.sns.service.PostService;
 import com.ipro.sns.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -14,11 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -28,6 +33,8 @@ public class PostController {
 
     private final UserService userService;
     private final PostService postService;
+    private final CommentService commentService;
+    private final LikeService likeService;
 
 
     //포스팅 업로드 프로세스
@@ -62,18 +69,25 @@ public class PostController {
         //포스트 셋
         Optional<PostModel> postModel = postService.findById(id);
 
+
+        List<CommnetModel> commentlist = commentService.findByPostid(id);
+
+
         model.addAttribute("post", postModel);
         model.addAttribute("loginUser", user);
+        model.addAttribute("comment", commentlist);
 
         return "view/post/post_details";
     }
 
     //포스팅 삭제
+    @Transactional
     @RequestMapping("/deletePost/{id}")
     public String deletePost(@PathVariable int id) {
         String redirect = "redirect:/ipro/main/user/";
 
-        postService.deleteByID(id);
+        Optional<PostModel> postModel = postService.findById(id);
+        postService.deleteByID(postModel.get().getId());
 
         return redirect;
     }
