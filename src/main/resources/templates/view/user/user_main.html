@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
     <link rel="stylesheet" href="/resource/css/user_main.css">
-    <link rel="stylesheet" href="/resource/css/modal.css">
     <title th:text="${user.get().usernick} + '  Profile Page ・ Phoblo'"></title>
     <!-- include header -->
     <th:block th:replace="view/layout/header :: headerFragment"></th:block>
@@ -57,7 +56,7 @@
                                 <span class="stat_cout" th:text="${imgCount}"></span>
                             </li>
                             <li>
-                                <a th:href="@{'/follwerlist/' + ${user.get.id} }">Followers</a>
+                                <a th:onclick="|modalfollower('${user.get.id}')|">Followers</a>
                                 <span class="stat_count" th:text="${follower}"></span>
                             </li>
                             <li>
@@ -79,7 +78,11 @@
     </div>
 
     <!-- user modal section -->
-    <div id="modal-following"></div>
+    <div id="modal-box">
+        <div id="modal-following_list"></div>
+        <div id="modal-follower_list"></div>
+        <div id="modal-post"></div>
+    </div>
 
     <!-- user main section start -->
     <div class="main_section">
@@ -127,7 +130,7 @@
         </div>
         <!-- end of container -->
     </div>
-    <script src="/resource/js/modal.js"></script>
 </main>
+<th:block th:replace="view/layout/footer :: footerFragment"></th:block>
 </body>
 </html>

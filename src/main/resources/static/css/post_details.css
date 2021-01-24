@@ -32,14 +32,18 @@
 
 .post_user_info a {
     text-decoration: none;
-    color: #999;
+    color: black;
 }
 
 .post_username {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: bold;
-    padding-top: 9.5px;
+    padding-top: 10.5px;
     flex: auto;
+}
+
+.post_username:hover {
+    color: #26bda4;
 }
 
 .post_edit_box {
@@ -93,7 +97,10 @@
     font-size: 1.4rem;
     font-weight: bold;
     text-decoration: none;
-    color: #999;
+    color: black;
+}
+.info_username:hover {
+    color: #26bda4;
 }
 
 .posting_caption span {
@@ -117,7 +124,7 @@
 }
 
 .like_count {
-    padding: 0 0 .5rem .5rem;
+    margin-top: .5rem;
     font-size: 1.6rem;
     font-weight: 600;
 }
@@ -150,7 +157,11 @@
     font-size: 1.4rem;
     font-weight: bold;
     text-decoration: none;
-    color: #999;
+    color: black;
+}
+
+.comment_username:hover {
+    color: #26bda4;
 }
 
 .comment_edit_area {
@@ -162,6 +173,7 @@
     font-size: 1rem;
     text-decoration: none;
     color: #26bda4;
+    cursor: pointer;
 }
 
 .add_comment_area{
@@ -194,13 +206,12 @@
     cursor: pointer;
 }
 
+.post_btn:disabled {
+    opacity: 0.6;
+}
 
 .heart-clicked {
-    color: red;
+    color: #26bda4;
     animation: .5s pump infinite linear;
 }
 
-.fa-comment {
-    text-decoration: none;
-    color: black;
-}

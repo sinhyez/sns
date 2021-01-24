@@ -1,6 +1,33 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<body>
-    <th:block th:each="flist : ${followerlist}">
-        <p th:text="${flist.followingid.usernick}"></p>
-    </th:block>
-</body>
+<script src="/resource/js/modal.js"></script>
+
+    <div id="modal-follower_list" class="modal-list follower_list">
+        <div class="modal-follow-box">
+            <div class="follow_list_title">
+                <h2>Follower List</h2>
+                <button class="modal-close" id="modal-button">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="follow_list">
+                <th:block th:each="fwlist : ${followerlist}">
+                    <div class="follow_list_box">
+                        <div class="modal-follow_list_img">
+                            <img th:if="${fwlist.followingid.userimg} != null"
+                                 th:src="@{'/resource/img/profile/' + ${fwlist.followingid.userimg} }" alt="">
+                            <img th:unless="${fwlist.followingid.userimg}"
+                                 th:src="@{'/resource/img/profile/Basic.png'}" alt="">
+                        </div>
+                        <div class="modal-follow_list_username">
+                            <a th:href="@{'/ipro/main/user/' + ${fwlist.followingid.usernick} }"
+                               th:text="${fwlist.followingid.usernick}"></a>
+                        </div>
+                    </div>
+                </th:block>
+            </div>
+
+        </div>
+    </div>
+
+

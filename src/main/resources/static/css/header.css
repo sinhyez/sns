@@ -30,9 +30,9 @@
     cursor: text;
     color: #999;
 }
-.search_bar_area input::placeholder{
-    opacity: 0;
-}
+/*.search_bar_area input::placeholder{*/
+/*    opacity: 0;*/
+/*}*/
 .search_bar_area input:focus,
 .search_bar_area input:not(:placeholder-shown){
     border: 2px solid #999;
@@ -66,7 +66,7 @@
     color: black;
 }
 .header_title h1{
-    padding: 0 2rem 0;
+    margin-left: 4rem;
     font-size: 3rem;
     color: #e6e9ed;
 }
@@ -85,6 +85,7 @@
     position: relative;
     text-decoration: none;
     color: #e6e9ed;
+    cursor: pointer;
 }
 .user_area img{
     width: 33px;
@@ -105,6 +106,7 @@
         padding: 0;
         margin-right: 2rem;
     }
+
     .header_title {
         width: auto;
         padding: 0;
@@ -113,6 +115,7 @@
     .header_title h1 {
         width: auto;
         padding: 0;
+        margin: 0;
     }
 
 }

@@ -1,0 +1,32 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<script src="/resource/js/modal.js"></script>
+
+<div id="modal-like_list" class="modal-list like_list">
+    <div class="modal-follow-box">
+        <div class="follow_list_title">
+            <h2>Like List</h2>
+            <button class="modal-close" id="modal-button">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="follow_list">
+            <th:block th:each="likelist : ${like}">
+                <div class="follow_list_box">
+                    <div class="modal-follow_list_img">
+                        <img th:if="${likelist.userid.userimg} != null"
+                             th:src="@{'/resource/img/profile/' + ${likelist.userid.userimg} }" alt="">
+                        <img th:unless="${likelist.userid.userimg}"
+                             th:src="@{'/resource/img/profile/Basic.png'}" alt="">
+                    </div>
+                    <div class="modal-follow_list_username">
+                        <a th:href="@{'/ipro/main/user/' + ${likelist.userid.usernick} }"
+                           th:text="${likelist.userid.usernick}"></a>
+                    </div>
+                </div>
+            </th:block>
+        </div>
+
+    </div>
+</div>
+

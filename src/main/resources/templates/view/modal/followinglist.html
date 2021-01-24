@@ -1,17 +1,34 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<link rel="css" href="/resource/css/modal.css">
 <script src="/resource/js/modal.js"></script>
 
-    <div id="modal-following" class="modal-following_list">
-        <th:block th:each="fwlist : ${followinglist}">
-            <div class="modal-following_list_img">
-                <img th:if="${fwlist.followerid.userimg} eq null" th:src="" alt="">
-                <img th:unless="${fwlist.followerid.userimg} eq null" th:src="" alt="">
+    <div id="modal-following_list" class="modal-list following_list">
+        <div class="modal-follow-box">
+
+            <div class="follow_list_title">
+                <h2>Following List</h2>
+                <button class="modal-close" id="modal-button">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
-            <div class="modal-following_list_username">
-                <p th:text="${fwlist.followerid.usernick}"></p>
+
+            <div class="follow_list">
+                <th:block th:each="fwlist : ${followinglist}">
+                    <div class="follow_list_box">
+                        <div class="modal-follow_list_img">
+                            <img th:if="${fwlist.followerid.userimg} != null"
+                                 th:src="@{'/resource/img/profile/' + ${fwlist.followerid.userimg} }" alt="">
+                            <img th:unless="${fwlist.followerid.userimg}"
+                                 th:src="@{'/resource/img/profile/Basic.png'}" alt="">
+                        </div>
+                        <div class="modal-follow_list_username">
+                            <a th:href="@{'/ipro/main/user/' + ${fwlist.followerid.usernick} }"
+                               th:text="${fwlist.followerid.usernick}"></a>
+                        </div>
+                    </div>
+                </th:block>
+
             </div>
-        </th:block>
-        <button id="modal-button">x</button>
+
+        </div>
     </div>
 

@@ -1,0 +1,27 @@
+footer {
+
+    text-align: center;
+}
+
+.footer_container {
+    border-top: 1px solid #26bda4;
+    padding: 1rem;
+    font-size: 1.3rem;
+    background: #26bda4;
+}
+
+.footer_icon {
+    margin-left: 3rem;
+    padding: .6rem 1.5rem .6rem 1.5rem;
+}
+
+.footer_icon a {
+    margin: 0 1rem 0 1rem;
+    text-decoration: none;
+    color: #e6e9ed;
+}
+
+.footer_copy {
+    margin-left: 3rem;
+    color: #e6e9ed;
+}

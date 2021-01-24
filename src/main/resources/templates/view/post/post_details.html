@@ -38,19 +38,18 @@
             <div class="post_info_details">
                 <div class="post_info_icon">
                     <i th:if="${post.get.likeState} eq true" th:onclick="|unlike('${post.get.id}','${loginUser.get.id}')|"
-                       th:id="'like'+${post.get.id}" class="fa fa-heart heart heart-clicked fa-2x"></i>
+                       th:id="'like'+${post.get.id}" class="fa fa-thumbs-up heart-clicked fa-2x"></i>
                     <i th:if="${post.get.likeState} eq false" th:onclick="|like('${post.get.id}','${loginUser.get.id}')|"
-                       th:id="'like'+${post.get.id}" class="far fa-heart heart fa-2x"></i>
+                       th:id="'like'+${post.get.id}" class="far fa-thumbs-up fa-2x"></i>
                 </div>
-                <div class="post_info_icon">
-                    <i class="far fa-comment fa-2x" aria-hidden="true"></i>
-                </div>
+                <th:block th:each="lc : ${likes}">
+                    <div class="like_count" th:if="${lc.postid == post.get.id} and ${lc.count} >= 0">
+                        <span th:text="${lc.count} + 'Likes'"></span>
+                    </div>
+                </th:block>
+
             </div>
-            <th:block th:each="lc : ${likes}">
-                <div class="like_count" th:if="${lc.postid == post.get.id} and ${lc.count} >= 0">
-                    <span th:text="${lc.count} + 'Likes'"></span>
-                </div>
-            </th:block>
+
 
             <div class="post_date">
                 <a th:text="${#calendars.format(post.get().create_date, 'MM/dd')}"></a>
@@ -59,7 +58,8 @@
         <th:block th:each="listc : ${comment}">
             <div class="post_comment_area" th:if="${post.get.id} eq ${listc.postid.id}">
                 <div class="comment_user_area">
-                    <a href="" class="comment_username" th:text="${listc.userid.usernick}">userid</a>
+                    <a th:href="@{ '/ipro/main/user/' + ${listc.userid.usernick} }" class="comment_username"
+                       th:text="${listc.userid.usernick}">userid</a>
                     <span th:text="${listc.content}"></span>
                 </div>
                 <div class="comment_edit_area" th:if="${listc.userid.id} eq ${loginUser.get.id}">
@@ -75,14 +75,17 @@
             <form class="add_comment_area" th:id="'ci'+${post.get().id}">
                 <input type="hidden" id="postid" name="postid" th:value="${post.get().id}">
                 <input type="hidden" th:id="'userid' + ${post.get().id}" name="userid" th:value="${loginUser.get().id}">
-                <textarea name="content" th:id="'content'+${post.get().id}" placeholder="Add a comment"></textarea>
-                <button th:onclick="|commentSend('${post.get().id}')|" class="post_btn">Post</button>
+                <textarea name="content" class="content" th:id="'content'+${post.get.id}" th:onclick="|insert('${post.get.id}')|"
+                          placeholder="Add a comment"></textarea>
+                <button th:onclick="|commentSend('${post.get().id}')|"
+                        th:id="'post_btn' + ${post.get.id}" class="post_btn" disabled>Post</button>
             </form>
         </div>
 
     </article>
 
 </div>
+<th:block th:replace="view/layout/footer :: footerFragment"></th:block>
 <script th:inline="javascript" th:src="@{'/resource/js/comment.js'}"></script>
 <script th:inline="javascript" th:src="@{'/resource/js/like.js'}"></script>
 </body>

@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -21,6 +22,10 @@ public class LikeService {
 
     public LikesModel findByUseridIdAndPosidId(int userid, int postid) {
         return likesRepository.findByUseridIdAndPosidId(userid, postid);
+    }
+
+    public List<LikesModel> findByPostid(PostModel postid) {
+        return likesRepository.findByPosid(postid);
     }
 
     public void unLike(PostModel postid, UserModel userid) {

@@ -1,5 +1,6 @@
 $(function () {
-    var filetarget = $('.file_box .upload');
+
+    const filetarget = $('.file_box .upload');
 
     filetarget.on('change', function() {
         if(window.FileReader) {
@@ -9,6 +10,14 @@ $(function () {
         }
 
         $(this).siblings('.upload_name').val(filename);
+    });
+
+    $('.posting').on("keyup", function () {
+        if ($('.form_caption').val() === "" || !$(".upload").val()) {
+            $(".post_btn").attr('disabled', true);
+        }  else {
+            $(".post_btn").removeAttr('disabled', false);
+        }
     });
 
 })

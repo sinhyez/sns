@@ -52,7 +52,7 @@ public class FollowController {
         return "redirect:/ipro/main/user/" + userModel.getUsernick();
     }
 
-    @RequestMapping("/follwerlist/{id}")
+    @RequestMapping("/followerlist/{id}")
     public String followerlist(@PathVariable int id, Model model) throws Exception {
 
         Optional<UserModel> user = userService.findById(id);

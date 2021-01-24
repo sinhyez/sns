@@ -1,9 +1,20 @@
+function insert(postid) {
+    const ctn = $("#content"+postid);
+    const btn = $("#post_btn"+postid);
+    $(ctn).on("keyup", function () {
+        if (ctn.val() === "") {
+            btn.attr('disabled', true);
+        }  else {
+            btn.removeAttr('disabled', false);
+        }
+    });
+}
+
 //메인페이지 댓글달기
 function commentSend(postid) {
 
     let userid = $("#userid"+postid).val();
     let content = $("#content"+postid).val();
-
     let page = '/comment/insert'
 
     let param = {
