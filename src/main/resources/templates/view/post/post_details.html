@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="view/layout/header :: headerFragment"></th:block>
-<link rel="stylesheet" href="/resource/css/post_details.css">
 <div class="post_details_main">
 
+    <div id="modal-box">
+        <div id="modal-like_list"></div>
+        <div id="modal-post"></div>
+    </div>
     <article class="detail_main_container">
 
-        <div class="post_user_info">
+        <div class="post_user_info" id="modal-post_detail">
 
             <img th:if="${post.get.user.userimg} eq null"
                  src="/resource/img/profile/Basic.png" alt="usericon">
@@ -25,7 +28,7 @@
 
         </div>
 
-        <div class="post_img">
+        <div class="post_img post_detail_img">
             <img th:src="@{'/resource/img/' + ${post.get.imgurl}}" alt="postimg">
         </div>
 
@@ -44,7 +47,9 @@
                 </div>
                 <th:block th:each="lc : ${likes}">
                     <div class="like_count" th:if="${lc.postid == post.get.id} and ${lc.count} >= 0">
-                        <span th:text="${lc.count} + 'Likes'"></span>
+                        <a th:onclick="|likelist('${post.get.id}')|">
+                            <span th:text="${lc.count} + 'Likes'"></span>
+                        </a>
                     </div>
                 </th:block>
 

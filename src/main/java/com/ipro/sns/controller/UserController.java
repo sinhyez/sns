@@ -26,21 +26,6 @@ public class UserController {
 
     private final UserService userService;
 
-    //로그인 처리
-    @RequestMapping("/ipro/login")
-    public String login(HttpSession session, String username){
-        //로그인을 처리하고 세션에 유저정보를 저장(세선 최대 시간 60분)
-        session.setAttribute("user", userService.findByUsername(username));
-        session.setMaxInactiveInterval(60 * 60);
-        return "view/login";
-    }
-
-    //회원가입 페이지
-    @GetMapping("/ipro/signup")
-    public String signup(UserDto userDto){
-        return "view/signup";
-    }
-
     //회원가입 처리 프로세스
     @PostMapping("/ipro/signup")
     public String signUpProc(@Valid UserDto userDto, BindingResult bindingResult, Model model) throws Exception{
@@ -89,19 +74,26 @@ public class UserController {
         return "view/user/img_edit";
     }
 
-    //유저 프로필 사진 업데이트 프로세스
-    @RequestMapping(value = "/ipro/user/img_insert")
-    public String imgInsert(HttpServletRequest request,
-                             @RequestParam("filename") MultipartFile multipartFile, Model model) {
+    @RequestMapping("/ipro/user/img_insert")
+    public String userImgInsert(Model model) {
+
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        Optional<UserModel> model1 = userService.findByUsername(username);
-        String img_path = "C:/Users/yoon sung/Desktop/java/sns/src/main/resources/static/img/profile/" + model1.get().getUsernick();
-        String redirect = "redirect:/ipro/main/user/" + model1.get().getUsernick();
+        model.addAttribute("user", userService.findByUsername(username));
+
+        return "view/user/img_edit";
+    }
+    //유저 프로필 사진 업데이트 프로세스
+    @RequestMapping(value = "/ipro/user/img_insert/{id}")
+    public @ResponseBody String imgInsert(@PathVariable int id,
+                             @RequestParam("filename") MultipartFile multipartFile, Model model) {
+
+        Optional<UserModel> userModel = userService.findById(id);
+        String img_path = "C:/Users/yoon sung/Desktop/java/sns/src/main/resources/static/img/profile/" + userModel.get().getUsernick();
 
         try {
-            if (model1.get().getUserimg() != null) {
+            if (userModel.get().getUserimg() != null) {
                 // 기존에 이미지가 있으면 경로를 불러와서 삭제 후 새로운 이미지 삽입
-                File file = new File(img_path + model1.get().getUserimg());
+                File file = new File(img_path + userModel.get().getUserimg());
                 file.delete();
             }
             multipartFile.transferTo(new File(img_path + multipartFile.getOriginalFilename()));
@@ -109,9 +101,9 @@ public class UserController {
             exception.printStackTrace();
         }
 
-        userService.img_edit(username,
-                model1.get().getUsernick() + multipartFile.getOriginalFilename());
-        return redirect;
+        userService.userImgEdit(userModel.get().getUsername(),
+                userModel.get().getUsernick() + multipartFile.getOriginalFilename());
+        return "ok";
 
     }
 
@@ -127,8 +119,20 @@ public class UserController {
         String intro = request.getParameter("userintro");
 
         //유저 서비스의 업데이트 프로세스 호출
-        userService.user_edit(username, nick, full, intro);
+        userService.userProfileEdit(username, nick, full, intro);
         return redirect;
+    }
+
+    @RequestMapping("/user/deleteimg/{id}")
+    public @ResponseBody String deleteUserimg(@PathVariable int id) {
+
+        Optional<UserModel> userModel = userService.findById(id);
+        UserModel userModelWrapper = userModel.get();
+
+        userService.userImgDelete(userModelWrapper.getId());
+
+        return "ok";
+
     }
 
     //유저 검색

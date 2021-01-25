@@ -6,24 +6,32 @@
 
 <body>
     <div class="body">
+        <div id="modal-box">
+            <div id="modal-post"></div>
+            <div id="modal-img_insert"></div>
+        </div>
         <div class="edit_body">
             <form th:action="@{'/ipro/user/user_edit'}" method="post">
                 <!-- profile_img area -->
                 <div class="profile_img_area">
                     <div th:unless="${user.get().getUserimg()} eq null">
-                        <img th:src="@{'/resource/img/profile/'+ ${user.get.userimg} }"
-                             alt="user_icon" class="user_img_icon">
+                        <a th:onclick="|profileImgEdit2('${user.get.id}','${loginId}')|">
+                            <img th:src="@{'/resource/img/profile/'+ ${user.get.userimg} }"
+                                 alt="user_icon" class="user_img_icon">
+                        </a>
                     </div>
                     <div th:if="${user.get().getUserimg()} eq null ">
-                        <img th:src="@{'/resource/img/profile/Basic.png'}"
-                             alt="user_icon" class="user_img_icon">
+                        <a th:onclick="|profileImgEdit2('${user.get.id}','${loginId}')|">
+                            <img th:src="@{'/resource/img/profile/Basic.png'}"
+                                 alt="user_icon" class="user_img_icon">
+                        </a>
                     </div>
                     <div class="profile_img_edit_area">
                     <span class="img_edit_usernick_area">
                         <p th:text="${user.get().usernick}"></p>
                     </span>
                         <span class="img_edit">
-                        <a th:href="@{/ipro/user/img_edit}">Profile img edit</a>
+                        <a th:onclick="|profileImgEdit2('${user.get.id}','${loginId}')|">Profile img edit</a>
                     </span>
                     </div>
                 </div>
@@ -52,5 +60,6 @@
         </div>
     </div>
     <th:block th:replace="view/layout/footer :: footerFragment"></th:block>
+    <script src="/resource/js/posting.js"></script>
 </body>
 </html>

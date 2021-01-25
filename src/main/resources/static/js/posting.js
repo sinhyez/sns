@@ -22,6 +22,66 @@ $(function () {
 
 })
 
+function postEdit(postid) {
+
+}
+
+function savePosting() {
+
+    const data = new FormData($("#postform")[0]);
+
+    $.ajax({
+        url : '/upload',
+        method : "POST",
+        data : data,
+        enctype : "multiple/form-data",
+        contentType : false,
+        processData : false,
+        success : function () {
+            location.reload()
+        },
+        error: function (request, status, error) {
+            console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+        }
+    });
+}
+
+function saveUserImg(userid) {
+    const data = new FormData($("#edit_form")[0]);
+    $.ajax({
+        url : '/ipro/user/img_insert/'+userid,
+        method : "POST",
+        data : data,
+        enctype : "multiple/form-data",
+        contentType : false,
+        processData : false,
+        success : function () {
+            location.reload();
+        },
+        error: function (request, status, error) {
+            console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+        }
+    });
+}
+
+function deleteUserImg(userid) {
+    const data = $("#delete_form").serialize();
+    $.ajax({
+        url : '/user/deleteimg/'+userid,
+        method : "POST",
+        data : data,
+        enctype : "multiple/form-data",
+        contentType : false,
+        processData : false,
+        success : function () {
+            location.reload();
+        },
+        error: function (request, status, error) {
+            console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+        }
+    });
+}
+
 function setThumbnail(event) {
     var reader = new FileReader();
 

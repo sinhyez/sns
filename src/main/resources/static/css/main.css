@@ -32,7 +32,7 @@ main {
 }
 
 .feed_card_header {
-    border-bottom: 1px solid rgba(0, 0, 0, .0975);
+    border-bottom: 1px solid #26bda4;
 }
 
 .feed_card_header img {
@@ -196,10 +196,6 @@ main {
     outline: none;
     cursor: pointer;
     transition: all .15s ease;
-}
-
-.post_btn:disabled {
-    opacity: 0.6;
 }
 
 .heart-clicked {

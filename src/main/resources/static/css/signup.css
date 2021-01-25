@@ -1,0 +1,24 @@
+.sign_up_title{
+    color: #999;
+    text-decoration: none;
+}
+
+.login_btn_area {
+    margin-top: 3rem;
+    font-size: 1.5rem;
+    color: #999;
+}
+
+.login_btn_area a {
+    color: #999;
+    text-decoration: none;
+}
+
+.login_btn_area a:hover {
+    color: #26bda4;
+    transition: .3s ease;
+}
+
+.sign_up_input {
+    margin-bottom: 1rem;
+}

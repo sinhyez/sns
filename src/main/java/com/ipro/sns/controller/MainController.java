@@ -2,6 +2,7 @@ package com.ipro.sns.controller;
 
 import com.ipro.sns.model.*;
 import com.ipro.sns.model.dto.PostDto;
+import com.ipro.sns.model.dto.UserDto;
 import com.ipro.sns.model.modelutils.Count;
 import com.ipro.sns.model.modelutils.LikesCount;
 import com.ipro.sns.service.*;
@@ -9,11 +10,15 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.*;
 
@@ -31,6 +36,21 @@ public class MainController {
     @GetMapping("/")
     public String index(){
         return "view/index";
+    }
+
+    //로그인 처리
+    @RequestMapping("/ipro/login")
+    public String login(HttpSession session, String username){
+        //로그인을 처리하고 세션에 유저정보를 저장(세선 최대 시간 60분)
+        session.setAttribute("user", userService.findByUsername(username));
+        session.setMaxInactiveInterval(60 * 60);
+        return "view/login";
+    }
+
+    //회원가입 페이지
+    @GetMapping("/ipro/signup")
+    public String signup(UserDto userDto){
+        return "view/signup";
     }
 
     //main feed
@@ -95,7 +115,6 @@ public class MainController {
         } catch (Exception e) {
             return "view/login";
         }
-
 
     }
 

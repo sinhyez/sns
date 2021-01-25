@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-    <link rel="stylesheet" href="/resource/css/user_main.css">
     <title th:text="${user.get().usernick} + '  Profile Page ・ Phoblo'"></title>
     <!-- include header -->
     <th:block th:replace="view/layout/header :: headerFragment"></th:block>
@@ -16,10 +15,14 @@
                 <div class="profile_border">
                     <!-- profile model icon area -->
                     <div class="profile_img" th:unless="${user.get().userimg eq null}">
-                        <img th:src="@{'/resource/img/profile/'+ ${user.get().userimg}} " alt="usericon">
+                        <a th:onclick="|profileImgEdit('${user.get.id}','${loginId}')|">
+                            <img th:src="@{'/resource/img/profile/'+ ${user.get().userimg}} " alt="usericon">
+                        </a>
                     </div>
                     <div class="profile_img" th:if="${user.get().userimg eq null}">
-                        <img th:src="@{'/resource/img/profile/Basic.png'}" alt="usericon">
+                        <a th:onclick="|profileImgEdit('${user.get.id}','${loginId}')|">
+                            <img th:src="@{'/resource/img/profile/Basic.png'}" alt="usericon">
+                        </a>
                     </div>
                     <!-- profile model setting area -->
                     <div class="profile_setting">
@@ -82,6 +85,7 @@
         <div id="modal-following_list"></div>
         <div id="modal-follower_list"></div>
         <div id="modal-post"></div>
+        <div id="modal-img_insert"></div>
     </div>
 
     <!-- user main section start -->
@@ -98,7 +102,7 @@
 
                     <div class="post_item">
                         <a th:href="@{'/ipro/post/details/' + ${i.id}}">
-                            <img th:src="@{'/resource/img/'+ ${i.imgurl}} " alt="post_img" class="post_img">
+                            <img th:src="@{'/resource/img/'+ ${i.imgurl}} " alt="post_img" class="post_img user_postimg">
                             <!-- post item info likes comment -->
                             <div class="post_item_info">
                                 <ul>

@@ -70,7 +70,7 @@ public class UserService implements UserDetailsService {
     }
 
     //프로필사진 변경
-    public void img_edit(String username, String userimg) {
+    public void userImgEdit(String username, String userimg) {
 
         Optional<UserModel> uModel = userRepository.findByUsername(username);
         UserModel userModel = uModel.get();
@@ -80,8 +80,16 @@ public class UserService implements UserDetailsService {
 
     }
 
+    @Transactional
+    public void userImgDelete(int id) {
+        Optional<UserModel> userModel = userRepository.findById(id);
+        UserModel userModelWrapper = userModel.get();
+        userModelWrapper.setUserimg(null);
+        userRepository.save(userModelWrapper);
+    }
+
     //유저 프로필 내용 수정
-    public void user_edit(String username, String usernick, String userfull, String userintro) {
+    public void userProfileEdit(String username, String usernick, String userfull, String userintro) {
 
         Optional<UserModel> uModel = userRepository.findByUsername(username);
         UserModel userModel = uModel.get();

@@ -2,27 +2,27 @@
 <head>
 <!--    th:name="${_csrf.parameterName}" th:value="${_csrf.token}"-->
     <title>Phoblo</TITLE>
-    <link rel="stylesheet" type="text/css" href="/resource/css/login.css">
+    <link rel="stylesheet" type="text/css" href="/resource/css/import.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-<section class="main-1">
-        <h1 class="title-1">
-            <a href="#" class="title-2">Phoblo</a>
+<div class="Wrapper">
+    <section class="login_section auth_section">
+        <h1 class="auth_title_box">
+            <a href="#" class="auth_title">Phoblo</a>
         </h1>
-        <form action="/ipro/login" class="login-form" method="post">
-            <input type="hidden">
-            <div class="int-area">
-                <input type="email" id="id" name="username" autocapitalize="off" required>
+        <form action="/ipro/login" class="auth_form login_form" method="post" autocomplete="off">
+            <div class="int_area">
+                <input type="email" id="id" name="username" autocapitalize="off" placeholder="userid">
                 <label for="id">Email</label>
             </div>
-            <div class="int-area">
-                <input type="password" id="pw" name="userpw" autocapitalize="off" required>
+            <div class="int_area">
+                <input type="password" id="pw" name="userpw" autocapitalize="off" placeholder="password">
                 <label for="pw">Password</label>
             </div>
-            <div class="btn-area">
+            <div class="btn_area">
                 <button type="submit">LOGIN</button>
             </div>
-            <a href="/oauth2/authorization/google">google login</a>
         </form>
         <div th:if="${param.error}">
             <div class="fMsg">
@@ -30,14 +30,10 @@
                 <p th:text="${errormsg}"></p>
             </div>
         </div>
-        <div class="caption">
-            <a href="#" class="forgot">Forgot Your Email?</a>
-            <a href="#" class="forgot">Forgot Password?</a>
-        </div>
-        <div class="signup">
+        <div class="auth_sign_up_form">
             <a href="/ipro/signup">Sign up now</a>
         </div>
-</section>
+    </section>
+</div>
 <th:block th:replace="view/layout/footer :: footerFragment"></th:block>
-</body>
 </html>

@@ -24,7 +24,6 @@ function like(postid, userid) {
             if (data === 1) {
                 location.reload();
             }
-
         },
         error: function (request, status, error) {
             console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);

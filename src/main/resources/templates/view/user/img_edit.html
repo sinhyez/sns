@@ -1,21 +1,22 @@
-<!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<th:block th:replace="view/layout/header :: headerFragment"></th:block>
-<body>
-<div>
-    <span><p th:text="username"></p></span>
-    <form th:action="@{/ipro/user/img_insert}" method="post" enctype="multipart/form-data">
-        <label for="ex_file">profile img change</label>
-        <input type="file" id="ex_file" name="filename">
-        <button type="submit">upload</button>
-        <a th:href="@{/ipro/user/img_delete}">img delete</a>
-    </form>
-    <div th:if="${param.error}">
-        <div class="fMsg">
-            <p>error!!</p>
+
+<div id="modal-img_insert" class="modal-list">
+    <div class="posting_container edit_container">
+        <div class="form_box">
+            <form id="edit_form" class="edit_form insert" enctype="multipart/form-data">
+                <input type="file" id="ex_file" name="filename" class="file_input">
+                <label for="ex_file">Choose Your Image</label>
+                <button class="insert_btn" th:onclick="|saveUserImg('${user.get.id}')|">Insert</button>
+            </form>
+            <form id="delete_form" class="edit_form delete">
+                <input type="hidden" name="userimg" th:value="${user.get.id}">
+                <button class="delete_btn" th:onclick="|deleteUserImg('${user.get.id}')|">Post Imeage Delete</button>
+            </form>
+            <div class="back_button">
+                <a href="">Go back</a>
+            </div>
         </div>
     </div>
 </div>
-<th:block th:replace="view/layout/footer :: footerFragment"></th:block>
-</body>
+<script src="/resource/js/posting.js"></script>
 </html>

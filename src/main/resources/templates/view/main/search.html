@@ -1,22 +1,28 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<!--inclide header-->
 <th:block th:replace="view/layout/header :: headerFragment"></th:block>
-<body>
-    <div th:if="${countUser == 0}">
-        <p>유저없당</p>
+<!--inclide header-->
+<th:block th:if="${countUser == 0}">
+    <div class="search_null_container">
+        <div class="null_box">
+            <div class="null_box_text">
+                <span>No corresponding user found</span>
+                <span>Please try again</span>
+            </div>
+        </div>
     </div>
-    <div th:each="list : ${findUser}">
-        <div th:if="${list.userimg != null}">
-            <img th:src="@{'/resource/img/profile/' + ${list.userimg}}">
-            <a th:href="@{'/ipro/main/user/' + ${list.usernick}}" th:text="${list.usernick}"></a>
-        </div>
-        <div th:if="${list.userimg == null}">
-            <img th:src="@{'/resource/img/profile/basic.png'}">
-            <a th:href="@{'/ipro/main/user/' + ${list.usernick}}" th:text="${list.usernick}"></a>
-        </div>
+</th:block>
 
+<div th:each="list : ${findUser}">
+    <div th:if="${list.userimg != null}">
+        <img th:src="@{'/resource/img/profile/' + ${list.userimg}}">
+        <a th:href="@{'/ipro/main/user/' + ${list.usernick}}" th:text="${list.usernick}"></a>
     </div>
-    <th:block th:replace="view/layout/footer :: footerFragment"></th:block>
-</body>
+    <div th:if="${list.userimg == null}">
+        <img th:src="@{'/resource/img/profile/basic.png'}">
+        <a th:href="@{'/ipro/main/user/' + ${list.usernick}}" th:text="${list.usernick}"></a>
+    </div>
+
+</div>
+<th:block th:replace="view/layout/footer :: footerFragment"></th:block>
 </html>

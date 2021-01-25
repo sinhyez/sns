@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" href="/resource/css/posting.css">
-
 <div id="modal-post" class="modal-list posting_area">
     <div class="posting_container">
 
@@ -16,7 +14,7 @@
             </div>
 
             <!-- input area -->
-            <form th:action="@{/upload}" method="POST" enctype="multipart/form-data" autocomplete="off" class="posting">
+            <form enctype="multipart/form-data" autocomplete="off" class="posting" id="postform">
 
                 <div class="input_area">
                     <div class="file_form">
@@ -33,15 +31,16 @@
                     </div>
                     <textarea name="caption" class="form_caption" placeholder="Photo caption"></textarea>
                     <input type="hidden" id="usernick" name="usernick" th:value="${user.get().usernick}">
-                    <button type="submit" class="post_btn" disabled>POST</button>
+                    <button type="submit" class="post_btn" onclick="savePosting()" disabled>POST</button>
                 </div>
 
             </form>
+            <div class="back_button">
+                <a href="">Go back</a>
+            </div>
 
         </div>
-        <div class="back_button">
-            <a href="">Go back</a>
-        </div>
+
 
     </div>
 </div>

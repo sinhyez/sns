@@ -1,12 +1,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" href="/resource/css/main.css">
 <!-- include header -->
 <th:block th:replace="view/layout/header :: headerFragment"></th:block>
 <!-- section start -->
-<main>
+<main id="overlay">
     <div id="modal-box">
         <div id="modal-post"></div>
         <div id="modal-like_list"></div>
+        <div id="modal-search_list"></div>
     </div>
     <div class="feed_main">
         <!-- article start -->
@@ -51,7 +51,7 @@
                         <i th:if="${post.likeState} eq false" th:onclick="|like('${post.id}','${user.get.id}')|"
                            th:id="'like'+${post.id}" class="far fa-thumbs-up fa-2x"></i>
                         <th:block th:each="lC : ${likes}" th:if="${lC.count}" eq 1>
-                            <a th:onclick="|likelist('${post.id}')|" class="post_btn">
+                            <a th:onclick="|likelist('${post.id}')|" class="likeCheck">
                                 <span class="photo_like_count" th:if="${lC.postid == post.id} and ${lC.count} >= 0"
                                       th:text="${lC.count} + 'Likes'">
                             </span>

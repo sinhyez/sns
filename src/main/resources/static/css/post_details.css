@@ -44,6 +44,7 @@
 
 .post_username:hover {
     color: #26bda4;
+    transition: all .15s ease;
 }
 
 .post_edit_box {
@@ -62,18 +63,17 @@
 .post_edit_box a:hover {
     color: #e6e9ed;
     background-color: #26bda4;
+    transition: all .15s ease;
 }
 
 /* post img area */
 
-.post_img {
-    max-width: 70vh;
-    max-height: 70vh;
+.post_detail_img {
     border-top: 1px solid #26bda4;
     text-align: center;
 }
 
-.post_img img{
+.post_detail_img img{
     max-width: 70vh;
     max-height: 50vh;
     border-bottom: 1px solid #26bda4;
@@ -101,6 +101,7 @@
 }
 .info_username:hover {
     color: #26bda4;
+    transition: all .15s ease;
 }
 
 .posting_caption span {
@@ -127,6 +128,15 @@
     margin-top: .5rem;
     font-size: 1.6rem;
     font-weight: 600;
+}
+
+.like_count a {
+    cursor: pointer;
+}
+
+.like_count a:hover {
+    color: #26bda4;
+    transition: all .15s ease;
 }
 
 .post_date {
@@ -162,6 +172,7 @@
 
 .comment_username:hover {
     color: #26bda4;
+    transition: all .15s ease;
 }
 
 .comment_edit_area {
@@ -204,10 +215,6 @@
     color: #26bda4;
     outline: none;
     cursor: pointer;
-}
-
-.post_btn:disabled {
-    opacity: 0.6;
 }
 
 .heart-clicked {

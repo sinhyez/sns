@@ -23,9 +23,11 @@ public class PostService {
     public void deleteByID(int id) {
         postRepository.deleteById(id);
     }
+
     public List<PostModel> findByUserIdOrderByIdDesc(int id) {
         return postRepository.findByUserIdOrderByIdDesc(id);
     }
+
     public Optional<PostModel> findById(int id) { return postRepository.findById(id); }
 
     //포스트 저장 프로세스
@@ -38,6 +40,17 @@ public class PostService {
 
         postRepository.save(postDto.toEntity());
 
+    }
+
+    public void postEdit(int id, String caption, UserModel userModel, String imgurl) {
+
+        PostDto postDto = new PostDto();
+        postDto.setId(id);
+        postDto.setCaption(caption);
+        postDto.setUser(userModel);
+        postDto.setImgurl(imgurl);
+
+        postRepository.save(postDto.toEntity());
     }
 
     //PostDto를 통해 Controller 와 Service 간의 데이터 전달을 위해
