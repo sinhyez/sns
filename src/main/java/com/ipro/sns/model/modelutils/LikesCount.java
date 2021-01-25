@@ -1,6 +1,5 @@
 package com.ipro.sns.model.modelutils;
 
-import com.ipro.sns.model.UserModel;
 import lombok.Data;
 
 @Data

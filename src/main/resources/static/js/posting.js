@@ -29,7 +29,7 @@ function postEdit(postid) {
 function savePosting() {
 
     const data = new FormData($("#postform")[0]);
-
+    console.log(data);
     $.ajax({
         url : '/upload',
         method : "POST",
@@ -37,8 +37,10 @@ function savePosting() {
         enctype : "multiple/form-data",
         contentType : false,
         processData : false,
-        success : function () {
-            location.reload()
+        success : function (data) {
+            if (data === "ok") {
+                location.reload()
+            }
         },
         error: function (request, status, error) {
             console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);

@@ -95,7 +95,10 @@
             <div class="user_post_area">
 
                 <th:block th:if="${postlist.size()} eq 0">
-                    <p> 게시글 작성해!!</p>
+                    <div class="empty_feed user_main">
+                        <p>Oops your post is empty Let's start sharing your moments</p>
+                        <a href="">Click here sharing your moments</a>
+                    </div>
                 </th:block>
                 <!-- model post item -->
                 <th:block th:each="i : ${postlist}">

@@ -21,7 +21,7 @@
 
             <div class="post_edit_box">
                 <th:block th:if="${loginUser.get.id == post.get.user.id}">
-                    <a href="">Edit</a>
+<!--                    <a href="">Edit</a>-->
                     <a th:href="@{'/deletePost/' + ${post.get.id}}">Deletet</a>
                 </th:block>
             </div>
@@ -68,7 +68,7 @@
                     <span th:text="${listc.content}"></span>
                 </div>
                 <div class="comment_edit_area" th:if="${listc.userid.id} eq ${loginUser.get.id}">
-                    <a th:onclick="|commnetEdit('${post.get.id}')|" class="comment_edit">Edit</a>
+<!--                    <a th:onclick="|commnetEdit('${post.get.id}')|" class="comment_edit">Edit</a>-->
                     <a th:onclick="|commentDlete('${listc.id}')|" class="comment_edit">Delete</a>
                 </div>
             </div>

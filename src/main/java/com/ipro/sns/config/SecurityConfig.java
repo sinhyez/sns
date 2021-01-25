@@ -1,7 +1,7 @@
 package com.ipro.sns.config;
 
-import com.ipro.sns.service.handler.AuthFailureHandler;
 import com.ipro.sns.service.UserService;
+import com.ipro.sns.service.handler.AuthFailureHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

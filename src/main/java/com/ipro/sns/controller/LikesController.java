@@ -6,7 +6,6 @@ import com.ipro.sns.model.UserModel;
 import com.ipro.sns.service.LikeService;
 import com.ipro.sns.service.PostService;
 import lombok.AllArgsConstructor;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

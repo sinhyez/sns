@@ -1,4 +1,5 @@
-.search_null_container {
+/* null */
+.search_bar_container {
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -35,4 +36,54 @@
 .null_box_text span {
     margin-right: 6rem;
     color: #999;
+}
+
+/*not null*/
+.search_box_title {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #999;
+}
+
+.search_user_conatainer {
+    margin: 0 auto 10rem;
+    min-width: 50rem;
+}
+
+.search_box_wrapper {
+    padding: 1rem;
+    border-radius: 3rem;
+    background: #fff;
+}
+
+.search_list_box {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+.search_list {
+
+
+}
+
+.search_list_userimg img {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+}
+
+.search_list_username {
+    margin-left: 3rem;
+    font-size: 1.8rem;
+}
+.search_list_username a{
+    color: #999;
+    text-decoration: none;
+}
+
+.search_list_username a:hover {
+    color: #26bda4;
+    transition: .3s ease;
 }

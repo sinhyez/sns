@@ -17,19 +17,33 @@ body {
     font-family: "Open Sans", Arial, sans-serif;
     color: #262626;
     background: rgba(var(--b3f, 250, 250, 250),1);
+    min-height:100%;
+    position:relative
 }
 img {
     display: block;
 }
 
-
 .post_btn:disabled {
     opacity: 0.6;
 }
 
-@media (max-width: 72rem) {
-    body {
-        width: auto;
-        height: auto;
-    }
+.empty_feed {
+    color: #999;
+    font-size: 1.8rem;
+    margin-top: 3rem;
+    padding: 3rem;
+    border-radius: 1rem;
+}
+.user_main {
+    margin: 0 auto;
+}
+
+.user_main a {
+    text-decoration: none;
+    color: #999;
+}
+.user_main a:hover {
+    color: #26bda4;
+    transition: all .3s ease;
 }

@@ -2,7 +2,6 @@ package com.ipro.sns.repository;
 
 import com.ipro.sns.model.PostModel;
 import com.ipro.sns.model.UserModel;
-import com.ipro.sns.model.dto.PostDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import javax.transaction.Transactional;

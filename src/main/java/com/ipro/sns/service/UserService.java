@@ -1,9 +1,9 @@
 package com.ipro.sns.service;
 
 import com.ipro.sns.model.UserModel;
+import com.ipro.sns.model.dto.UserDto;
 import com.ipro.sns.model.modelutils.Role;
 import com.ipro.sns.repository.UserRepository;
-import com.ipro.sns.model.dto.UserDto;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,8 +16,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
 import javax.transaction.Transactional;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor

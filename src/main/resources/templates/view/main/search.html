@@ -1,9 +1,11 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<th:block th:replace="view/layout/header :: headerFragment"></th:block>
 <!--inclide header-->
+<th:block th:replace="view/layout/header :: headerFragment"></th:block>
+
+<!-- if list empty -->
 <th:block th:if="${countUser == 0}">
-    <div class="search_null_container">
+    <div class="search_bar_container search_null_container">
         <div class="null_box">
             <div class="null_box_text">
                 <span>No corresponding user found</span>
@@ -13,16 +15,33 @@
     </div>
 </th:block>
 
-<div th:each="list : ${findUser}">
-    <div th:if="${list.userimg != null}">
-        <img th:src="@{'/resource/img/profile/' + ${list.userimg}}">
-        <a th:href="@{'/ipro/main/user/' + ${list.usernick}}" th:text="${list.usernick}"></a>
+<!-- if list not empty -->
+<div class="wrapper">
+    <div class="search_bar_container search_user_conatainer" th:if="${countUser} > 0">
+        <div class="search_box_title" th:if="${countUser} > 0">
+            <h2>User List</h2>
+        </div>
+        <div class="search_box_wrapper">
+            <th:block th:each="list : ${findUser}">
+                <div class="search_list">
+                    <div class="search_list_box">
+                        <div class="search_list_userimg">
+                            <a th:href="@{'/ipro/main/user/' + ${list.usernick}}">
+                                <img th:if="${list.userimg != null}" th:src="@{'/resource/img/profile/' + ${list.userimg}}">
+                            </a>
+                            <a th:href="@{'/ipro/main/user/' + ${list.usernick}}">
+                                <img th:if="${list.userimg == null}" th:src="@{'/resource/img/profile/basic.png'}">
+                            </a>
+                        </div>
+                        <div class="search_list_username">
+                            <a th:href="@{'/ipro/main/user/' + ${list.usernick}}" th:text="${list.usernick}"></a>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+        </div>
     </div>
-    <div th:if="${list.userimg == null}">
-        <img th:src="@{'/resource/img/profile/basic.png'}">
-        <a th:href="@{'/ipro/main/user/' + ${list.usernick}}" th:text="${list.usernick}"></a>
-    </div>
-
 </div>
+
 <th:block th:replace="view/layout/footer :: footerFragment"></th:block>
 </html>

@@ -6,7 +6,6 @@ import com.ipro.sns.model.UserModel;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.userdetails.User;
 
 import java.sql.Timestamp;
 

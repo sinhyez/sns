@@ -11,8 +11,8 @@
     <div class="feed_main">
         <!-- article start -->
         <th:bolck th:if="${postlist.size() == 0}">
-            <article class="no_feed" >
-                <p>팔로우 하러 가기</p>
+            <article class="empty_feed">
+                <p>Oops your feed is empty Let's find someone to following or sharing your moments</p>
             </article>
         </th:bolck>
         <th:block th:each="post : ${postlist}">

@@ -1,6 +1,9 @@
 package com.ipro.sns.controller;
 
-import com.ipro.sns.model.*;
+import com.ipro.sns.model.FollowModel;
+import com.ipro.sns.model.LikesModel;
+import com.ipro.sns.model.PostModel;
+import com.ipro.sns.model.UserModel;
 import com.ipro.sns.model.dto.PostDto;
 import com.ipro.sns.model.dto.UserDto;
 import com.ipro.sns.model.modelutils.Count;
@@ -10,17 +13,16 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 
 @Controller
