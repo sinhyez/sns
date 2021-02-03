@@ -1,6 +1,5 @@
 package com.ipro.sns.controller;
 
-
 import com.ipro.sns.model.CommnetModel;
 import com.ipro.sns.model.LikesModel;
 import com.ipro.sns.model.PostModel;
