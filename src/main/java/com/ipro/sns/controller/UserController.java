@@ -82,7 +82,7 @@ public class UserController {
         return "view/user/img_edit";
     }
     //유저 프로필 사진 업데이트 프로세스
-    @RequestMapping(value = "/ipro/user/img_insert/{id}")
+    @PutMapping(value = "/ipro/user/img_insert/{id}")
     public @ResponseBody String imgInsert(@PathVariable int id,
                              @RequestParam("filename") MultipartFile multipartFile, Model model) {
 

@@ -29,8 +29,8 @@ function commentSend(postid) {
         success: function (data) {
             if (data === 1) {
                 $(".content").val("");
+                location.href;
             }
-            location.reload();
         },
         error: function (request, status, error) {
             console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
