@@ -26,6 +26,9 @@ public class UserController {
 
     private final UserService userService;
 
+    //    protected String loImgPath = "/Users/yoon sung/Desktop/upload/";
+    protected String ubImgPath = "/home/ubuntu/apps/upload/";
+
     //회원가입 처리 프로세스
     @PostMapping("/ipro/signup")
     public String signUpProc(@Valid UserDto userDto, BindingResult bindingResult, Model model) throws Exception{
@@ -88,7 +91,7 @@ public class UserController {
                              @RequestParam("filename") MultipartFile multipartFile) throws IOException{
 
         Optional<UserModel> userModel = userService.findById(id);
-        String img_path = "C:/Users/yoon sung/Desktop/upload/profile/" + userModel.get().getUsernick();
+        String img_path = ubImgPath + userModel.get().getUsernick();
 
         try {
             if (userModel.get().getUserimg() != null) {

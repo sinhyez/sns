@@ -37,19 +37,21 @@ public class PostController {
     private final CommentService commentService;
     private final LikeService likeService;
 
+    //    protected String loImgPath = "/Users/yoon sung/Desktop/upload/";
+    protected String ubImgPath = "/home/ubuntu/apps/upload/";
+
 
     //포스팅 업로드 프로세스
     @RequestMapping("/upload")
     public @ResponseBody String uploadProc(@RequestParam("file")MultipartFile file, @RequestParam("caption") String caption,
-                      @RequestParam("usernick") String usernick) throws IOException {
+                                           @RequestParam("usernick") String usernick) throws IOException {
 
         Optional<UserModel> userModel = userService.findByUsernick(usernick);
         UserModel userModelWrapper = userModel.get();
-        String path = "C:/Users/yoon sung/Desktop/upload/";
 
         UUID uuid = UUID.randomUUID();
         String filename = uuid + "_" + file.getOriginalFilename();
-        Path filepath = Paths.get(path + filename);
+        Path filepath = Paths.get(ubImgPath + filename);
         Files.write(filepath, file.getBytes());
 
         postService.postSave(caption, userModelWrapper, filename);
@@ -62,13 +64,12 @@ public class PostController {
     public String postEdit(@PathVariable int id, @RequestParam("file") MultipartFile file,
                            @RequestParam("caption") String caption, @RequestParam("usernick") String usernick) throws Exception {
 
-        String path = "C:/Users/yoon sung/Desktop/upload/";
         Optional<UserModel> userModel = userService.findByUsernick(usernick);
         UserModel userModelWrapper = userModel.get();
 
         UUID uuid = UUID.randomUUID();
         String filename = uuid + "_" + file.getOriginalFilename();
-        Path filepath = Paths.get(path + filename);
+        Path filepath = Paths.get(ubImgPath + filename);
         Files.write(filepath, file.getBytes());
 
         postService.postEdit(id, caption, userModelWrapper, filename);
