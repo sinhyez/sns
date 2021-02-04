@@ -5,15 +5,15 @@
     <title>Microblogram</title>
 </head>
 <body>
-<!--    <div sec:authorize="hasRole('USER')">-->
-<!--        <script>-->
-<!--            location.replace("/ipro/main")-->
-<!--        </script>-->
-<!--    </div>-->
-<!--    <div sec:authorize="isAnonymous()">-->
-<!--        <script>-->
-<!--            location.replace("/ipro/login")-->
-<!--        </script>-->
-<!--    </div>-->
+    <div sec:authorize="hasRole('USER')">
+        <script>
+            location.replace("/ipro/main")
+        </script>
+    </div>
+    <div sec:authorize="isAnonymous()">
+        <script>
+            location.replace("/ipro/login")
+        </script>
+    </div>
 </body>
 </html>

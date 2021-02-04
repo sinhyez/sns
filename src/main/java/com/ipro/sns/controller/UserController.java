@@ -26,8 +26,8 @@ public class UserController {
 
     private final UserService userService;
 
-    //    protected String loImgPath = "/Users/yoon sung/Desktop/upload/";
-    protected String ubImgPath = "/home/ubuntu/apps/upload/";
+    //    protected String loImgPath = "/Users/yoon sung/Desktop/upload/profile";
+    protected String ubImgPath = "/home/ubuntu/apps/upload/profile/";
 
     //회원가입 처리 프로세스
     @PostMapping("/ipro/signup")
