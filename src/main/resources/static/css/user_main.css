@@ -40,7 +40,6 @@ main {
 .profile_img img {
     width: 160px;
     height: 155px;
-    border: solid #26bda4;
     border-radius: 50%;
     object-fit: cover;
 }

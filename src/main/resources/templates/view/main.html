@@ -22,12 +22,12 @@
                 <div class="feed_card_header">
                     <div class="photo_user_info" th:if="${post.user.userimg != null}">
                         <img th:src="@{'/upload/profile/' + ${post.user.userimg}}" alt="userIcon">
-                        <a th:href="@{'/ipro/main/user/' + ${post.user.usernick}}"
+                        <a th:href="@{'/main/user/' + ${post.user.usernick}}"
                            class="username" th:text="${post.user.usernick}"></a>
                     </div>
                     <div class="photo_user_info" th:if="${post.user.userimg == null}">
                         <img src="/static/img/profile/Basic.png" alt="userIcon">
-                        <a th:href="@{'/ipro/main/user/' + ${post.user.usernick}}"
+                        <a th:href="@{'/main/user/' + ${post.user.usernick}}"
                            class="username" th:text="${post.user.usernick}"></a>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
 
                     <!-- article caption -->
                     <div class="photo_caption">
-                        <a th:href="@{'/ipro/main/user/' + ${post.user.usernick}}"
+                        <a th:href="@{'/main/user/' + ${post.user.usernick}}"
                            class="username" th:text="${post.user.usernick}"></a>
                         <span class="caption" th:text="${post.caption}"></span>
                     </div>
@@ -78,7 +78,7 @@
                     <th:block th:each="li : ${count}">
                         <div class="photo_comments" th:if="${post.id == li.postid}">
                             <div class="photo_comment" th:if="${li.count} > 0">
-                                <a th:href="@{'/ipro/post/details/' + ${post.id}}" class="comment_user"
+                                <a th:href="@{'/post/details/' + ${post.id}}" class="comment_user"
                                    th:text="'View all ' + ${li.count} + ' comments'"></a>
                             </div>
                         </div>
@@ -86,7 +86,7 @@
 
                     <!-- article create date -->
                     <span class="photo_date">
-                    <a th:href="@{'/ipro/post/details/' + ${post.id}}" th:text="${#calendars.format(post.create_date, 'MM/dd')}"></a>
+                    <a th:href="@{'/post/details/' + ${post.id}}" th:text="${#calendars.format(post.create_date, 'MM/dd')}"></a>
                 </span>
 
                     <!-- add comment area -->
@@ -108,6 +108,4 @@
 </main>
 <!-- section end -->
 <th:block th:replace="view/layout/footer :: footerFragment"></th:block>
-<script th:inline="javascript" th:src="@{'/static/js/comment.js'}"></script>
-<script th:inline="javascript" th:src="@{'/static/js/like.js'}"></script>
 </html>

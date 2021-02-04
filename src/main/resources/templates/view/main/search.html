@@ -26,15 +26,15 @@
                 <div class="search_list">
                     <div class="search_list_box">
                         <div class="search_list_userimg">
-                            <a th:href="@{'/ipro/main/user/' + ${list.usernick}}">
+                            <a th:href="@{'/main/user/' + ${list.usernick}}">
                                 <img th:if="${list.userimg != null}" th:src="@{'/upload/profile/' + ${list.userimg}}">
                             </a>
-                            <a th:href="@{'/ipro/main/user/' + ${list.usernick}}">
+                            <a th:href="@{'/main/user/' + ${list.usernick}}">
                                 <img th:if="${list.userimg == null}" th:src="@{'/static/img/profile/basic.png'}">
                             </a>
                         </div>
                         <div class="search_list_username">
-                            <a th:href="@{'/ipro/main/user/' + ${list.usernick}}" th:text="${list.usernick}"></a>
+                            <a th:href="@{'/main/user/' + ${list.usernick}}" th:text="${list.usernick}"></a>
                         </div>
                     </div>
                 </div>

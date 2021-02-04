@@ -11,7 +11,7 @@
             <div id="modal-img_insert"></div>
         </div>
         <div class="edit_body">
-            <form th:action="@{'/ipro/user/user_edit'}" method="post">
+            <form th:action="@{'/user/user_edit'}" method="post">
                 <!-- profile_img area -->
                 <div class="profile_img_area">
                     <div th:unless="${user.get().getUserimg()} eq null">
@@ -35,24 +35,26 @@
                     </span>
                     </div>
                 </div>
-                <!-- user_nickname area -->
-                <div class="profile_username_area">
+
+                <div class="int_area profile-int-area">
+                    <!-- user_nickname area -->
                     <input type="text" id="nick" name="usernick" autocapitalize="off"
-                           th:value="${user.get().usernick}" required>
-                    <label for="nick">Username</label>
+                           th:value="${user.get().usernick}" placeholder="Username">
+                    <label for="nick" style="left: .6rem">Username</label>
                 </div>
-                <!-- user_realname area -->
-                <div class="profile_userRname_area">
+                <div class="profile-int-area int_area">
+                    <!-- user_realname area -->
                     <input type="text" id="rname" name="userfull" autocapitalize="off"
-                           th:value="${user.get().userfull}" required>
-                    <label for="rname">Name</label>
+                           th:value="${user.get().userfull}" placeholder="Full Name">
+                    <label for="rname" style="left: .6rem">Full Name</label>
                 </div>
-                <!-- user_introduce area -->
-                <div class="profile_introduce_area">
-            <textarea name="userintro" id="intro" cols="30" rows="10"
-                      th:text="${user.get().getUserintro()}"></textarea>
-                    <label for="intro">Introduce</label>
+                <div class="profile-int-area int_area">
+                    <!-- user_introduce area -->
+                    <textarea name="userintro" id="intro" placeholder="Introduce"
+                              th:text="${user.get().getUserintro()}"></textarea>
+                    <label for="intro" style="left: .6rem">Introduce</label>
                 </div>
+
                 <div class="btn_area">
                     <button type="submit">submit</button>
                 </div>

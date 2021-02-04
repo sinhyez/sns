@@ -51,7 +51,7 @@ public class UserService implements UserDetailsService {
         }
 
         if (findByUsername(userDto.getUsername()).isPresent()) {
-            bindingResult.rejectValue("username", null, "중복된 아이디 입니다.");
+            bindingResult.rejectValue("username", null, "This Email is already registered.");
             return true;
         }
         

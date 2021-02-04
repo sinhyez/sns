@@ -83,3 +83,11 @@
 .modal-follow_list_username a:hover {
     color: #26bda4;
 }
+
+#modal-post {
+    animation: fadein .75s;
+}
+
+#modal-img_insert {
+    animation: fadein .75s;
+}

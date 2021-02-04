@@ -7,6 +7,7 @@
         <div id="modal-like_list"></div>
         <div id="modal-post"></div>
     </div>
+
     <article class="detail_main_container">
 
         <div class="post_user_info" id="modal-post_detail">
@@ -14,9 +15,9 @@
             <img th:if="${post.get.user.userimg} eq null"
                  src="/static/img/profile/Basic.png" alt="usericon">
             <img th:unless="${post.get.user.userimg} eq null"
-                 th:src="@{'/upload/' + ${post.get.user.userimg} }" alt="usericon">
+                 th:src="@{'/upload/profile/' + ${post.get.user.userimg} }" alt="usericon">
 
-            <a th:href="@{'/ipro/main/user/' + ${post.get.user.usernick} }"
+            <a th:href="@{'/main/user/' + ${post.get.user.usernick} }"
                class="post_username" th:text="${post.get.user.usernick}"></a>
 
             <div class="post_edit_box">
@@ -34,7 +35,7 @@
 
         <div class="posting_info">
             <div class="posting_caption">
-                <a th:href="@{'/ipro/main/user/' + ${post.get.user.usernick} }"
+                <a th:href="@{'/main/user/' + ${post.get.user.usernick} }"
                    class="info_username" th:text="${post.get.user.usernick}"></a>
                 <span th:text="${post.get().caption}"></span>
             </div>
@@ -46,7 +47,7 @@
                        th:id="'like'+${post.get.id}" class="far fa-thumbs-up fa-2x"></i>
                 </div>
                 <th:block th:each="lc : ${likes}">
-                    <div class="like_count" th:if="${lc.postid == post.get.id} and ${lc.count} >= 0">
+                    <div class="like_count" th:if="${lc.postid == post.get.id} and ${lc.count} > 0">
                         <a th:onclick="|likelist('${post.get.id}')|">
                             <span th:text="${lc.count} + 'Likes'"></span>
                         </a>
@@ -63,7 +64,7 @@
         <th:block th:each="listc : ${comment}">
             <div class="post_comment_area" th:if="${post.get.id} eq ${listc.postid.id}">
                 <div class="comment_user_area">
-                    <a th:href="@{ '/ipro/main/user/' + ${listc.userid.usernick} }" class="comment_username"
+                    <a th:href="@{ '/main/user/' + ${listc.userid.usernick} }" class="comment_username"
                        th:text="${listc.userid.usernick}">userid</a>
                     <span th:text="${listc.content}"></span>
                 </div>
@@ -91,8 +92,6 @@
 
 </div>
 <th:block th:replace="view/layout/footer :: footerFragment"></th:block>
-<script th:inline="javascript" th:src="@{'/static/js/comment.js'}"></script>
-<script th:inline="javascript" th:src="@{'/static/js/like.js'}"></script>
 </body>
 </html>
 

@@ -17,9 +17,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpSession;
-import java.io.Console;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,28 +36,8 @@ public class MainController {
     private final CommentService commentService;
     private final LikeService likeService;
 
-    @GetMapping("/")
-    public String index(){
-        return "view/index";
-    }
-
-    //로그인 처리
-    @RequestMapping("/ipro/login")
-    public String login(HttpSession session, String username){
-        //로그인을 처리하고 세션에 유저정보를 저장(세선 최대 시간 60분)
-        session.setAttribute("user", userService.findByUsername(username));
-        session.setMaxInactiveInterval(60 * 60);
-        return "view/login";
-    }
-
-    //회원가입 페이지
-    @GetMapping("/ipro/signup")
-    public String signup(UserDto userDto){
-        return "view/signup";
-    }
-
     //main feed
-    @RequestMapping("/ipro/main")
+    @RequestMapping("/")
     public String main(Model model) throws Exception {
 
         try {
@@ -123,7 +102,7 @@ public class MainController {
     }
 
     //user Profile page
-    @RequestMapping("/ipro/main/user/{usernick}")
+    @RequestMapping("/main/user/{usernick}")
     public String userMain(@PathVariable("usernick") String usernick, Model model) throws Exception {
 
         //유저정보 set
@@ -183,8 +162,23 @@ public class MainController {
 
     }
 
+    //로그인 처리
+    @RequestMapping("/login")
+    public String login(HttpSession session, String username){
+        //로그인을 처리하고 세션에 유저정보를 저장(세선 최대 시간 60분)
+        session.setAttribute("user", userService.findByUsername(username));
+        session.setMaxInactiveInterval(60 * 60);
+        return "view/login";
+    }
+
+    //회원가입 페이지
+    @GetMapping("/signup")
+    public String signup(UserDto userDto){
+        return "view/signup";
+    }
+
     //posting page
-    @GetMapping("/ipro/post")
+    @GetMapping("/post")
     public String postPage(Model model) throws IOException {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         model.addAttribute("user", userService.findByUsername(username));

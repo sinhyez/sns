@@ -23,9 +23,6 @@ public class CommentService {
     public List<CommnetModel> findByPostid(int postid) {
         return commentRepository.findByPostidId(postid);
     }
-    public Optional<CommnetModel> findByPost(PostModel postModel) {
-        return commentRepository.findByPostid(postModel);
-    }
     public int countByPostid(int postid) {
         return commentRepository.countByPostidId(postid);
     }

@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class AuthFailureHandler implements AuthenticationFailureHandler {
-    private final String DEFAULT_FAILURE_URL = "/ipro/login?error=true";
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
@@ -22,10 +21,11 @@ public class AuthFailureHandler implements AuthenticationFailureHandler {
             errorMsg = "아이디가 존재하지 않습니다 다시 한번 확인해주세요";
         }
         else if (exception instanceof BadCredentialsException) {
-            errorMsg = "비밀번호가 틀렸습니다. 다시 한번 확인해주세요";
+            errorMsg = "Wrong Password please try again";
         }
 
         request.setAttribute("errormsg", errorMsg);
+        String DEFAULT_FAILURE_URL = "/ipro/login?error=true";
         request.getRequestDispatcher(DEFAULT_FAILURE_URL).forward(request, response);
     }
 }

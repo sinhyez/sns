@@ -50,7 +50,7 @@ function savePosting() {
 function saveUserImg(userid) {
     const data = new FormData($("#edit_form")[0]);
     $.ajax({
-        url : '/ipro/user/img_insert/'+userid,
+        url : '/user/img_insert/'+userid,
         type : "put",
         data : data,
         enctype : "multiple/form-data",

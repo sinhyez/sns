@@ -18,8 +18,8 @@ public class CommentController {
 
     //comment insert proc
     @PostMapping("/insert")
-    public int commentInsert(@RequestParam PostModel postid, @RequestParam UserModel userid, @RequestParam String content)
-        throws Exception {
+    public int commentInsert(@RequestParam PostModel postid, @RequestParam UserModel userid,
+                             @RequestParam String content) throws Exception {
 
         commentService.cSave(userid, postid, content);
 

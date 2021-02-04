@@ -8,6 +8,7 @@
 }
 
 .detail_main_container {
+    width: 50rem;
     border: 1px solid #26bda4;
     position: relative;
     background: #fff;
@@ -74,17 +75,13 @@
 }
 
 .post_detail_img img{
-    max-width: 70vh;
-    max-height: 50vh;
+    width: 50rem;
+    height: 50rem;
     border-bottom: 1px solid #26bda4;
     object-fit: cover;
 }
 
 /* post info */
-
-.posting_info {
-
-}
 
 .posting_caption {
     height: 12.5vh;

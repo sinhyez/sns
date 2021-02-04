@@ -5,7 +5,7 @@
     <th:block th:replace="view/layout/header :: headerFragment"></th:block>
 <body>
 <!-- model main section start -->
-<main>
+<main id="overlay">
     <!-- user main section header start -->
     <div class="main_header">
         <div class="user_main_container">
@@ -28,7 +28,7 @@
                     <div class="profile_setting">
                         <h1 class="user_name" th:text="${user.get().usernick}"></h1>
                         <a th:if="${loginId eq user.get().id}"
-                           th:href="@{'/ipro/user/edit/' + ${user.get().usernick}}" class="btn edit_btn">
+                           th:href="@{'/user/edit/' + ${user.get().usernick}}" class="btn edit_btn">
                             Edit Profile
                         </a>
                         <a th:if="${loginId eq user.get().id}" href="/logout">
@@ -104,7 +104,7 @@
                 <th:block th:each="i : ${postlist}">
 
                     <div class="post_item">
-                        <a th:href="@{'/ipro/post/details/' + ${i.id}}">
+                        <a th:href="@{'/post/details/' + ${i.id}}">
                             <img th:src="@{'/upload/'+ ${i.imgurl}} " alt="post_img" class="post_img user_postimg">
                             <!-- post item info likes comment -->
                             <div class="post_item_info">

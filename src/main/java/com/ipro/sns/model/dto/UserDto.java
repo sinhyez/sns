@@ -15,13 +15,13 @@ import java.util.List;
 public class UserDto {
 
     private int id;
-    @NotBlank(message = "이메일을 입력해 주세요")
+    @NotBlank(message = "Please enter Email")
     private String username;
-    @NotBlank(message = "비밀번호를 입력해 주세요")
+    @NotBlank(message = "Please enter Password")
     private String userpw;
-    @NotBlank(message = "닉네임을 입려해 주세요")
+    @NotBlank(message = "Please enter Username")
     private String usernick;
-    @NotBlank(message = "이름을 입력해 주세요")
+    @NotBlank(message = "Please enter Full Name")
     private String userfull;
     private String userimg;
     private String userintro;

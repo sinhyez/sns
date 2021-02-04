@@ -18,7 +18,7 @@
             </h1>
             <!-- form area -->
             <form method="post" class="auth_form" role="form" autocomplete="off"
-                  th:action="@{/ipro/signup}" th:object="${userDto}">
+                  th:action="@{/signup}" th:object="${userDto}">
                 <!-- Email -->
                 <div class="int_area sign_up_input">
                     <input type="email" id="id" name="username" th:field="*{username}"
@@ -64,5 +64,4 @@
 
     </div>
     <th:block th:replace="view/layout/footer :: footerFragment"></th:block>
-</body>
 </html>

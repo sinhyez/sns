@@ -1,5 +1,5 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<script src="/resource/js/modal.js"></script>
+<script src="/static/js/modal.js"></script>
 
     <div id="modal-follower_list" class="modal-list follower_list">
         <div class="modal-follow-box">
@@ -20,7 +20,7 @@
                                  th:src="@{'/resource/img/profile/Basic.png'}" alt="">
                         </div>
                         <div class="modal-follow_list_username">
-                            <a th:href="@{'/ipro/main/user/' + ${fwlist.followingid.usernick} }"
+                            <a th:href="@{'/main/user/' + ${fwlist.followingid.usernick} }"
                                th:text="${fwlist.followingid.usernick}"></a>
                         </div>
                     </div>

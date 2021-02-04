@@ -28,8 +28,8 @@ function commentSend(postid) {
         dataType:'text',
         success: function (data) {
             if (data === 1) {
+                location.reload();
                 $(".content").val("");
-                location.href;
             }
         },
         error: function (request, status, error) {

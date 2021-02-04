@@ -7,6 +7,9 @@ function modalFollowing(userid) {
         $(".modal-close").on("click", function () {
             $("#modal-following_list").hide();
         })
+        $("#overlay").on("click", function () {
+            $("#modal-following_list").hide();
+        })
     })
 }
 
@@ -16,6 +19,9 @@ function modalfollower(userid) {
     $('#modal-follower_list').load(page, function () {
         $("#modal-follower_list").show();
         $(".modal-close").on("click", function () {
+            $("#modal-follower_list").hide();
+        })
+        $("#overlay").on("click", function () {
             $("#modal-follower_list").hide();
         })
     })
@@ -38,25 +44,31 @@ function likelist(postid) {
 function profileImgEdit(userid, loginid) {
 
     if(userid === loginid) {
-        const page = "/ipro/user/img_insert";
+        const page = "/user/img_insert";
         $("#modal-img_insert").load(page, function () {
             $("#modal-img_insert").show();
         })
     }
-
 }
 function profileImgEdit2(userid) {
 
-    const page = "/ipro/user/img_insert";
+    const page = "/user/img_insert";
     $("#modal-img_insert").load(page, function () {
         $("#modal-img_insert").show();
     })
+}
 
+function postDetail(postid) {
+    const page = "/post/details/" + postid;
+    console.log(page);
+    $("#modal-post_detail").load(page, function () {
+        $("#modal-post_detail").show();
+    })
 }
 
 function posting() {
 
-    const page = '/ipro/post';
+    const page = '/post';
     $("#modal-post").load(page, function () {
         $("#modal-post").show();
     })

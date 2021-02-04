@@ -51,8 +51,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/admin/**").hasRole("ADMIN")
                 .and()
                     .formLogin()
-                    .loginPage("/ipro/login")
-                    .defaultSuccessUrl("/ipro/main")
+                    .loginPage("/login")
+                    .defaultSuccessUrl("/")
                     .failureHandler(failureHandler())
                     .usernameParameter("username")
                     .passwordParameter("userpw")
@@ -60,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .logout()
                     .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                     .invalidateHttpSession(true)
-                    .logoutSuccessUrl("/ipro/login");
+                    .logoutSuccessUrl("/login");
 
 
 

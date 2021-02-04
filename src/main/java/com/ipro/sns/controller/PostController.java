@@ -16,8 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -37,7 +35,7 @@ public class PostController {
     private final CommentService commentService;
     private final LikeService likeService;
 
-    //    protected String loImgPath = "/Users/yoon sung/Desktop/upload/";
+//    protected String loImgPath = "/Users/yoon sung/Desktop/upload/";
     protected String ubImgPath = "/home/ubuntu/apps/upload/";
 
 
@@ -60,25 +58,8 @@ public class PostController {
 
     }
 
-    @PutMapping("/post/edit/{id}")
-    public String postEdit(@PathVariable int id, @RequestParam("file") MultipartFile file,
-                           @RequestParam("caption") String caption, @RequestParam("usernick") String usernick) throws Exception {
-
-        Optional<UserModel> userModel = userService.findByUsernick(usernick);
-        UserModel userModelWrapper = userModel.get();
-
-        UUID uuid = UUID.randomUUID();
-        String filename = uuid + "_" + file.getOriginalFilename();
-        Path filepath = Paths.get(ubImgPath + filename);
-        Files.write(filepath, file.getBytes());
-
-        postService.postEdit(id, caption, userModelWrapper, filename);
-
-        return "ok";
-    }
-
     //포스팅 디테일 화면
-    @RequestMapping("/ipro/post/details/{id}")
+    @RequestMapping("/post/details/{id}")
     public String postDetails(@PathVariable("id") int id, Model model) throws Exception {
 
         //유저정보 set
@@ -117,7 +98,7 @@ public class PostController {
     @Transactional
     @RequestMapping("/deletePost/{id}")
     public String deletePost(@PathVariable int id) {
-        String redirect = "redirect:/ipro/main/user/";
+        String redirect = "redirect:/main/user/";
 
         Optional<PostModel> postModel = postService.findById(id);
         postService.deleteByID(postModel.get().getId());
