@@ -46,8 +46,8 @@ public class PostController {
         Optional<UserModel> userModel = userService.findByUsernick(usernick);
         UserModel userModelWrapper = userModel.get();
         HttpSession session = request.getSession();
-        String root_path = session.getServletContext().getRealPath("/");
-        String path = root_path + "static\\img\\";
+        String root_path = session.getServletContext().getContextPath();
+        String path = root_path + "resources\\static\\img\\";
 
         UUID uuid = UUID.randomUUID();
         String filename = uuid + "_" + file.getOriginalFilename();

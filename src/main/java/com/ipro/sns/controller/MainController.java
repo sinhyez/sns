@@ -38,10 +38,8 @@ public class MainController {
     private final LikeService likeService;
 
     @GetMapping("/")
-    public String index(HttpServletRequest request){
-        HttpSession session = request.getSession();
-        String rootPath = session.getServletContext().getRealPath("/");
-        String path = rootPath + "static\\img\\";
+    public String index(){
+        String path =  "/home/ubuntu/apps/upload/profile";
         System.out.println(path);
         return "view/index";
     }
