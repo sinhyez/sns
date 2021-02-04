@@ -12,9 +12,9 @@
         <div class="post_user_info" id="modal-post_detail">
 
             <img th:if="${post.get.user.userimg} eq null"
-                 src="/resource/img/profile/Basic.png" alt="usericon">
+                 src="/static/img/profile/Basic.png" alt="usericon">
             <img th:unless="${post.get.user.userimg} eq null"
-                 th:src="@{'/resource/img/profile/' + ${post.get.user.userimg} }" alt="usericon">
+                 th:src="@{'/static/img/profile/' + ${post.get.user.userimg} }" alt="usericon">
 
             <a th:href="@{'/ipro/main/user/' + ${post.get.user.usernick} }"
                class="post_username" th:text="${post.get.user.usernick}"></a>
@@ -29,7 +29,7 @@
         </div>
 
         <div class="post_img post_detail_img">
-            <img th:src="@{'/resource/img/' + ${post.get.imgurl}}" alt="postimg">
+            <img th:src="@{'/static/img/' + ${post.get.imgurl}}" alt="postimg">
         </div>
 
         <div class="posting_info">
@@ -91,8 +91,8 @@
 
 </div>
 <th:block th:replace="view/layout/footer :: footerFragment"></th:block>
-<script th:inline="javascript" th:src="@{'/resource/js/comment.js'}"></script>
-<script th:inline="javascript" th:src="@{'/resource/js/like.js'}"></script>
+<script th:inline="javascript" th:src="@{'/static/js/comment.js'}"></script>
+<script th:inline="javascript" th:src="@{'/static/js/like.js'}"></script>
 </body>
 </html>
 

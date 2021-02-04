@@ -16,12 +16,12 @@
                     <!-- profile model icon area -->
                     <div class="profile_img" th:unless="${user.get().userimg eq null}">
                         <a th:onclick="|profileImgEdit('${user.get.id}','${loginId}')|">
-                            <img th:src="@{'/resource/img/profile/'+ ${user.get().userimg}} " alt="usericon">
+                            <img th:src="@{'/static/img/profile/'+ ${user.get().userimg}} " alt="usericon">
                         </a>
                     </div>
                     <div class="profile_img" th:if="${user.get().userimg eq null}">
                         <a th:onclick="|profileImgEdit('${user.get.id}','${loginId}')|">
-                            <img th:src="@{'/resource/img/profile/Basic.png'}" alt="usericon">
+                            <img th:src="@{'/static/img/profile/Basic.png'}" alt="usericon">
                         </a>
                     </div>
                     <!-- profile model setting area -->
@@ -105,7 +105,7 @@
 
                     <div class="post_item">
                         <a th:href="@{'/ipro/post/details/' + ${i.id}}">
-                            <img th:src="@{'/resource/img/'+ ${i.imgurl}} " alt="post_img" class="post_img user_postimg">
+                            <img th:src="@{'/static/img/'+ ${i.imgurl}} " alt="post_img" class="post_img user_postimg">
                             <!-- post item info likes comment -->
                             <div class="post_item_info">
                                 <ul>

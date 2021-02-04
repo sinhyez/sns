@@ -18,7 +18,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private UserService userService;
+    private final UserService userService;
 
     public SecurityConfig(UserService userService) {
         this.userService = userService;

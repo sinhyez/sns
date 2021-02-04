@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
@@ -84,10 +85,13 @@ public class UserController {
     //유저 프로필 사진 업데이트 프로세스
     @PutMapping(value = "/ipro/user/img_insert/{id}")
     public @ResponseBody String imgInsert(@PathVariable int id,
-                             @RequestParam("filename") MultipartFile multipartFile, Model model) {
+                             @RequestParam("filename") MultipartFile multipartFile,
+                                          HttpServletRequest request) throws IOException{
 
+        HttpSession session = request.getSession();
+        String root_path = session.getServletContext().getRealPath("/");
         Optional<UserModel> userModel = userService.findById(id);
-        String img_path = "C:/Users/yoon sung/Desktop/java/sns/src/main/resources/static/img/profile/" + userModel.get().getUsernick();
+        String img_path = root_path + "resources\\static\\img\\profile\\" + userModel.get().getUsernick();
 
         try {
             if (userModel.get().getUserimg() != null) {

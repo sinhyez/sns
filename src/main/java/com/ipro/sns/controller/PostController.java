@@ -16,6 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -58,9 +60,12 @@ public class PostController {
 
     @PutMapping("/post/edit/{id}")
     public String postEdit(@PathVariable int id, @RequestParam("file") MultipartFile file,
-                           @RequestParam("caption") String caption, @RequestParam("usernick") String usernick) throws Exception {
+                           @RequestParam("caption") String caption, @RequestParam("usernick") String usernick,
+                           HttpServletRequest request) throws Exception {
 
-        String path = "C:/Users/yoon sung/Desktop/java/sns/src/main/resources/static/img/";
+        HttpSession session = request.getSession();
+        String root_path = session.getServletContext().getRealPath("/");
+        String path = root_path + "resources\\static\\img\\";
         Optional<UserModel> userModel = userService.findByUsernick(usernick);
         UserModel userModelWrapper = userModel.get();
 
