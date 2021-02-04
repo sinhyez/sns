@@ -16,7 +16,7 @@
                 <div class="profile_img_area">
                     <div th:unless="${user.get().getUserimg()} eq null">
                         <a th:onclick="|profileImgEdit2('${user.get.id}','${loginId}')|">
-                            <img th:src="@{'/static/img/profile/'+ ${user.get.userimg} }"
+                            <img th:src="@{'/upload/profile/'+ ${user.get.userimg} }"
                                  alt="user_icon" class="user_img_icon">
                         </a>
                     </div>

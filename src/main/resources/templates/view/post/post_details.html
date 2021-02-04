@@ -14,7 +14,7 @@
             <img th:if="${post.get.user.userimg} eq null"
                  src="/static/img/profile/Basic.png" alt="usericon">
             <img th:unless="${post.get.user.userimg} eq null"
-                 th:src="@{'/static/img/profile/' + ${post.get.user.userimg} }" alt="usericon">
+                 th:src="@{'/upload/' + ${post.get.user.userimg} }" alt="usericon">
 
             <a th:href="@{'/ipro/main/user/' + ${post.get.user.usernick} }"
                class="post_username" th:text="${post.get.user.usernick}"></a>
@@ -29,7 +29,7 @@
         </div>
 
         <div class="post_img post_detail_img">
-            <img th:src="@{'/static/img/' + ${post.get.imgurl}}" alt="postimg">
+            <img th:src="@{'/upload/' + ${post.get.imgurl}}" alt="postimg">
         </div>
 
         <div class="posting_info">

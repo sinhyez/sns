@@ -85,13 +85,10 @@ public class UserController {
     //유저 프로필 사진 업데이트 프로세스
     @PutMapping(value = "/ipro/user/img_insert/{id}")
     public @ResponseBody String imgInsert(@PathVariable int id,
-                             @RequestParam("filename") MultipartFile multipartFile,
-                                          HttpServletRequest request) throws IOException{
+                             @RequestParam("filename") MultipartFile multipartFile) throws IOException{
 
-        HttpSession session = request.getSession();
-        String root_path = session.getServletContext().getRealPath("/");
         Optional<UserModel> userModel = userService.findById(id);
-        String img_path = root_path + "resources\\static\\img\\profile\\" + userModel.get().getUsernick();
+        String img_path = "C:/Users/yoon sung/Desktop/upload/profile/" + userModel.get().getUsernick();
 
         try {
             if (userModel.get().getUserimg() != null) {

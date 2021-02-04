@@ -39,8 +39,6 @@ public class MainController {
 
     @GetMapping("/")
     public String index(){
-        String path =  "/home/ubuntu/apps/upload/profile";
-        System.out.println(path);
         return "view/index";
     }
 
@@ -60,7 +58,7 @@ public class MainController {
     }
 
     //main feed
-    @GetMapping("/ipro/main")
+    @RequestMapping("/ipro/main")
     public String main(Model model) throws Exception {
 
         try {

@@ -37,6 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
     }
+
     @Override
     public void configure(WebSecurity web) throws Exception{
         web.ignoring().antMatchers("/css/**", "/js/**", "/img/**");

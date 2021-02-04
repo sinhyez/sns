@@ -27,7 +27,7 @@
                     <div class="search_list_box">
                         <div class="search_list_userimg">
                             <a th:href="@{'/ipro/main/user/' + ${list.usernick}}">
-                                <img th:if="${list.userimg != null}" th:src="@{'/static/img/profile/' + ${list.userimg}}">
+                                <img th:if="${list.userimg != null}" th:src="@{'/upload/profile/' + ${list.userimg}}">
                             </a>
                             <a th:href="@{'/ipro/main/user/' + ${list.usernick}}">
                                 <img th:if="${list.userimg == null}" th:src="@{'/static/img/profile/basic.png'}">

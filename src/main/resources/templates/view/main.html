@@ -21,7 +21,7 @@
                 <!-- card header -->
                 <div class="feed_card_header">
                     <div class="photo_user_info" th:if="${post.user.userimg != null}">
-                        <img th:src="@{'/static/img/profile/' + ${post.user.userimg}}" alt="userIcon">
+                        <img th:src="@{'/upload/' + ${post.user.userimg}}" alt="userIcon">
                         <a th:href="@{'/ipro/main/user/' + ${post.user.usernick}}"
                            class="username" th:text="${post.user.usernick}"></a>
                     </div>
@@ -35,8 +35,7 @@
                 <!-- img card area -->
                 <div class="photo_card_img">
                     <div class="card_photo">
-                        <img th:src="@{ ${#session.getServletContext().getContextPath()}
-                        +'/static/img/' + ${post.imgurl} }" alt="card_img" class="card_img" />
+                        <img th:src="@{'/upload/' + ${post.imgurl} }" alt="card_img" class="card_img" />
                     </div>
                 </div>
 

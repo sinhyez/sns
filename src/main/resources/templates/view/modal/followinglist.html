@@ -16,7 +16,7 @@
                     <div class="follow_list_box">
                         <div class="modal-follow_list_img">
                             <img th:if="${fwlist.followerid.userimg} != null"
-                                 th:src="@{'/resource/img/profile/' + ${fwlist.followerid.userimg} }" alt="">
+                                 th:src="@{'/upload/profile/' + ${fwlist.followerid.userimg} }" alt="">
                             <img th:unless="${fwlist.followerid.userimg}"
                                  th:src="@{'/resource/img/profile/Basic.png'}" alt="">
                         </div>
