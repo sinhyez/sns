@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.Console;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,7 +38,11 @@ public class MainController {
     private final LikeService likeService;
 
     @GetMapping("/")
-    public String index(){
+    public String index(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        String rootPath = session.getServletContext().getRealPath("/");
+        String path = rootPath + "static\\img\\";
+        System.out.println(path);
         return "view/index";
     }
 

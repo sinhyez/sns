@@ -41,11 +41,13 @@ public class PostController {
     //포스팅 업로드 프로세스
     @RequestMapping("/upload")
     public @ResponseBody String uploadProc(@RequestParam("file")MultipartFile file, @RequestParam("caption") String caption,
-                      @RequestParam("usernick") String usernick) throws IOException {
+                      @RequestParam("usernick") String usernick, HttpServletRequest request) throws IOException {
 
         Optional<UserModel> userModel = userService.findByUsernick(usernick);
         UserModel userModelWrapper = userModel.get();
-        String path = "C:/Users/yoon sung/Desktop/java/sns/src/main/resources/static/img/";
+        HttpSession session = request.getSession();
+        String root_path = session.getServletContext().getRealPath("/");
+        String path = root_path + "static\\img\\";
 
         UUID uuid = UUID.randomUUID();
         String filename = uuid + "_" + file.getOriginalFilename();
@@ -65,7 +67,7 @@ public class PostController {
 
         HttpSession session = request.getSession();
         String root_path = session.getServletContext().getRealPath("/");
-        String path = root_path + "resources\\static\\img\\";
+        String path = root_path + "static\\img\\";
         Optional<UserModel> userModel = userService.findByUsernick(usernick);
         UserModel userModelWrapper = userModel.get();
 
