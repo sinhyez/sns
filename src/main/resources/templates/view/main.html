@@ -21,7 +21,7 @@
                 <!-- card header -->
                 <div class="feed_card_header">
                     <div class="photo_user_info" th:if="${post.user.userimg != null}">
-                        <img th:src="@{'/upload/' + ${post.user.userimg}}" alt="userIcon">
+                        <img th:src="@{'/upload/profile/' + ${post.user.userimg}}" alt="userIcon">
                         <a th:href="@{'/ipro/main/user/' + ${post.user.usernick}}"
                            class="username" th:text="${post.user.usernick}"></a>
                     </div>
