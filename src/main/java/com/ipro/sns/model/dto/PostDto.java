@@ -26,7 +26,6 @@ public class PostDto implements Comparator<PostModel> {
                 .id(id)
                 .caption(caption)
                 .user(user)
-                .imgurl(imgurl)
                 .create_date(create_date)
                 .likeState(likeState)
                 .build();

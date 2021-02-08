@@ -17,7 +17,7 @@
                             <img th:if="${fwlist.followingid.userimg} != null"
                                  th:src="@{'/upload/profile/' + ${fwlist.followingid.userimg} }" alt="">
                             <img th:unless="${fwlist.followingid.userimg}"
-                                 th:src="@{'/resource/img/profile/Basic.png'}" alt="">
+                                 th:src="@{'/static/img/profile/Basic.png'}" alt="">
                         </div>
                         <div class="modal-follow_list_username">
                             <a th:href="@{'/main/user/' + ${fwlist.followingid.usernick} }"

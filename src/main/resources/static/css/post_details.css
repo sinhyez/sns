@@ -85,7 +85,7 @@
 
 .posting_caption {
     height: 12.5vh;
-    padding: 1rem .5rem 1rem .5rem;
+    padding: 0 1.5rem;
     border-bottom: 1px solid #26bda4;
 }
 
@@ -111,7 +111,7 @@
 .posting_info .post_info_details {
     font-size: 1.2rem;
     display: flex;
-    padding: 1rem .5rem 1rem .5rem;
+    padding: 1rem 1.5rem 1rem 1.5rem;
 
 }
 
@@ -137,7 +137,7 @@
 }
 
 .post_date {
-    padding : 0 .5rem;
+    padding : 0 1.5rem;
     margin-bottom: 1.5rem;
 }
 
@@ -195,12 +195,6 @@
 }
 
 .add_comment_area textarea {
-    padding: 1.7rem .7rem;
-    border: 0;
-    resize: none;
-    width: 100%;
-    height: 5rem;
-    font-size: 1.4rem;
     outline: none;
 }
 
@@ -217,5 +211,42 @@
 .heart-clicked {
     color: #26bda4;
     animation: .5s pump infinite linear;
+}
+
+/*empty*/
+
+.notLogin {
+    padding: 1.5rem 1rem 1.5rem .5rem;
+}
+
+.notLogin a {
+    text-decoration: none;
+    color: #26bda4;
+}
+
+.notLogin span {
+    color: #999;
+}
+
+.post_info_icon a {
+    text-decoration: none;
+    color: #262626;
+}
+
+.post_img .bx-wrapper {
+    margin-bottom: 3rem;
+}
+
+/*mobile*/
+@media only screen and (max-width: 768px) {
+    .post_details_main {
+        margin: 0;
+        padding: 0;
+    }
+    .detail_main_container {
+        max-width: 100%;
+        margin: 0;
+        border: none;
+    }
 }
 

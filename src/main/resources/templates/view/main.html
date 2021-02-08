@@ -34,9 +34,14 @@
 
                 <!-- img card area -->
                 <div class="photo_card_img">
-                    <div class="card_photo">
-                        <img th:src="@{'/upload/' + ${post.imgurl} }" alt="card_img" class="card_img" />
-                    </div>
+                    <ul class="slider">
+                        <th:block th:each="imglist : ${img}">
+                            <li class="sl" th:if="${post.id} eq ${imglist.postid}">
+                                <img th:src="@{'/upload/' + ${user.get().username}
+                                        + '/' + ${imglist.filename} }" alt="card_img" class="card_img" />
+                            </li>
+                        </th:block>
+                    </ul>
                 </div>
 
                 <!-- card info -->

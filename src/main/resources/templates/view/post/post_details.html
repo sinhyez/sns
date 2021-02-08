@@ -30,7 +30,14 @@
         </div>
 
         <div class="post_img post_detail_img">
-            <img th:src="@{'/upload/' + ${post.get.imgurl}}" alt="postimg">
+            <ul class="slider">
+                <th:block th:each="imglist : ${img}">
+                    <li th:if="${post.get().id} eq ${imglist.postid}">
+                        <img th:src="@{'/upload/' + ${post.get().user.username}
+                                        + '/' + ${imglist.filename} }" alt="card_img" class="card_img" />
+                    </li>
+                </th:block>
+            </ul>
         </div>
 
         <div class="posting_info">
@@ -46,10 +53,16 @@
                     <i th:if="${post.get.likeState} eq false" th:onclick="|like('${post.get.id}','${loginUser.get.id}')|"
                        th:id="'like'+${post.get.id}" class="far fa-thumbs-up fa-2x"></i>
                 </div>
+
                 <th:block th:each="lc : ${likes}">
                     <div class="like_count" th:if="${lc.postid == post.get.id} and ${lc.count} > 0">
                         <a th:onclick="|likelist('${post.get.id}')|">
-                            <span th:text="${lc.count} + 'Likes'"></span>
+                            <th:block th:if="${lc.count} > 1">
+                                <span th:text="'Liked by ' + ${lc.userid} + ' and ' + ${lc.count - 1} + ' others'"></span>
+                            </th:block>
+                            <th:block th:if="${lc.count} eq 1">
+                                <span th:text="${lc.count} + 'Like'"></span>
+                            </th:block>
                         </a>
                     </div>
                 </th:block>

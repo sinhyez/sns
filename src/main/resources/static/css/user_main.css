@@ -93,6 +93,7 @@ main {
     line-height: 1.8;
     margin-left: 1rem;
     border-radius: 0.3rem;
+    text-decoration: none;
 }
 
 .profile_stat {
@@ -123,6 +124,7 @@ main {
     font-size: 1.4rem;
     font-weight: 400;
     line-height: 1.5;
+    word-break: break-all;
 }
 
 
@@ -141,6 +143,8 @@ main {
     /*flex: 1 0 22rem;*/
     margin: 0.5rem;
     color: #fff;
+    height: 28.5rem;
+    overflow: hidden;
 }
 
 .post_item a {
@@ -216,4 +220,101 @@ main {
 .post_something a:hover {
     color: #26bda4;
     transition: all .15s ease;
+}
+
+
+
+/*mobile*/
+
+@media only screen and (max-width: 768px){
+    .user_main_container {
+        min-width: 100%;
+        margin: 2rem 0 2rem 0;
+        padding: 0;
+    }
+    .user_main_container .profile {
+        margin: 0 0 2rem 0;
+        height: 16.8rem;
+        width: 100%;
+        display: inline;
+        border: none;
+        background: none;
+    }
+
+    .profile .profile_setting {
+        width: 100%;
+    }
+
+    .profile .profile_img {
+        padding: 0;
+        margin: 0;
+    }
+
+    .profile_img img {
+        margin-left: 1rem;
+        max-width: 10rem;
+        max-height: 10rem;
+    }
+
+    .profile .profile_setting {
+        margin-top: 10.5rem;
+        position: absolute;
+        display: grid;
+    }
+
+    .profile_setting .edit_btn, .profile_setting .logout_btn {
+        margin: 0 0 .1rem 0;
+        text-align: center;
+        background: #fff;
+    }
+
+    .user_post_area {
+        margin: 0;
+    }
+
+    .profile .profile_stat {
+        margin: 0;
+        padding: 0;
+    }
+    .profile_stat ul{
+        margin: 1rem 0 0 1.5rem;
+        padding: 0;
+        display: flex;
+    }
+    .profile_stat ul li {
+        margin: 0;
+        line-height: 1;
+    }
+
+    .profile_stat ul li ~ li{
+        padding-left: 1rem;
+    }
+    .profile_border .profile_intro {
+        margin-top: .6rem;
+        padding-left: 1.4rem;
+    }
+
+    .user_main_container .user_post_area{
+        margin: 0;
+        padding: 0;
+    }
+
+    .user_post_area .post_item {
+        margin: .1rem;
+        flex: 2 0 22rem;
+    }
+
+    .post_item img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .post_item_info .item_likes {
+        margin-left: 15rem;
+    }
+
+    .main_section {
+        margin-top: 9rem;
+    }
+
 }

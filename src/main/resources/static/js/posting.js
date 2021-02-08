@@ -27,13 +27,12 @@ $(function () {
 function savePosting() {
 
     const data = new FormData($("#postform")[0]);
-    console.log(data);
     $.ajax({
         url : '/upload',
-        type : "POST",
+        method : 'post',
         data : data,
-        enctype : "multiple/form-data",
-        async: false,
+        enctype : 'multipart/form-data',
+        async : false,
         contentType : false,
         processData : false,
         success : function (data) {

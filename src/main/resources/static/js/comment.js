@@ -26,6 +26,7 @@ function commentSend(postid) {
         type: "POST",
         data: param,
         dataType:'text',
+        async: false,
         success: function (data) {
             if (data === 1) {
                 location.reload();

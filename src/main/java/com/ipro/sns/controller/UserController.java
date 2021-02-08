@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.Optional;
 
 
@@ -37,7 +37,7 @@ public class UserController {
             return "view/signup";
         }
         userService.joinUser(userDto);
-        return "redirect:/login";
+        return "view/login";
     }
 
     //헤더에서 유저프로필로 이동할때 처리되는 프로세스
@@ -48,6 +48,7 @@ public class UserController {
 
             String username = SecurityContextHolder.getContext().getAuthentication().getName();
             Optional<UserModel> userModel = userService.findByUsername(username);
+            System.out.println(username);
 
             return "redirect:/main/user/" + userModel.get().getUsernick();
 
@@ -61,9 +62,10 @@ public class UserController {
 
     //유저 프로필 업데이트
     @RequestMapping(value = "/user/edit/{usernick}")
-    public String updateUser(@PathVariable("usernick") String usernick, Model model) throws Exception {
+    public String updateUser(@PathVariable("usernick") String usernick, Model model, Principal principal) throws Exception {
 
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        String username = principal.getName();
+        System.out.println(username);
         model.addAttribute("user", userService.findByUsername(username));
 
         return "view/user/edit";

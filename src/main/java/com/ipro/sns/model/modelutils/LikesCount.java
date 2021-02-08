@@ -8,6 +8,6 @@ public class LikesCount {
     private int postid;
     private int count;
     private boolean likeState;
-    private int userid;
+    private String userid;
 
 }

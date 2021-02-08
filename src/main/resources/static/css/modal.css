@@ -1,6 +1,6 @@
 
 .modal-list {
-    z-index: 999;
+    z-index: 99999;
     border: 1px solid;
     position: fixed;
     left: 0;
@@ -90,4 +90,16 @@
 
 #modal-img_insert {
     animation: fadein .75s;
+}
+
+
+/**/
+@media only screen and (max-width: 768px) {
+
+    .modal-list .modal-follow-box {
+        margin: 69% auto;
+    }
+    .modal-list .posting_container {
+        padding-top: 13rem;
+    }
 }

@@ -22,8 +22,8 @@ public class PostModel {
     @Column
     private String caption;
 
-    @Column(nullable = false, length = 500)
-    private String imgurl;
+//    @Column(nullable = false, length = 500)
+//    private String imgurl;
 
     @ManyToOne
     @JoinColumn(name = "userid")
@@ -40,11 +40,10 @@ public class PostModel {
     private int likeCount;
 
     @Builder
-    public PostModel(int id, String caption, String imgurl, UserModel user,
+    public PostModel(int id, String caption, UserModel user,
                      Timestamp create_date, boolean likeState) {
         this.id = id;
         this.caption = caption;
-        this.imgurl = imgurl;
         this.user = user;
         this.create_date = create_date;
         this.likeState = likeState;

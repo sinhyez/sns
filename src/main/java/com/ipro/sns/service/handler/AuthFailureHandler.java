@@ -25,7 +25,7 @@ public class AuthFailureHandler implements AuthenticationFailureHandler {
         }
 
         request.setAttribute("errormsg", errorMsg);
-        String DEFAULT_FAILURE_URL = "/ipro/login?error=true";
+        String DEFAULT_FAILURE_URL = "/login?error=true";
         request.getRequestDispatcher(DEFAULT_FAILURE_URL).forward(request, response);
     }
 }

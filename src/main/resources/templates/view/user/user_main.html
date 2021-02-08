@@ -31,23 +31,17 @@
                            th:href="@{'/user/edit/' + ${user.get().usernick}}" class="btn edit_btn">
                             Edit Profile
                         </a>
-                        <a th:if="${loginId eq user.get().id}" href="/logout">
-                            <button class="btn logout_btn">
-                                Logout
-                            </button>
+                        <a th:if="${loginId eq user.get().id}" href="/logout" class="btn logout_btn">
+                            Logout
                         </a>
                         <th:block th:switch="${followcount}">
                             <a th:case="false" th:unless="${loginId eq user.get().id}"
-                               th:href="@{'/follow/' + ${user.get().id}}">
-                                <button class="btn edit_btn">
-                                    Follow
-                                </button>
+                               th:href="@{'/follow/' + ${user.get().id}}" class="btn edit_btn">
+                                Follow
                             </a>
                             <a th:case="true" th:unless="${loginId eq user.get().id}"
-                               th:href="@{'/unfollow/' + ${user.get().id}}" >
-                                <button class="btn edit_btn">
-                                    Unfollow
-                                </button>
+                               th:href="@{'/unfollow/' + ${user.get().id}}" class="btn edit_btn">
+                                Unfollow
                             </a>
                         </th:block>
                     </div>
@@ -105,7 +99,10 @@
 
                     <div class="post_item">
                         <a th:href="@{'/post/details/' + ${i.id}}">
-                            <img th:src="@{'/upload/'+ ${i.imgurl}} " alt="post_img" class="post_img user_postimg">
+                            <th:block th:each="imglist : ${img}" th:if="${imglist.postid} eq ${i.id}">
+                                <img th:src="@{'/upload/' +${user.get.username} + '/' + ${imglist.filename}} "
+                                     alt="post_img" class="post_img user_postimg">
+                            </th:block>
                             <!-- post item info likes comment -->
                             <div class="post_item_info">
                                 <ul>

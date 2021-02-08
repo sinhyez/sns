@@ -1,29 +1,27 @@
 package com.ipro.sns.controller;
 
-import com.ipro.sns.model.FollowModel;
-import com.ipro.sns.model.LikesModel;
-import com.ipro.sns.model.PostModel;
-import com.ipro.sns.model.UserModel;
+import com.ipro.sns.model.*;
 import com.ipro.sns.model.dto.PostDto;
 import com.ipro.sns.model.dto.UserDto;
 import com.ipro.sns.model.modelutils.Count;
 import com.ipro.sns.model.modelutils.LikesCount;
 import com.ipro.sns.service.*;
 import lombok.AllArgsConstructor;
+import org.apache.tomcat.util.digester.ArrayStack;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
 import javax.servlet.http.HttpSession;
+import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 import java.util.List;
-import java.util.Optional;
 
 
 @Controller
@@ -91,10 +89,11 @@ public class MainController {
             PostDto postDto = new PostDto();
             Collections.sort(postList, postDto);
 
+            List<PostImgModel> postImgModelList = postService.findByPostid();
+            model.addAttribute("img", postImgModelList);
             model.addAttribute("postlist", postList);
 
             return "view/main";
-
         } catch (Exception e) {
             return "view/login";
         }
@@ -156,7 +155,11 @@ public class MainController {
             lc.setCount(likeService.countByPostid(p.getId()));
             likeCount.add(lc);
         }
+
         model.addAttribute("likes", likeCount);
+
+        List<PostImgModel> postImgModelList = postService.findByPostid();
+        model.addAttribute("img", postImgModelList);
 
         return "view/user/user_main";
 

@@ -1,9 +1,6 @@
 package com.ipro.sns.controller;
 
-import com.ipro.sns.model.CommnetModel;
-import com.ipro.sns.model.LikesModel;
-import com.ipro.sns.model.PostModel;
-import com.ipro.sns.model.UserModel;
+import com.ipro.sns.model.*;
 import com.ipro.sns.model.modelutils.LikesCount;
 import com.ipro.sns.service.CommentService;
 import com.ipro.sns.service.LikeService;
@@ -13,18 +10,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.transaction.Transactional;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.io.File;
+import java.util.*;
+import java.util.logging.Logger;
 
 @Controller
 @RequiredArgsConstructor
@@ -41,57 +35,89 @@ public class PostController {
 
     //포스팅 업로드 프로세스
     @RequestMapping("/upload")
-    public @ResponseBody String uploadProc(@RequestParam("file")MultipartFile file, @RequestParam("caption") String caption,
-                                           @RequestParam("usernick") String usernick) throws IOException {
+    public @ResponseBody
+    String uploadProc(MultipartHttpServletRequest request,
+                    @RequestParam("caption") String caption, @RequestParam("usernick") int userid) throws Exception {
 
-        Optional<UserModel> userModel = userService.findByUsernick(usernick);
-        UserModel userModelWrapper = userModel.get();
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        String path = ubImgPath + username;
+        File file = new File(path);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
 
-        UUID uuid = UUID.randomUUID();
-        String filename = uuid + "_" + file.getOriginalFilename();
-        Path filepath = Paths.get(ubImgPath + filename);
-        Files.write(filepath, file.getBytes());
+        PostModel postModel = new PostModel();
 
-        postService.postSave(caption, userModelWrapper, filename);
+        Optional<UserModel> userModel = userService.findById(userid);
+        postModel.setUser(userModel.get());
+        postModel.setCaption(caption);
+
+        postModel.setId(postService.postSave(postModel));
+        postService.flush();
+
+        List<MultipartFile> multipartFiles = request.getFiles("files");
+        for (MultipartFile f : multipartFiles) {
+            PostImgModel postImgModel = new PostImgModel();
+
+            String oriName = f.getOriginalFilename();
+            String fileName = postService.rand(oriName, f.getBytes(), path);
+
+            postImgModel.setFileoname(oriName);
+            postImgModel.setFilename(fileName);
+            postImgModel.setPostid(postModel.getId());
+
+            postService.postImgSave(postImgModel);
+
+        }
 
         return "ok";
-
     }
+
+
 
     //포스팅 디테일 화면
     @RequestMapping("/post/details/{id}")
     public String postDetails(@PathVariable("id") int id, Model model) throws Exception {
 
-        //유저정보 set
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        Optional<UserModel> user = userService.findByUsername(username);
+        try {
+            //유저정보 set
+            String username = SecurityContextHolder.getContext().getAuthentication().getName();
+            Optional<UserModel> user = userService.findByUsername(username);
 
-        //포스트 셋
-        Optional<PostModel> postModel = postService.findById(id);
+            //포스트 셋
+            Optional<PostModel> postModel = postService.findById(id);
 
 
-        List<CommnetModel> commentlist = commentService.findByPostid(id);
-        List<PostModel> postList = postService.findByUserIdOrderByIdDesc(user.get().getId());
-        List<LikesCount> likeCount = new ArrayList<>();
+            List<CommnetModel> commentlist = commentService.findByPostid(id);
+            List<PostImgModel> postImgModelList = postService.findByPostid();
+            List<PostModel> postList = postService.findByUserIdOrderByIdDesc(postModel.get().getUser().getId());
+            List<LikesCount> likeCount = new ArrayList<>();
 
-        for (PostModel p : postList) {
-            LikesCount lc = new LikesCount();
-            LikesModel likesModel = likeService.findByUseridIdAndPosidId(user.get().getId(), p.getId());
-            if (likesModel != null) {
-                p.setLikeState(true);
+            for (PostModel p : postList) {
+                LikesCount lc = new LikesCount();
+                LikesModel likesModel = likeService.findByUseridIdAndPosidId(user.get().getId(), p.getId());
+                if (likesModel != null) {
+                    p.setLikeState(true);
+                }
+                lc.setPostid(p.getId());
+                lc.setCount(likeService.countByPostid(p.getId()));
+                lc.setUserid(p.getUser().getUsernick());
+
+                likeCount.add(lc);
             }
-            lc.setPostid(p.getId());
-            lc.setCount(likeService.countByPostid(p.getId()));
 
-            likeCount.add(lc);
+            model.addAttribute("img", postImgModelList);
+            model.addAttribute("likes", likeCount);
+            model.addAttribute("post", postModel);
+            model.addAttribute("loginUser", user);
+            model.addAttribute("comment", commentlist);
+
+            return "view/post/post_details";
+
+        } catch (Exception e) {
+            return "1";
         }
 
-        model.addAttribute("likes", likeCount);
-        model.addAttribute("post", postModel);
-        model.addAttribute("loginUser", user);
-        model.addAttribute("comment", commentlist);
-
-        return "view/post/post_details";
     }
 
     //포스팅 삭제

@@ -8,16 +8,6 @@
     padding: 0 2rem;
     width: 10%;
 }
-@media screen and (max-height: 1060px){
-    .search_null_container {
-        height: 32.5rem;
-    }
-}
-@media screen and (min-height: 1020px){
-    .search_null_container {
-        height: 66.5rem;
-    }
-}
 
 .null_box {
     width: 60rem;
@@ -86,4 +76,27 @@
 .search_list_username a:hover {
     color: #26bda4;
     transition: .3s ease;
+}
+
+@media only screen and (max-width: 768px) {
+    .wrapper .search_bar_container{
+        min-width: 375px;
+        padding: 0;
+    }
+
+    .search_null_container {
+        min-width: 375px;
+        padding: 0;
+    }
+    .search_null_container .null_box {
+        margin: 3rem 0;
+        width: 100%;
+    }
+    .null_box .null_box_text {
+        padding: 2rem 0 4rem 0;
+        white-space: pre-line;
+    }
+    .null_box .null_box_text span {
+        margin: 0;
+    }
 }
