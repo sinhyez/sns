@@ -48,7 +48,6 @@ public class UserController {
 
             String username = SecurityContextHolder.getContext().getAuthentication().getName();
             Optional<UserModel> userModel = userService.findByUsername(username);
-            System.out.println(username);
 
             return "redirect:/main/user/" + userModel.get().getUsernick();
 
@@ -65,7 +64,6 @@ public class UserController {
     public String updateUser(@PathVariable("usernick") String usernick, Model model, Principal principal) throws Exception {
 
         String username = principal.getName();
-        System.out.println(username);
         model.addAttribute("user", userService.findByUsername(username));
 
         return "view/user/edit";
