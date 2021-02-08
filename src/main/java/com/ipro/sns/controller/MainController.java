@@ -38,65 +38,60 @@ public class MainController {
     @RequestMapping("/")
     public String main(Model model) throws Exception {
 
-        try {
-            //현재 로그인 되어있는 아이디 검색
-            String username = SecurityContextHolder.getContext().getAuthentication().getName();
-            Optional<UserModel> user = userService.findByUsername(username);
-            UserModel userWrapper = user.get();
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Optional<UserModel> user = userService.findByUsername(username);
+        UserModel userWrapper = user.get();
 
-            //유저아이디를 통해 유저테이블에 존재하는 현재 유저의 모든정보 전달
-            model.addAttribute("user", user);
+        //유저아이디를 통해 유저테이블에 존재하는 현재 유저의 모든정보 전달
+        model.addAttribute("user", user);
 
-            //login user 가 Follow한 아이디 리스트
-            List<FollowModel> followList = followService.findByFollowingid(userWrapper);
+        //login user 가 Follow한 아이디 리스트
+        List<FollowModel> followList = followService.findByFollowingid(userWrapper);
 
-            //login user의 post 찾기
-            List<PostModel> postList = postService.findByUserIdOrderByIdDesc(userWrapper.getId());
+        //login user의 post 찾기
+        List<PostModel> postList = postService.findByUserIdOrderByIdDesc(userWrapper.getId());
 
-            // following한 유저의 게시글 select 후 user 포스팅과 list 합치기
-            for (FollowModel f : followList) {
-                List<PostModel> post = postService.findByUserIdOrderByIdDesc(f.getFollowerid().getId());
-                postList.addAll(post);
-            }
-
-            //comment counting
-            List<Count> count = new ArrayList<>();
-            for (PostModel p : postList) {
-                Count c = new Count();
-                c.setPostid(p.getId());
-                c.setCount(commentService.countByPostid(p.getId()));
-
-                count.add(c);
-            }
-            model.addAttribute("count", count);
-
-            //like count
-            List<LikesCount> likeCount = new ArrayList<>();
-            for (PostModel p : postList) {
-                LikesCount lc = new LikesCount();
-                LikesModel likesModel = likeService.findByUseridIdAndPosidId(userWrapper.getId(), p.getId());
-                if (likesModel != null) {
-                    p.setLikeState(true);
-                }
-                lc.setPostid(p.getId());
-                lc.setCount(likeService.countByPostid(p.getId()));
-
-                likeCount.add(lc);
-            }
-            model.addAttribute("likes", likeCount);
-
-            //작성한 날짜 순서 정렬
-            PostDto postDto = new PostDto();
-            Collections.sort(postList, postDto);
-
-            List<PostImgModel> postImgModelList = postService.findByPostid();
-            model.addAttribute("img", postImgModelList);
-            model.addAttribute("postlist", postList);
-
-            return "view/main";
-        } catch (Exception e) {
-            return "view/login";
+        // following한 유저의 게시글 select 후 user 포스팅과 list 합치기
+        for (FollowModel f : followList) {
+            List<PostModel> post = postService.findByUserIdOrderByIdDesc(f.getFollowerid().getId());
+            postList.addAll(post);
         }
+
+        //comment counting
+        List<Count> count = new ArrayList<>();
+        for (PostModel p : postList) {
+            Count c = new Count();
+            c.setPostid(p.getId());
+            c.setCount(commentService.countByPostid(p.getId()));
+
+            count.add(c);
+        }
+        model.addAttribute("count", count);
+
+        //like count
+        List<LikesCount> likeCount = new ArrayList<>();
+        for (PostModel p : postList) {
+            LikesCount lc = new LikesCount();
+            LikesModel likesModel = likeService.findByUseridIdAndPosidId(userWrapper.getId(), p.getId());
+            if (likesModel != null) {
+                p.setLikeState(true);
+            }
+            lc.setPostid(p.getId());
+            lc.setCount(likeService.countByPostid(p.getId()));
+
+            likeCount.add(lc);
+        }
+        model.addAttribute("likes", likeCount);
+
+        //작성한 날짜 순서 정렬
+        PostDto postDto = new PostDto();
+        Collections.sort(postList, postDto);
+
+        List<PostImgModel> postImgModelList = postService.findByPostid();
+        model.addAttribute("img", postImgModelList);
+        model.addAttribute("postlist", postList);
+
+        return "view/main";
 
     }
 
