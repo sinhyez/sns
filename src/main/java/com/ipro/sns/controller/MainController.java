@@ -83,10 +83,6 @@ public class MainController {
         }
         model.addAttribute("likes", likeCount);
 
-        //작성한 날짜 순서 정렬
-        PostModel postModel = new PostModel();
-        postList.sort(postModel);
-
         List<PostImgModel> postImgModelList = postService.findByPostid();
         model.addAttribute("img", postImgModelList);
         model.addAttribute("postlist", postList);
