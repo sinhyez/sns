@@ -85,7 +85,7 @@ public class MainController {
 
         //작성한 날짜 순서 정렬
         PostModel postModel = new PostModel();
-        Collections.sort(postList, postModel);
+        postList.sort(postModel);
 
         List<PostImgModel> postImgModelList = postService.findByPostid();
         model.addAttribute("img", postImgModelList);
