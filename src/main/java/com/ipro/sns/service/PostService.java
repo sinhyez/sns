@@ -12,6 +12,7 @@ import org.springframework.util.FileCopyUtils;
 
 import javax.transaction.Transactional;
 import java.io.File;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -42,8 +43,11 @@ public class PostService {
     public int postSave(PostModel postModel) {
 
         PostModel p = new PostModel();
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
         p.setCaption(postModel.getCaption());
         p.setUser(postModel.getUser());
+        p.setCreate_date(timestamp);
 
         postRepository.save(p);
 

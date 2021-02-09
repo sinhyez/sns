@@ -1,10 +1,3 @@
-article {
-    margin: 0 auto 5rem;
-    font-size: 1.6rem;
-    border: 1px solid #26bda4;
-    background: #fff;
-}
-
 .feed_main {
     margin-top: 5rem;
     display: flex;
@@ -105,14 +98,25 @@ article {
 }
 
 .photo_caption {
+    max-width: 432.95px;
     padding-left: 1rem;
     padding-right: 1rem;
     margin-bottom: 6px;
 }
 
 .caption {
+    word-break: break-word;
     padding-top: 1rem;
-    font-size: 1.3rem;
+}
+
+.more {
+    text-decoration: none;
+    color: #999999;
+    padding: 1rem .5rem;
+}
+.more:hover {
+    color: #269180;
+    transition: all .3s ease;
 }
 
 .photo_tag {
@@ -124,10 +128,23 @@ article {
 }
 
 .photo_comments {
+    border-top: 1px solid #26bda4;
+    padding-top: .75rem;
     padding-bottom: 1rem;
 }
 
+.photo_comments .post_comment_area {
+    max-width: 432.95px;
+}
+
+.photo_comments .comment_user_area {
+    display: flex;
+    margin-bottom: .23rem;
+}
+
+
 .photo_comments .photo_comment {
+    margin-top: .7rem;
     padding-left: 1rem;
     list-style: none;
     font-size: 1.3rem;
@@ -136,8 +153,13 @@ article {
 
 .photo_comment .comment_user {
     text-decoration: none;
-    color: black;
+    color: #999999;
     font-weight: 600;
+    margin-top: 1rem;
+}
+.comment_user:hover {
+    color: #269180;
+    transition: all .3s ease;
 }
 
 .photo_info .photo_date{
@@ -162,15 +184,6 @@ article {
     flex-shrink: 0;
 }
 
-.add_comment_area textarea {
-    padding: 1.5rem;
-    border: 0;
-    resize: none;
-    width: 100%;
-    height: 5rem;
-    font-size: 1.4rem;
-}
-
 .add_comment_area textarea:focus {
     outline: none;
 }
@@ -181,12 +194,7 @@ article {
 
 .post_btn {
     margin-right: .5rem;
-    font-size: 1.6rem;
-    border: none;
     background-color: #fff;
-    color: #26bda4;
-    outline: none;
-    cursor: pointer;
     transition: all .15s ease;
 }
 

@@ -22,9 +22,6 @@ public class PostModel implements Comparator<PostModel> {
     @Column
     private String caption;
 
-//    @Column(nullable = false, length = 500)
-//    private String imgurl;
-
     @ManyToOne
     @JoinColumn(name = "userid")
     private UserModel user;

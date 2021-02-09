@@ -1,9 +1,3 @@
-
-function likeLoad(postid, userid) {
-
-    let like
-}
-
 //좋아요 ajax
 function like(postid, userid) {
 

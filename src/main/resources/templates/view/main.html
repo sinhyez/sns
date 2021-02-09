@@ -37,8 +37,7 @@
                     <ul class="slider">
                         <th:block th:each="imglist : ${img}">
                             <li class="sl" th:if="${post.id} eq ${imglist.postid}">
-                                <img th:src="@{'/upload/' + ${user.get().username}
-                                        + '/' + ${imglist.filename} }" alt="card_img" class="card_img" />
+                                <img th:src="@{'/upload/' + ${imglist.filename} }" alt="card_img" class="card_img" />
                             </li>
                         </th:block>
                     </ul>
@@ -58,9 +57,12 @@
                            th:id="'like'+${post.id}" class="far fa-thumbs-up fa-2x"></i>
                         <th:block th:each="lC : ${likes}" th:if="${lC.count}" eq 1>
                             <a th:onclick="|likelist('${post.id}')|" class="likeCheck">
-                                <span class="photo_like_count" th:if="${lC.postid == post.id} and ${lC.count} >= 0"
-                                      th:text="${lC.count} + 'Likes'">
-                            </span>
+                                <span class="photo_like_count" th:if="${lC.postid == post.id} and ${lC.count} > 2"
+                                      th:text="'Liked by ' + ${lC.userid} + ' and ' + ${lC.count - 1} + ' others'">
+                                </span>
+                                <span class="photo_like_count" th:if="${lC.postid == post.id} and ${lC.count} <= 2"
+                                      th:text="${lC.count} + 'Like'">
+                                </span>
                             </a>
                         </th:block>
                     </span>
@@ -74,17 +76,23 @@
                         <span class="caption" th:text="${post.caption}"></span>
                     </div>
 
-                    <!--                &lt;!&ndash; article tag &ndash;&gt;-->
-                    <!--                <div class="photo_tag">-->
-                    <!--                    #acne-->
-                    <!--                </div>-->
-
                     <!-- article comment -->
-                    <th:block th:each="li : ${count}">
-                        <div class="photo_comments" th:if="${post.id == li.postid}">
-                            <div class="photo_comment" th:if="${li.count} > 0">
+                    <th:block th:each="list : ${count}">
+                        <div class="photo_comments" th:if="${post.id == list.postid}">
+                            <th:block th:each="co, iter : ${c}" th:if="${post.id} eq ${co.postid.id}">
+                                <div class="post_comment_area" th:if="${list.count} <= 2">
+                                    <div class="comment_user_area">
+                                        <a href="" th:text="${co.userid.usernick}" class="comment_username"></a>
+                                        <span th:text="${co.content}"></span>
+                                    </div>
+                                    <div class="comment_edit_area" th:if="${co.userid.id} eq ${user.get.id}">
+                                        <a th:onclick="|commentDlete('${co.userid.id}')|" class="comment_edit">Delete</a>
+                                    </div>
+                                </div>
+                            </th:block>
+                            <div class="photo_comment" th:if="${list.count} > 0">
                                 <a th:href="@{'/post/details/' + ${post.id}}" class="comment_user"
-                                   th:text="'View all ' + ${li.count} + ' comments'"></a>
+                                   th:text="'View all ' + ${list.count} + ' comments'"></a>
                             </div>
                         </div>
                     </th:block>

@@ -64,7 +64,7 @@
                     </div>
                     <!-- profile model introduce area -->
                     <div class="profile_intro">
-                        <span th:text="${user.get().userintro}"></span>
+                        <span class="intro" th:text="${user.get().userintro}"></span>
                     </div>
                 </div>
                 <!-- end of profile border line -->
@@ -100,7 +100,7 @@
                     <div class="post_item">
                         <a th:href="@{'/post/details/' + ${i.id}}">
                             <th:block th:each="imglist : ${img}" th:if="${imglist.postid} eq ${i.id}">
-                                <img th:src="@{'/upload/' +${user.get.username} + '/' + ${imglist.filename}} "
+                                <img th:src="@{'/upload/' + ${imglist.filename}} "
                                      alt="post_img" class="post_img user_postimg">
                             </th:block>
                             <!-- post item info likes comment -->

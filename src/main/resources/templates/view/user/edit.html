@@ -11,7 +11,7 @@
             <div id="modal-img_insert"></div>
         </div>
         <div class="edit_body">
-            <form th:action="@{'/user/user_edit'}" method="post">
+            <form th:action="@{'/user/user_edit'}" method="post" th:object="${userDto}">
                 <!-- profile_img area -->
                 <div class="profile_img_area">
                     <div th:unless="${user.get().getUserimg()} eq null">
@@ -38,9 +38,11 @@
 
                 <div class="int_area profile-int-area">
                     <!-- user_nickname area -->
-                    <input type="text" id="nick" name="usernick" autocapitalize="off"
+                    <input type="text" id="nick" name="usernick" autocapitalize="off" th:field="*{usernick}"
                            th:value="${user.get().usernick}" placeholder="Username">
                     <label for="nick" style="left: .6rem">Username</label>
+                    <span th:if="${#fields.hasErrors('usernick')}" th:errors="*{usernick}"></span>
+                    <p th:text="${userDto.usernick}"></p>
                 </div>
                 <div class="profile-int-area int_area">
                     <!-- user_realname area -->

@@ -72,7 +72,7 @@
 .int_area label{
     position: absolute;
     top: 15px;
-    left: 10px;
+    left: 6px;
     font-size: 1.2rem;
     transition: .3s ease;
     cursor: text;
@@ -96,8 +96,9 @@
     color: #166cea;
 }
 .int_area span{
+    font-size: 1.5rem;
     color: red;
-    padding-left: 10px;
+    padding: 0 0 .5rem .5rem;
 }
 
 .btn_area{
@@ -162,4 +163,9 @@
 
 .sign_up_input {
     margin-bottom: 1rem;
+}
+
+#joinform .int_area input,
+#joinform .int_area textarea {
+    margin-bottom: 0;
 }

@@ -5,11 +5,13 @@ import com.ipro.sns.model.UserModel;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.sql.Timestamp;
 import java.util.Comparator;
 
 @Data
+@ToString
 @NoArgsConstructor
 public class PostDto implements Comparator<PostModel> {
 

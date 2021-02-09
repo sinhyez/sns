@@ -5,23 +5,17 @@ import com.ipro.sns.model.UserModel;
 import com.ipro.sns.model.modelutils.Role;
 import lombok.*;
 
-import javax.validation.constraints.NotBlank;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @ToString
 @NoArgsConstructor
 public class UserDto {
 
     private int id;
-    @NotBlank(message = "Please enter Email")
     private String username;
-    @NotBlank(message = "Please enter Password")
     private String userpw;
-    @NotBlank(message = "Please enter Username")
     private String usernick;
-    @NotBlank(message = "Please enter Full Name")
     private String userfull;
     private String userimg;
     private String userintro;

@@ -5,6 +5,7 @@ import com.ipro.sns.model.dto.PostDto;
 import com.ipro.sns.model.dto.UserDto;
 import com.ipro.sns.model.modelutils.Count;
 import com.ipro.sns.model.modelutils.LikesCount;
+import com.ipro.sns.repository.PostRepository;
 import com.ipro.sns.service.*;
 import lombok.AllArgsConstructor;
 import org.apache.tomcat.util.digester.ArrayStack;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpSession;
 import java.awt.*;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.*;
 import java.util.List;
 
@@ -79,17 +81,27 @@ public class MainController {
                 }
                 lc.setPostid(p.getId());
                 lc.setCount(likeService.countByPostid(p.getId()));
+                lc.setUserid(p.getUser().getUsernick());
 
                 likeCount.add(lc);
             }
             model.addAttribute("likes", likeCount);
+
+            try {
+                List<CommnetModel> commentlist = commentService.findByAll();
+                model.addAttribute("c", commentlist);
+            } catch (Exception e) {
+                e.getStackTrace();
+            }
 
             List<PostImgModel> postImgModelList = postService.findByPostid();
             model.addAttribute("img", postImgModelList);
             model.addAttribute("postlist", postList);
 
             return "view/main";
+
         } catch (Exception e) {
+            e.getStackTrace();
             return "view/login";
         }
 
@@ -97,7 +109,8 @@ public class MainController {
 
     //user Profile page
     @RequestMapping("/main/user/{usernick}")
-    public String userMain(@PathVariable("usernick") String usernick, Model model) throws Exception {
+    public String userMain(@PathVariable("usernick") String usernick, Model model,
+                           Principal principal) throws Exception {
 
         //유저정보 set
         Optional<UserModel> userModel = userService.findByUsernick(usernick);
@@ -105,17 +118,15 @@ public class MainController {
         model.addAttribute("user", userModel);
 
         try {
-
-            String username = SecurityContextHolder.getContext().getAuthentication().getName();
+            String username = principal.getName();
             Optional<UserModel> loginUser = userService.findByUsername(username);
             UserModel loginUserWrapper = loginUser.get();
             model.addAttribute("loginId", loginUser.get().getId());
 
             boolean checkFollow = followService.checkFollow(user.getId(), loginUserWrapper.getId());
             model.addAttribute("followcount", checkFollow);
-
         } catch (Exception e) {
-
+            e.getStackTrace();
         }
 
         //이미지 카운트

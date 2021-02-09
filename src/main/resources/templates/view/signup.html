@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/import.css">
+    <script src="/static/js/jquery-3.5.1.min.js"></script>
+    <script src="/static/js/Auth.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet">
     <title>Phoblo</title>
 </head>
@@ -17,35 +19,37 @@
                 </a>
             </h1>
             <!-- form area -->
-            <form method="post" class="auth_form" role="form" autocomplete="off"
+            <form id="joinform" method="post" class="auth_form" role="form" autocomplete="off"
                   th:action="@{/signup}" th:object="${userDto}">
                 <!-- Email -->
                 <div class="int_area sign_up_input">
                     <input type="email" id="id" name="username" th:field="*{username}"
                            autocapitalize="off" placeholder="email" />
                     <label for="id">Email Address</label>
-                    <span  th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+                    <span class="error1"></span>
+                    <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
                 </div>
                 <!-- password -->
                 <div class="int_area sign_up_input">
                     <input type="password" id="pw" name="userpw" th:field="*{userpw}"
                            autocapitalize="off" placeholder="password" />
                     <label for="pw">Password</label>
-                    <span  th:if="${#fields.hasErrors('userpw')}" th:errors="*{userpw}"></span>
+                    <span class="error2"></span>
                 </div>
                 <!-- nickname -->
                 <div class="int_area sign_up_input">
                     <input type="text" id="name" name="usernick" th:field="*{usernick}"
                            autocapitalize="off" placeholder="usernick" />
                     <label for="name">User Name</label>
-                    <span  th:if="${#fields.hasErrors('usernick')}" th:errors="*{usernick}"></span>
+                    <span class="error3"></span>
+                    <span th:if="${#fields.hasErrors('usernick')}" th:errors="*{usernick}"></span>
                 </div>
                 <!-- username -->
                 <div class="int_area sign_up_input">
                     <input type="text" id="fullname" name="userfull" th:field="*{userfull}"
                            autocapitalize="off" placeholder="userfull" />
                     <label for="fullname">Full Name</label>
-                    <span  th:if="${#fields.hasErrors('userfull')}" th:errors="*{userfull}"></span>
+                    <span class="error4"></span>
                 </div>
                 <!-- submit button --->
                 <div class="btn_area">

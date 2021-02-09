@@ -22,11 +22,16 @@ $(function () {
         }
     });
 
-})
+});
 
 function savePosting() {
 
     const data = new FormData($("#postform")[0]);
+    const valid = $(".form_caption").val();
+    if (valid.length > 300) {
+        alert("Please enter less than 300 characters.");
+    }
+
     $.ajax({
         url : '/upload',
         method : 'post',

@@ -5,7 +5,7 @@ import com.ipro.sns.model.UserModel;
 import com.ipro.sns.model.dto.UserDto;
 import com.ipro.sns.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +17,7 @@ import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.Objects;
 import java.util.Optional;
 
 
@@ -42,11 +43,11 @@ public class UserController {
 
     //헤더에서 유저프로필로 이동할때 처리되는 프로세스
     @RequestMapping("/main/user/")
-    public String userProfile() throws Exception{
+    public String userProfile(Principal principal) throws Exception{
 
         try {
 
-            String username = SecurityContextHolder.getContext().getAuthentication().getName();
+            String username = principal.getName();
             Optional<UserModel> userModel = userService.findByUsername(username);
 
             return "redirect:/main/user/" + userModel.get().getUsernick();
@@ -61,10 +62,12 @@ public class UserController {
 
     //유저 프로필 업데이트
     @RequestMapping(value = "/user/edit/{usernick}")
-    public String updateUser(@PathVariable("usernick") String usernick, Model model, Principal principal) throws Exception {
+    public String updateUser(@PathVariable("usernick") String usernick, UserDto userDto,
+                             Model model, Principal principal) throws Exception {
 
-        String username = principal.getName();
+        String username = principal.getName();;
         model.addAttribute("user", userService.findByUsername(username));
+        model.addAttribute("msg", "");
 
         return "view/user/edit";
     }
@@ -72,16 +75,16 @@ public class UserController {
     //유저 프로필 사진 업데이트
 
     @RequestMapping("/user/img_insert")
-    public String userImgInsert(Model model) throws Exception{
+    public String userImgInsert(Model model, Principal principal) throws Exception{
 
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        String username = principal.getName();
         model.addAttribute("user", userService.findByUsername(username));
 
         return "view/user/img_edit";
     }
     //유저 프로필 사진 업데이트 프로세스
     @RequestMapping(value = "/user/img_insert/{id}")
-    public @ResponseBody String imgInsert(@PathVariable int id,
+    public @ResponseBody String imgInsert(@PathVariable int id, UserDto userDto,
                              @RequestParam("filename") MultipartFile multipartFile) throws IOException{
 
         Optional<UserModel> userModel = userService.findById(id);
@@ -106,17 +109,20 @@ public class UserController {
 
     //유저 프로필 업데이트 프로세스
     @RequestMapping(value = "/user/user_edit")
-    public String profileEdit(HttpServletRequest request) throws Exception{
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+    public String profileEdit(Principal principal, @RequestParam("usernick") String usernick,
+                              @RequestParam("userfull") String userfull, @RequestParam("userintro") String userintro,
+                              @Valid UserDto userDto, BindingResult bindingResult, Model model) throws Exception{
+
+        if (userService.check(userDto, bindingResult)) {
+            model.addAttribute("userModel", userDto);
+            System.out.println(bindingResult);
+            return "redirect:/user/edit/"+usernick;
+        }
+
+        String username = principal.getName();
         String redirect = "redirect:/main/user/";
-
-        //파라메터 값을 넘겨받을 변수지정
-        String nick = request.getParameter("usernick");
-        String full = request.getParameter("userfull");
-        String intro = request.getParameter("userintro");
-
         //유저 서비스의 업데이트 프로세스 호출
-        userService.userProfileEdit(username, nick, full, intro);
+        userService.userProfileEdit(username, usernick, userfull, userintro);
         return redirect;
     }
 

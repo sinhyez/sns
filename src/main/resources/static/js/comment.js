@@ -17,6 +17,10 @@ function commentSend(postid) {
     let content = $("#content"+postid).val();
     let page = '/comment/insert'
 
+    if (content.length > 300) {
+        alert("Please enter less than 300 characters")
+    }
+
     let param = {
         "postid" : postid, "userid" : userid, "content" : content
     };

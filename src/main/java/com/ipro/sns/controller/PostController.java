@@ -1,6 +1,7 @@
 package com.ipro.sns.controller;
 
 import com.ipro.sns.model.*;
+import com.ipro.sns.model.dto.UserDto;
 import com.ipro.sns.model.modelutils.LikesCount;
 import com.ipro.sns.service.CommentService;
 import com.ipro.sns.service.LikeService;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.transaction.Transactional;
 import java.io.File;
+import java.security.Principal;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -39,13 +41,8 @@ public class PostController {
     String uploadProc(MultipartHttpServletRequest request,
                     @RequestParam("caption") String caption, @RequestParam("usernick") int userid) throws Exception {
 
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        String path = ubImgPath + username;
-        File file = new File(path);
-        if (!file.exists()) {
-            file.mkdirs();
-        }
-
+        String path = ubImgPath;
+        
         PostModel postModel = new PostModel();
 
         Optional<UserModel> userModel = userService.findById(userid);
@@ -73,15 +70,13 @@ public class PostController {
         return "ok";
     }
 
-
-
     //포스팅 디테일 화면
     @RequestMapping("/post/details/{id}")
-    public String postDetails(@PathVariable("id") int id, Model model) throws Exception {
+    public String postDetails(@PathVariable("id") int id, Model model, Principal principal) throws Exception {
 
         try {
             //유저정보 set
-            String username = SecurityContextHolder.getContext().getAuthentication().getName();
+            String username = principal.getName();
             Optional<UserModel> user = userService.findByUsername(username);
 
             //포스트 셋
@@ -131,6 +126,5 @@ public class PostController {
 
         return redirect;
     }
-
 
 }

@@ -24,7 +24,17 @@ img {
     display: block;
 }
 
+article {
+    margin: 0 auto 5rem;
+    font-size: 1.6rem;
+    border: 1px solid #26bda4;
+    background: #fff;
+}
+
 .post_btn:disabled {
+    opacity: 0.6;
+}
+#btnSubmit:disabled {
     opacity: 0.6;
 }
 
@@ -48,3 +58,23 @@ img {
     transition: all .3s ease;
 }
 
+.post_btn {
+    font-size: 1.6rem;
+    border: none;
+    color: #26bda4;
+    outline: none;
+    cursor: pointer;
+}
+
+.comment_user_area span {
+    word-break: break-word;
+}
+
+.add_comment_area textarea {
+    padding: 1.6rem;
+    border: 0;
+    resize: none;
+    width: 100%;
+    height: 5rem;
+    font-size: 1.4rem;
+}

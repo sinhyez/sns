@@ -2,6 +2,7 @@ package com.ipro.sns.controller;
 
 import com.ipro.sns.model.FollowModel;
 import com.ipro.sns.model.UserModel;
+import com.ipro.sns.model.dto.UserDto;
 import com.ipro.sns.service.FollowService;
 import com.ipro.sns.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,9 +25,9 @@ public class FollowController {
 
     //팔로잉
     @RequestMapping("/follow/{id}")
-    public String follow(@PathVariable int id) throws Exception{
+    public String follow(@PathVariable int id, Principal principal) throws Exception{
 
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        String username = principal.getName();
         Optional<UserModel> toUserModel = userService.findById(id);
         UserModel userModel = toUserModel.get();
 
@@ -37,9 +39,9 @@ public class FollowController {
 
     //언팔로우
     @RequestMapping("/unfollow/{id}")
-    public String unFollow(@PathVariable int id) throws Exception {
+    public String unFollow(@PathVariable int id, Principal principal) throws Exception {
 
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        String username = principal.getName();
 
         Optional<UserModel> loginUser = userService.findByUsername(username);
         UserModel loginUserWrapper = loginUser.get();

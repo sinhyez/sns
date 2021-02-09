@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
 import javax.transaction.Transactional;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -28,17 +29,13 @@ public class UserService implements UserDetailsService {
     public Optional<UserModel> findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
-
     public Optional<UserModel> findById(int id) { return userRepository.findById(id); }
-
     public Optional<UserModel> findByUsernick(String usernick) {
         return userRepository.findByUsernick(usernick);
     }
-
     public List<UserModel> findByUsernickContains(String word) {
         return userRepository.findByUsernickContains(word);
     }
-
     public int countByUsernickContains(String word) {
         return userRepository.countByUsernickContains(word);
     }
@@ -54,10 +51,15 @@ public class UserService implements UserDetailsService {
             bindingResult.rejectValue("username", null, "This Email is already registered.");
             return true;
         }
+        if (findByUsernick(userDto.getUsernick()).isPresent()) {
+            bindingResult.rejectValue("usernick", null, "This name is already use");
+            return true;
+        }
         
         return false;
 
     }
+
 
     @Transactional
     public int joinUser(UserDto userDto){
@@ -94,6 +96,7 @@ public class UserService implements UserDetailsService {
 
         Optional<UserModel> uModel = userRepository.findByUsername(username);
         UserModel userModel = uModel.get();
+
         userModel.setUsername(username);
         userModel.setUsernick(usernick);
         userModel.setUserfull(userfull);

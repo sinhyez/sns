@@ -4,6 +4,7 @@ import com.ipro.sns.model.CommnetModel;
 import com.ipro.sns.model.PostModel;
 import com.ipro.sns.model.UserModel;
 import com.ipro.sns.model.dto.CommentDto;
+import com.ipro.sns.model.dto.UserDto;
 import com.ipro.sns.repository.CommentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ public class CommentService {
     public List<CommnetModel> findByPostid(int postid) {
         return commentRepository.findByPostidId(postid);
     }
+    public List<CommnetModel> findByAll() { return commentRepository.findAll(); }
     public int countByPostid(int postid) {
         return commentRepository.countByPostidId(postid);
     }
