@@ -68,6 +68,19 @@ $(document).ready(function () {
                 }
         });
 
+        $(".edt-btn").on("click", function () {
+            if ($("#nick").val().length > 15) {
+                $('.error-msg').empty();
+                $('.error-msg').append("Please enter less than 15 characters.");
+                return false;
+            }
+            if ($("#rname").val().length > 50) {
+                $('.error-msg').empty();
+                $('.error-msg').append("Please enter less than 50 characters.");
+                return false
+            }
+        })
+
 });
 
 function deletePost(postid) {

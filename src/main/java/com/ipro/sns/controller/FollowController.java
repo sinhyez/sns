@@ -31,7 +31,7 @@ public class FollowController {
 
         followService.save(username, userModel.getUsername());
 
-        return "redirect:/main/user/" + userModel.getUsernick();
+        return "redirect:/main/user/" + userModel.getId();
 
     }
 
@@ -49,7 +49,7 @@ public class FollowController {
 
         followService.unFollow(userModel.getId(), loginUserWrapper.getId());
 
-        return "redirect:/main/user/" + userModel.getUsernick();
+        return "redirect:/main/user/" + userModel.getId();
     }
 
     @RequestMapping("/followerlist/{id}")

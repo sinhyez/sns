@@ -29,7 +29,7 @@
                     </div>
                     <textarea name="caption" class="form_caption" placeholder="Photo caption"></textarea>
                     <input type="hidden" id="usernick" name="usernick" th:value="${user.get().id}">
-                    <button type="submit" class="post_btn" th:onclick="savePosting()" disabled>POST</button>
+                    <button type="submit" class="post_btn modal-pst-btn" th:onclick="savePosting()" disabled>POST</button>
                 </div>
 
             </form>

@@ -15,18 +15,16 @@ footer {
 }
 
 .footer_icon {
-    margin-right: 1rem;
     padding: .6rem 1.5rem .6rem 1.5rem;
 }
 
 .footer_icon a {
-    margin: 0 1rem 0 1rem;
+    margin: 0 1rem;
     text-decoration: none;
     color: #e6e9ed;
 }
 
 .footer_copy {
-    margin-right: 1rem;
     color: #e6e9ed;
 }
 

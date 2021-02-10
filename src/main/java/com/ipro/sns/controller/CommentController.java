@@ -32,7 +32,7 @@ public class CommentController {
 
         commentService.deleteById(id);
 
-        return new ResponseEntity<>(1, HttpStatus.OK);
+        return new ResponseEntity<>(-1, HttpStatus.OK);
     }
 
 }

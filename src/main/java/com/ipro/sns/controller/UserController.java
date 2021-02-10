@@ -27,7 +27,7 @@ public class UserController {
 
     private final UserService userService;
 
-    protected static final String loImgPath = "C:/Users/yoon sung/Desktop/upload/profile/";
+//    protected static final String loImgPath = "C:/Users/yoon sung/Desktop/upload/profile/";
     protected static final String ubImgPath = "/home/ubuntu/apps/upload/profile/";
 
 
@@ -58,7 +58,7 @@ public class UserController {
                              @RequestParam("filename") MultipartFile multipartFile) throws IOException{
 
         Optional<UserModel> userModel = userService.findById(id);
-        String img_path = loImgPath + userModel.get().getUsernick();
+        String img_path = ubImgPath + userModel.get().getUsernick();
 
         try {
             if (userModel.get().getUserimg() != null) {
@@ -102,14 +102,14 @@ public class UserController {
 
     //유저 프로필 업데이트 프로세스
     @RequestMapping(value = "/user/user_edit")
-    public ResponseEntity<?> userUpadate(Principal principal, UserDto userDto) throws Exception{
+    public String userUpadate(Principal principal, UserDto userDto) throws Exception{
 
         String username = principal.getName();
 
         userDto.setUsername(username);
         userService.userProfileEdit(principal, userDto);
 
-        return new ResponseEntity<>("ok", HttpStatus.OK);
+        return "redirect:/main/user/";
 
     }
 
