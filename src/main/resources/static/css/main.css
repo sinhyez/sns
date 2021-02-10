@@ -96,14 +96,14 @@
 }
 
 .photo_caption {
-    max-width: 432.95px;
+    max-width: 55rem;
     padding-left: 1rem;
     padding-right: 1rem;
     margin-bottom: 6px;
 }
 
 .caption {
-    word-break: break-word;
+    white-space: pre-line;
     padding-top: 1rem;
 }
 

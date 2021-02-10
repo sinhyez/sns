@@ -18,6 +18,7 @@
 
 .search_bar_area input{
     width: 16rem;
+    padding-left: .5rem;
     height: 3rem;
     border: none;
     background: #e6e9ed;

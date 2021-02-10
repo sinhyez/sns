@@ -37,6 +37,37 @@ $(document).ready(function () {
         }
     });
 
+    $('.posting_caption').each(function(){
+        const content = $(this).children('span');
+        const contentTxt = content.text();
+        const contentTxtShort = contentTxt.substring(0,100)+"...";
+        const btnMore = $('<a href="javascript:void(0)" class="more"> read more</a>');
+
+        $(this).append(btnMore);
+
+        if(contentTxt.length >= 100){
+            content.html(contentTxtShort);
+
+        }else{
+            btnMore.hide();
+        }
+        btnMore.click(toggle_content);
+
+        function toggle_content(){
+            if($(this).hasClass('short')){
+                // 접기 상태
+                $(this).html('more');
+                content.html(contentTxtShort);
+                $(this).removeClass('short');
+            }else{
+                // 더보기 상태
+                $(this).html('less');
+                content.html(contentTxt);
+                $(this).addClass('short');
+            }
+        }
+    });
+
         $('.profile_intro').each(function(){
                 const content = $(this).children('.intro');
                 const contentTxt = content.text();
