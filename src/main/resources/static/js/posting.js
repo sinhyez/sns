@@ -38,11 +38,11 @@ function savePosting() {
 
     if (valid.length > 300) {
         alert("[POSTING ERROR] Please enter less than 300 characters.");
-        location.reload();
+        return false;
     }
     if (file.length > 5) {
         alert("[POSTING ERROR]You can insert up to 5 images.");
-        location.reload();
+        return false;
     }
     else {
         $.ajax({
