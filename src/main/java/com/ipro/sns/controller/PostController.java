@@ -1,26 +1,25 @@
 package com.ipro.sns.controller;
 
 import com.ipro.sns.model.*;
-import com.ipro.sns.model.dto.UserDto;
+import com.ipro.sns.model.dto.PostDto;
 import com.ipro.sns.model.modelutils.LikesCount;
 import com.ipro.sns.service.CommentService;
 import com.ipro.sns.service.LikeService;
 import com.ipro.sns.service.PostService;
 import com.ipro.sns.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.transaction.Transactional;
-import java.io.File;
 import java.security.Principal;
 import java.util.*;
-import java.util.logging.Logger;
+
 
 @Controller
 @RequiredArgsConstructor
@@ -37,19 +36,18 @@ public class PostController {
 
     //포스팅 업로드 프로세스
     @RequestMapping("/upload")
-    public @ResponseBody
-    String uploadProc(MultipartHttpServletRequest request,
-                    @RequestParam("caption") String caption, @RequestParam("usernick") int userid) throws Exception {
+    public ResponseEntity<?> uploadProc(MultipartHttpServletRequest request,
+                                     @RequestParam("caption") String caption, @RequestParam("usernick") int userid) throws Exception {
 
         String path = ubImgPath;
         
-        PostModel postModel = new PostModel();
+        PostDto postDto = new PostDto();
 
         Optional<UserModel> userModel = userService.findById(userid);
-        postModel.setUser(userModel.get());
-        postModel.setCaption(caption);
+        postDto.setUser(userModel.get());
+        postDto.setCaption(caption);
 
-        postModel.setId(postService.postSave(postModel));
+        postDto.setId(postService.postSave(postDto));
         postService.flush();
 
         List<MultipartFile> multipartFiles = request.getFiles("files");
@@ -61,13 +59,13 @@ public class PostController {
 
             postImgModel.setFileoname(oriName);
             postImgModel.setFilename(fileName);
-            postImgModel.setPostid(postModel.getId());
+            postImgModel.setPostid(postDto.getId());
 
             postService.postImgSave(postImgModel);
 
         }
 
-        return "ok";
+        return new ResponseEntity<>("ok", HttpStatus.OK);
     }
 
     //포스팅 디테일 화면
@@ -82,9 +80,9 @@ public class PostController {
             //포스트 셋
             Optional<PostModel> postModel = postService.findById(id);
 
-
+            //list set
             List<CommnetModel> commentlist = commentService.findByPostid(id);
-            List<PostImgModel> postImgModelList = postService.findByPostid();
+            List<PostImgModel> postImgModelList = postService.findAll();
             List<PostModel> postList = postService.findByUserIdOrderByIdDesc(postModel.get().getUser().getId());
             List<LikesCount> likeCount = new ArrayList<>();
 
@@ -118,13 +116,12 @@ public class PostController {
     //포스팅 삭제
     @Transactional
     @RequestMapping("/deletePost/{id}")
-    public String deletePost(@PathVariable int id) {
-        String redirect = "redirect:/main/user/";
+    public ResponseEntity<?> deletePost(@PathVariable int id) {
 
         Optional<PostModel> postModel = postService.findById(id);
         postService.deleteByID(postModel.get().getId());
 
-        return redirect;
+        return new ResponseEntity<>("ok", HttpStatus.OK);
     }
 
 }

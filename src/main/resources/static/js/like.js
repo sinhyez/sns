@@ -6,9 +6,6 @@ function like(postid, userid) {
         "postid" : postid, "userid" : userid
     }
 
-    console.log(param);
-    console.log(page);
-
     $.ajax({
         url : page,
         method : "POST",
@@ -34,8 +31,6 @@ function unlike(postid, userid) {
     let param = {
         "postid" : postid, "userid" : userid
     }
-
-    console.log(param);
 
     $.ajax({
         url: page,

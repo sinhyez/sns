@@ -3,21 +3,21 @@ package com.ipro.sns.controller;
 
 import com.ipro.sns.model.UserModel;
 import com.ipro.sns.model.dto.UserDto;
+
 import com.ipro.sns.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.context.properties.bind.BindResult;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
-import java.util.Objects;
 import java.util.Optional;
 
 
@@ -27,8 +27,9 @@ public class UserController {
 
     private final UserService userService;
 
-//    protected String loImgPath = "C:/Users/yoon sung/Desktop/upload/profile/";
-    protected String ubImgPath = "/home/ubuntu/apps/upload/profile/";
+    protected static final String loImgPath = "C:/Users/yoon sung/Desktop/upload/profile/";
+    protected static final String ubImgPath = "/home/ubuntu/apps/upload/profile/";
+
 
     //회원가입 처리 프로세스
     @PostMapping("/signup")
@@ -41,39 +42,7 @@ public class UserController {
         return "view/login";
     }
 
-    //헤더에서 유저프로필로 이동할때 처리되는 프로세스
-    @RequestMapping("/main/user/")
-    public String userProfile(Principal principal) throws Exception{
-
-        try {
-
-            String username = principal.getName();
-            Optional<UserModel> userModel = userService.findByUsername(username);
-
-            return "redirect:/main/user/" + userModel.get().getUsernick();
-
-        } catch (Exception e) {
-
-            return "view/login";
-
-        }
-
-    }
-
-    //유저 프로필 업데이트
-    @RequestMapping(value = "/user/edit/{usernick}")
-    public String updateUser(@PathVariable("usernick") String usernick, UserDto userDto,
-                             Model model, Principal principal) throws Exception {
-
-        String username = principal.getName();;
-        model.addAttribute("user", userService.findByUsername(username));
-        model.addAttribute("msg", "");
-
-        return "view/user/edit";
-    }
-
     //유저 프로필 사진 업데이트
-
     @RequestMapping("/user/img_insert")
     public String userImgInsert(Model model, Principal principal) throws Exception{
 
@@ -82,13 +51,14 @@ public class UserController {
 
         return "view/user/img_edit";
     }
+
     //유저 프로필 사진 업데이트 프로세스
     @RequestMapping(value = "/user/img_insert/{id}")
-    public @ResponseBody String imgInsert(@PathVariable int id, UserDto userDto,
+    public ResponseEntity<?> imgInsert(@PathVariable int id,
                              @RequestParam("filename") MultipartFile multipartFile) throws IOException{
 
         Optional<UserModel> userModel = userService.findById(id);
-        String img_path = ubImgPath + userModel.get().getUsernick();
+        String img_path = loImgPath + userModel.get().getUsernick();
 
         try {
             if (userModel.get().getUserimg() != null) {
@@ -103,38 +73,43 @@ public class UserController {
 
         userService.userImgEdit(userModel.get().getUsername(),
                 userModel.get().getUsernick() + multipartFile.getOriginalFilename());
-        return "ok";
+        return new ResponseEntity<>("ok", HttpStatus.OK);
 
-    }
-
-    //유저 프로필 업데이트 프로세스
-    @RequestMapping(value = "/user/user_edit")
-    public String profileEdit(Principal principal, @RequestParam("usernick") String usernick,
-                              @RequestParam("userfull") String userfull, @RequestParam("userintro") String userintro,
-                              @Valid UserDto userDto, BindingResult bindingResult, Model model) throws Exception{
-
-        if (userService.check(userDto, bindingResult)) {
-            model.addAttribute("userModel", userDto);
-            System.out.println(bindingResult);
-            return "redirect:/user/edit/"+usernick;
-        }
-
-        String username = principal.getName();
-        String redirect = "redirect:/main/user/";
-        //유저 서비스의 업데이트 프로세스 호출
-        userService.userProfileEdit(username, usernick, userfull, userintro);
-        return redirect;
     }
 
     @RequestMapping("/user/deleteimg/{id}")
-    public @ResponseBody String deleteUserimg(@PathVariable int id) {
+    public ResponseEntity<?> deleteUserimg(@PathVariable int id) {
 
         Optional<UserModel> userModel = userService.findById(id);
         UserModel userModelWrapper = userModel.get();
 
         userService.userImgDelete(userModelWrapper.getId());
 
-        return "ok";
+        return new ResponseEntity<>("ok", HttpStatus.OK);
+
+    }
+
+    //유저 프로필 업데이트
+    @RequestMapping(value = "/user/edit/{id}")
+    public String updateUser(@PathVariable("id") int id,
+                             Model model, Principal principal) throws Exception {
+
+        String username = principal.getName();;
+        model.addAttribute("user", userService.findByUsername(username));
+
+        return "view/user/edit";
+    }
+
+    //유저 프로필 업데이트 프로세스
+    @RequestMapping(value = "/user/user_edit")
+    public ResponseEntity<?> userUpadate(Principal principal, UserDto userDto) throws Exception{
+
+        String username = principal.getName();
+
+        userDto.setUsername(username);
+        userService.userProfileEdit(principal, userDto);
+
+        return new ResponseEntity<>("ok", HttpStatus.OK);
 
     }
 
@@ -151,6 +126,24 @@ public class UserController {
         model.addAttribute("search", search);
 
         return "view/main/search";
+
+    }
+
+    @RequestMapping("/main/user/")
+    public String userProfile(Principal principal) throws Exception{
+
+        try {
+
+            String username = principal.getName();
+            Optional<UserModel> userModel = userService.findByUsername(username);
+
+            return "redirect:/main/user/" + userModel.get().getId();
+
+        } catch (Exception e) {
+
+            return "view/login";
+
+        }
 
     }
 

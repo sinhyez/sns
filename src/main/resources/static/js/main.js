@@ -69,3 +69,15 @@ $(document).ready(function () {
         });
 
 });
+
+function deletePost(postid) {
+    const page = '/deletePost/' + postid;
+    $.ajax({
+        url: page,
+        method: "delete",
+        data: postid,
+        success: function (data) {
+            if (data === "ok") location.replace("/main/user/");
+        }
+    })
+}

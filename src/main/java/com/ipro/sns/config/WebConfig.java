@@ -7,14 +7,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-//    protected String loImgPath = "/Users/yoon sung/Desktop/upload/";
-    protected String ubImgPath = "/home/ubuntu/apps/upload/";
+    protected static final String loImgPath = "/Users/yoon sung/Desktop/upload/";
+    protected static final String ubImgPath = "/home/ubuntu/apps/upload/";
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry
                 .addResourceHandler("/upload/**")
-                .addResourceLocations("file://" + ubImgPath)
+                .addResourceLocations("file://" + loImgPath)
                 .setCachePeriod(20);
     }
 }

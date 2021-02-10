@@ -31,7 +31,7 @@ public class PostService {
     public void deleteByID(int id) {
         postRepository.deleteById(id);
     }
-    public List<PostImgModel> findByPostid() {
+    public List<PostImgModel> findAll() {
         return postImgRepository.findAll();
     }
     public List<PostModel> findByUserIdOrderByIdDesc(int id) {
@@ -40,13 +40,13 @@ public class PostService {
     public Optional<PostModel> findById(int id) { return postRepository.findById(id); }
 
     //포스트 저장 프로세스
-    public int postSave(PostModel postModel) {
+    public int postSave(PostDto postDto) {
 
         PostModel p = new PostModel();
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-        p.setCaption(postModel.getCaption());
-        p.setUser(postModel.getUser());
+        p.setCaption(postDto.getCaption());
+        p.setUser(postDto.getUser());
         p.setCreate_date(timestamp);
 
         postRepository.save(p);

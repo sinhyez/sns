@@ -20,7 +20,7 @@
                              th:src="@{'/static/img/profile/Basic.png'}" alt="">
                     </div>
                     <div class="modal-follow_list_username">
-                        <a th:href="@{'/main/user/' + ${likelist.userid.usernick} }"
+                        <a th:href="@{'/main/user/' + ${likelist.userid.id} }"
                            th:text="${likelist.userid.usernick}"></a>
                     </div>
                 </div>

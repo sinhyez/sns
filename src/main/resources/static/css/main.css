@@ -5,10 +5,8 @@
     align-items: center;
 }
 
-.feed_container {
-    max-width: 100%;
+.feed_main .feed_contianer {
     margin-bottom: 6rem;
-
 }
 
 .feed_container img {
@@ -51,7 +49,7 @@
 }
 
 .photo_card_img{
-    max-width: 60vh;
+    max-width: 55rem;
     max-height: 60vh;
     list-style: none;
 }
@@ -208,7 +206,7 @@
     color: black;
 }
 .feed_contianer .slider li {
-    min-width: 422.95px;
+    /*min-width: 422.95px;*/
 }
 
 /**/

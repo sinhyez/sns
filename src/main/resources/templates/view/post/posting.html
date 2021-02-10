@@ -9,7 +9,6 @@
             <span>Preview</span>
             <div class="img_thumbnail">
                 <div class="image_container" id="image_container">
-
                 </div>
             </div>
 
@@ -22,7 +21,7 @@
                             <label for="ex_file">
                                 Choose file
                             </label>
-                            <input type="file" name="files" multiple
+                            <input type="file" name="files" multiple accept="image/**"
                                    class="upload" id="ex_file" onchange="setThumbnail(event)">
                             <input class="upload_name" value="Choose File" disabled="disabled">
                         </div>

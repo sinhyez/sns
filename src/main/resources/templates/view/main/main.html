@@ -17,17 +17,17 @@
         </th:bolck>
         <th:block th:each="post : ${postlist}">
 
-            <article class="feed_contianer">
+            <article class="feed_contianer container">
                 <!-- card header -->
                 <div class="feed_card_header">
                     <div class="photo_user_info" th:if="${post.user.userimg != null}">
                         <img th:src="@{'/upload/profile/' + ${post.user.userimg}}" alt="userIcon">
-                        <a th:href="@{'/main/user/' + ${post.user.usernick}}"
+                        <a th:href="@{'/main/user/' + ${post.user.id}}"
                            class="username" th:text="${post.user.usernick}"></a>
                     </div>
                     <div class="photo_user_info" th:if="${post.user.userimg == null}">
                         <img src="/static/img/profile/Basic.png" alt="userIcon">
-                        <a th:href="@{'/main/user/' + ${post.user.usernick}}"
+                        <a th:href="@{'/main/user/' + ${post.user.id}}"
                            class="username" th:text="${post.user.usernick}"></a>
                     </div>
                 </div>
@@ -82,7 +82,8 @@
                             <th:block th:each="co, iter : ${c}" th:if="${post.id} eq ${co.postid.id}">
                                 <div class="post_comment_area" th:if="${list.count} <= 2">
                                     <div class="comment_user_area">
-                                        <a href="" th:text="${co.userid.usernick}" class="comment_username"></a>
+                                        <a th:href="${'/main/user/' + ${user.get.id}}"
+                                           th:text="${co.userid.usernick}" class="comment_username"></a>
                                         <span th:text="${co.content}"></span>
                                     </div>
                                     <div class="comment_edit_area" th:if="${co.userid.id} eq ${user.get.id}">

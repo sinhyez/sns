@@ -18,7 +18,7 @@ public class AuthFailureHandler implements AuthenticationFailureHandler {
         request.setAttribute("username", request.getParameter("username"));
         String errorMsg = null;
         if (exception instanceof InternalAuthenticationServiceException) {
-            errorMsg = "아이디가 존재하지 않습니다 다시 한번 확인해주세요";
+            errorMsg = "account does not exist Please check again";
         }
         else if (exception instanceof BadCredentialsException) {
             errorMsg = "Wrong Password please try again";

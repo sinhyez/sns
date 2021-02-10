@@ -31,10 +31,14 @@ article {
     background: #fff;
 }
 
+.container {
+    width: 55rem;
+}
+
 .post_btn:disabled {
     opacity: 0.6;
 }
-#btnSubmit:disabled {
+.auth-btn:disabled {
     opacity: 0.6;
 }
 

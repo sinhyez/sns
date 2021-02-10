@@ -1,5 +1,11 @@
 $(function () {
 
+    $(".slider").bxSlider({
+        infiniteLoop:false,
+        hideControlOnEnd:true,
+        pager:false
+    });
+
     const filetarget = $('.file_box .upload');
 
     filetarget.on('change', function() {
@@ -28,27 +34,35 @@ function savePosting() {
 
     const data = new FormData($("#postform")[0]);
     const valid = $(".form_caption").val();
-    if (valid.length > 300) {
-        alert("Please enter less than 300 characters.");
-    }
+    const file = $(".upload")[0].files;
 
-    $.ajax({
-        url : '/upload',
-        method : 'post',
-        data : data,
-        enctype : 'multipart/form-data',
-        async : false,
-        contentType : false,
-        processData : false,
-        success : function (data) {
-            if (data === "ok") {
-                location.href;
+    if (valid.length > 300) {
+        alert("[POSTING ERROR] Please enter less than 300 characters.");
+        location.reload();
+    }
+    if (file.length > 5) {
+        alert("[POSTING ERROR]You can insert up to 5 images.");
+        location.reload();
+    }
+    else {
+        $.ajax({
+            url : '/upload',
+            method : 'post',
+            data : data,
+            enctype : 'multipart/form-data',
+            async : false,
+            contentType : false,
+            processData : false,
+            success : function (data) {
+                if (data === "ok") {
+                    location.reload();
+                }
+            },
+            error: function (request, status, error) {
+                console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             }
-        },
-        error: function (request, status, error) {
-            console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-        }
-    });
+        });
+    }
 }
 
 function saveUserImg(userid) {
@@ -63,7 +77,7 @@ function saveUserImg(userid) {
         processData : false,
         success : function (data) {
             if (data === "ok") {
-                location.href;
+                location.reload();
             }
         },
         error: function (request, status, error) {
@@ -83,7 +97,7 @@ function deleteUserImg(userid) {
         contentType : false,
         processData : false,
         success : function () {
-            location.href;
+            location.replace("/mian/user/");
         },
         error: function (request, status, error) {
             console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
@@ -91,13 +105,26 @@ function deleteUserImg(userid) {
     });
 }
 
-function setThumbnail(event) {
-    const reader = new FileReader();
+function setThumbnail(e) {
 
-    reader.onload = function(event) {
-        const img = document.createElement("img");
-        img.setAttribute("src", event.target.result);
-        document.querySelector("#image_container").appendChild(img);
-    };
-    reader.readAsDataURL(event.target.files[0]);
+    var selFile = [];
+    var file = e.target.files;
+    let fileArr = Array.prototype.slice.call(file);
+    let index = 0;
+
+    $("#image_container").empty();
+
+    fileArr.forEach(function (f) {
+        selFile.push(f);
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = document.createElement("img");
+            img.setAttribute("src", e.target.result);
+            document.querySelector("#image_container").appendChild(img);
+            index++;
+        }
+        reader.readAsDataURL(f);
+    });
+
 }

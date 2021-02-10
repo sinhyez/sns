@@ -73,7 +73,6 @@
 }
 
 .post_detail_img img{
-    width: 50rem;
     height: 50rem;
     border-bottom: 1px solid #26bda4;
     object-fit: cover;

@@ -8,7 +8,7 @@
         <div id="modal-post"></div>
     </div>
 
-    <article class="detail_main_container">
+    <article class="detail_main_container container">
 
         <div class="post_user_info" id="modal-post_detail">
 
@@ -16,14 +16,13 @@
                  src="/static/img/profile/Basic.png" alt="usericon">
             <img th:unless="${post.get.user.userimg} eq null"
                  th:src="@{'/upload/profile/' + ${post.get.user.userimg} }" alt="usericon">
-
-            <a th:href="@{'/main/user/' + ${post.get.user.usernick} }"
+            <a th:href="@{'/main/user/' + ${post.get.user.id} }"
                class="post_username" th:text="${post.get.user.usernick}"></a>
 
             <div class="post_edit_box">
                 <th:block th:if="${loginUser.get.id == post.get.user.id}">
 <!--                    <a href="">Edit</a>-->
-                    <a th:href="@{'/deletePost/' + ${post.get.id}}">Deletet</a>
+                    <a th:onclick="|deletePost(${post.get.id})|">Deletet</a>
                 </th:block>
             </div>
 
@@ -41,7 +40,7 @@
 
         <div class="posting_info">
             <div class="posting_caption">
-                <a th:href="@{'/main/user/' + ${post.get.user.usernick} }"
+                <a th:href="@{'/main/user/' + ${post.get.user.id} }"
                    class="info_username" th:text="${post.get.user.usernick}"></a>
                 <span th:text="${post.get().caption}"></span>
             </div>
@@ -76,7 +75,7 @@
         <th:block th:each="listc : ${comment}">
             <div class="post_comment_area" th:if="${post.get.id} eq ${listc.postid.id}">
                 <div class="comment_user_area">
-                    <a th:href="@{ '/main/user/' + ${listc.userid.usernick} }" class="comment_username"
+                    <a th:href="@{ '/main/user/' + ${listc.userid.id} }" class="comment_username"
                        th:text="${listc.userid.usernick}">userid</a>
                     <span th:text="${listc.content}"></span>
                 </div>

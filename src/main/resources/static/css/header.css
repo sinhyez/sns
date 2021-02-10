@@ -88,6 +88,11 @@
     position: relative;
 }
 
+.guest {
+    font-size: 1.5rem;
+    margin-right: 6rem;
+}
+
 .user_area a{
     padding-left: 0.5rem;
     width: 40px;

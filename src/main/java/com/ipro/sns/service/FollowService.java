@@ -48,7 +48,6 @@ public class FollowService {
         UserModel userModelUserWrapper = userModelUser.get();
         UserModel userModelPageWrapper = userModelPage.get();
 
-
         followDto.setFollowerid(userModelPageWrapper);
         followDto.setFollowingid(userModelUserWrapper);
         followDto.setFollowdate(timestamp);

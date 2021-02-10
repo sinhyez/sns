@@ -5,8 +5,11 @@ import com.ipro.sns.model.dto.UserDto;
 import com.ipro.sns.model.modelutils.Role;
 import com.ipro.sns.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import net.bytebuddy.implementation.bind.annotation.Super;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -26,10 +29,10 @@ import java.util.Optional;
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
 
+    public Optional<UserModel> findById(int id) { return userRepository.findById(id); }
     public Optional<UserModel> findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
-    public Optional<UserModel> findById(int id) { return userRepository.findById(id); }
     public Optional<UserModel> findByUsernick(String usernick) {
         return userRepository.findByUsernick(usernick);
     }
@@ -43,9 +46,7 @@ public class UserService implements UserDetailsService {
     public boolean check(UserDto userDto, BindingResult bindingResult) {
 
         // 회원가입 유효성 검사
-        if (bindingResult.hasErrors()) {
-            return true;
-        }
+        if (bindingResult.hasErrors()) return true;
 
         if (findByUsername(userDto.getUsername()).isPresent()) {
             bindingResult.rejectValue("username", null, "This Email is already registered.");
@@ -92,16 +93,19 @@ public class UserService implements UserDetailsService {
     }
 
     //유저 프로필 내용 수정
-    public void userProfileEdit(String username, String usernick, String userfull, String userintro) {
+    @Transactional
+    public void userProfileEdit(Principal principal, UserDto userDto) {
 
-        Optional<UserModel> uModel = userRepository.findByUsername(username);
-        UserModel userModel = uModel.get();
+        String username = principal.getName();
+        Optional<UserModel> uModel = findByUsername(username);
+        UserModel user = uModel.get();
 
-        userModel.setUsername(username);
-        userModel.setUsernick(usernick);
-        userModel.setUserfull(userfull);
-        userModel.setUserintro(userintro);
-        userRepository.save(userModel);
+        user.setUsername(username);
+        user.setUsernick(userDto.getUsernick());
+        user.setUserfull(userDto.getUserfull());
+        user.setUserintro(userDto.getUserintro());
+
+        userRepository.save(user);
 
     }
 
